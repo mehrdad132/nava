@@ -1,0 +1,1468 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Nava_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="250" />
+          <Property Name="Position" Type="nvarchar" MaxLength="250" />
+          <Property Name="DurationWork" Type="int" />
+          <Property Name="DescPosition" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CrossSection">
+          <Key>
+            <PropertyRef Name="SectionID" />
+          </Key>
+          <Property Name="SectionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SectionTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EducatInfo">
+          <Key>
+            <PropertyRef Name="Educat_info_ID" />
+          </Key>
+          <Property Name="Educat_info_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="SectionID" Type="int" Nullable="false" />
+          <Property Name="UniID" Type="int" Nullable="false" />
+          <Property Name="FieldID" Type="int" Nullable="false" />
+          <Property Name="OrientationID" Type="int" Nullable="false" />
+          <Property Name="ThesisDiss" Type="nvarchar" MaxLength="50" />
+          <Property Name="Avrage" Type="nvarchar" MaxLength="50" />
+          <Property Name="Stu_Graduate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="BeginStudy" Type="date" />
+          <Property Name="YearGrad" Type="date" />
+        </EntityType>
+        <EntityType Name="Field_Lessons">
+          <Key>
+            <PropertyRef Name="FL_ID" />
+          </Key>
+          <Property Name="FL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LessonID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ProblemSolving" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MakingVideo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RelatedSoftware" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Fields">
+          <Key>
+            <PropertyRef Name="FieldID" />
+          </Key>
+          <Property Name="FieldID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FieldName" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InterView">
+          <Key>
+            <PropertyRef Name="ViewID" />
+          </Key>
+          <Property Name="ViewID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="DateView" Type="date" />
+          <Property Name="ClockView" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="LangID" />
+          </Key>
+          <Property Name="LangID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LangName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lessons">
+          <Key>
+            <PropertyRef Name="LessonID" />
+          </Key>
+          <Property Name="LessonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LessonCode" Type="int" />
+          <Property Name="FieldID" Type="int" Nullable="false" />
+          <Property Name="LessonName" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orientation">
+          <Key>
+            <PropertyRef Name="OrientationID" />
+          </Key>
+          <Property Name="OrientationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FieldID" Type="int" Nullable="false" />
+          <Property Name="OrientationName" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegisterUser">
+          <Key>
+            <PropertyRef Name="RegID" />
+          </Key>
+          <Property Name="RegID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="NationalNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Province" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BirthDay" Type="date" Nullable="false" />
+          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MilitaryService" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DescriptionArticles" Type="nvarchar(max)" />
+          <Property Name="Workinprogress" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeOfEmployment" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TimeInWeek" Type="int" />
+          <Property Name="WageFullTime" Type="int" />
+          <Property Name="WagePartTime" Type="int" />
+          <Property Name="Telework" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Internship" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="DescriptionFull" Type="nvarchar(max)" />
+          <Property Name="Rezome" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateSubmitInfo" Type="date" Nullable="false" />
+          <Property Name="EditInfo" Type="bit" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RejectInterView">
+          <Key>
+            <PropertyRef Name="RejectID" />
+          </Key>
+          <Property Name="RejectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="CauseReject" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ResultInterView">
+          <Key>
+            <PropertyRef Name="ResultID" />
+          </Key>
+          <Property Name="ResultID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="SkillSpeaking" Type="nvarchar" MaxLength="50" />
+          <Property Name="PassionWork" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sobriety" Type="nvarchar" MaxLength="50" />
+          <Property Name="Rhetorical" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateForWork" Type="date" />
+          <Property Name="VideoName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ResultItem">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ValueItem" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleTitle" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Special_Fields">
+          <Key>
+            <PropertyRef Name="SP_FL" />
+          </Key>
+          <Property Name="SP_FL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FieldID" Type="int" Nullable="false" />
+          <Property Name="SpecialID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Speciality">
+          <Key>
+            <PropertyRef Name="SpecialID" />
+          </Key>
+          <Property Name="SpecialID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FieldID" Type="int" Nullable="false" />
+          <Property Name="SpecialName" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UniverCity">
+          <Key>
+            <PropertyRef Name="UniID" />
+          </Key>
+          <Property Name="UniID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UniName" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Lang">
+          <Key>
+            <PropertyRef Name="UL_ID" />
+          </Key>
+          <Property Name="UL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="LangID" Type="int" Nullable="false" />
+          <Property Name="ScoreSpeking" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ScoreListening" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ScoreWrite" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ScoreReading" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DescriptionLang" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserLogin">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ActiveCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RegisterDate" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ImageUser" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Company_UserLogin">
+          <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="1" />
+          <End Role="Company" Type="Self.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducatInfo_CrossSection">
+          <End Role="CrossSection" Type="Self.CrossSection" Multiplicity="1" />
+          <End Role="EducatInfo" Type="Self.EducatInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CrossSection">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="EducatInfo">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducatInfo_Fields">
+          <End Role="Fields" Type="Self.Fields" Multiplicity="1" />
+          <End Role="EducatInfo" Type="Self.EducatInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fields">
+              <PropertyRef Name="FieldID" />
+            </Principal>
+            <Dependent Role="EducatInfo">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducatInfo_Orientation">
+          <End Role="Orientation" Type="Self.Orientation" Multiplicity="1" />
+          <End Role="EducatInfo" Type="Self.EducatInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orientation">
+              <PropertyRef Name="OrientationID" />
+            </Principal>
+            <Dependent Role="EducatInfo">
+              <PropertyRef Name="OrientationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducatInfo_UniverCity">
+          <End Role="UniverCity" Type="Self.UniverCity" Multiplicity="1" />
+          <End Role="EducatInfo" Type="Self.EducatInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UniverCity">
+              <PropertyRef Name="UniID" />
+            </Principal>
+            <Dependent Role="EducatInfo">
+              <PropertyRef Name="UniID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducatInfo_UserLogin">
+          <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="1" />
+          <End Role="EducatInfo" Type="Self.EducatInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="EducatInfo">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Field_Lessons_Lessons">
+          <End Role="Lessons" Type="Self.Lessons" Multiplicity="1" />
+          <End Role="Field_Lessons" Type="Self.Field_Lessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lessons">
+              <PropertyRef Name="LessonID" />
+            </Principal>
+            <Dependent Role="Field_Lessons">
+              <PropertyRef Name="LessonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Field_Lessons_UserLogin">
+          <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="1" />
+          <End Role="Field_Lessons" Type="Self.Field_Lessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Field_Lessons">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InterView_UserLogin">
+          <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="1" />
+          <End Role="InterView" Type="Self.InterView" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="InterView">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lessons_Fields">
+          <End Role="Fields" Type="Self.Fields" Multiplicity="1" />
+          <End Role="Lessons" Type="Self.Lessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fields">
+              <PropertyRef Name="FieldID" />
+            </Principal>
+            <Dependent Role="Lessons">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orientation_Fields">
+          <End Role="Fields" Type="Self.Fields" Multiplicity="1" />
+          <End Role="Orientation" Type="Self.Orientation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fields">
+              <PropertyRef Name="FieldID" />
+            </Principal>
+            <Dependent Role="Orientation">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegisterUser_UserLogin">
+          <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="1" />
+          <End Role="RegisterUser" Type="Self.RegisterUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RegisterUser">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RejectInterView_UserLogin">
+          <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="1" />
+          <End Role="RejectInterView" Type="Self.RejectInterView" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RejectInterView">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultInterView_UserLogin">
+          <End Role="ResultItem" Type="Self.ResultItem" Multiplicity="1" />
+          <End Role="ResultInterView" Type="Self.ResultInterView" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResultItem">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="ResultInterView">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultInterView_UserLogin1">
+          <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="1" />
+          <End Role="ResultInterView" Type="Self.ResultInterView" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ResultInterView">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Special_Fields_Fields">
+          <End Role="Fields" Type="Self.Fields" Multiplicity="1" />
+          <End Role="Special_Fields" Type="Self.Special_Fields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fields">
+              <PropertyRef Name="FieldID" />
+            </Principal>
+            <Dependent Role="Special_Fields">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Special_Fields_Speciality">
+          <End Role="Speciality" Type="Self.Speciality" Multiplicity="1" />
+          <End Role="Special_Fields" Type="Self.Special_Fields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Speciality">
+              <PropertyRef Name="SpecialID" />
+            </Principal>
+            <Dependent Role="Special_Fields">
+              <PropertyRef Name="SpecialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Special_Fields_UserLogin">
+          <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="1" />
+          <End Role="Special_Fields" Type="Self.Special_Fields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Special_Fields">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Speciality_Fields">
+          <End Role="Fields" Type="Self.Fields" Multiplicity="1" />
+          <End Role="Speciality" Type="Self.Speciality" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fields">
+              <PropertyRef Name="FieldID" />
+            </Principal>
+            <Dependent Role="Speciality">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Lang_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="User_Lang" Type="Self.User_Lang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LangID" />
+            </Principal>
+            <Dependent Role="User_Lang">
+              <PropertyRef Name="LangID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Lang_UserLogin">
+          <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="1" />
+          <End Role="User_Lang" Type="Self.User_Lang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="User_Lang">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLogin_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserLogin">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Nava_DBModelStoreContainer">
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CrossSection" EntityType="Self.CrossSection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EducatInfo" EntityType="Self.EducatInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Field_Lessons" EntityType="Self.Field_Lessons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fields" EntityType="Self.Fields" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InterView" EntityType="Self.InterView" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lessons" EntityType="Self.Lessons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orientation" EntityType="Self.Orientation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegisterUser" EntityType="Self.RegisterUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RejectInterView" EntityType="Self.RejectInterView" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResultInterView" EntityType="Self.ResultInterView" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResultItem" EntityType="Self.ResultItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Special_Fields" EntityType="Self.Special_Fields" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Speciality" EntityType="Self.Speciality" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UniverCity" EntityType="Self.UniverCity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Lang" EntityType="Self.User_Lang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLogin" EntityType="Self.UserLogin" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Company_UserLogin" Association="Self.FK_Company_UserLogin">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducatInfo_CrossSection" Association="Self.FK_EducatInfo_CrossSection">
+            <End Role="CrossSection" EntitySet="CrossSection" />
+            <End Role="EducatInfo" EntitySet="EducatInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducatInfo_Fields" Association="Self.FK_EducatInfo_Fields">
+            <End Role="Fields" EntitySet="Fields" />
+            <End Role="EducatInfo" EntitySet="EducatInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducatInfo_Orientation" Association="Self.FK_EducatInfo_Orientation">
+            <End Role="Orientation" EntitySet="Orientation" />
+            <End Role="EducatInfo" EntitySet="EducatInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducatInfo_UniverCity" Association="Self.FK_EducatInfo_UniverCity">
+            <End Role="UniverCity" EntitySet="UniverCity" />
+            <End Role="EducatInfo" EntitySet="EducatInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducatInfo_UserLogin" Association="Self.FK_EducatInfo_UserLogin">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="EducatInfo" EntitySet="EducatInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Field_Lessons_Lessons" Association="Self.FK_Field_Lessons_Lessons">
+            <End Role="Lessons" EntitySet="Lessons" />
+            <End Role="Field_Lessons" EntitySet="Field_Lessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Field_Lessons_UserLogin" Association="Self.FK_Field_Lessons_UserLogin">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="Field_Lessons" EntitySet="Field_Lessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InterView_UserLogin" Association="Self.FK_InterView_UserLogin">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="InterView" EntitySet="InterView" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lessons_Fields" Association="Self.FK_Lessons_Fields">
+            <End Role="Fields" EntitySet="Fields" />
+            <End Role="Lessons" EntitySet="Lessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orientation_Fields" Association="Self.FK_Orientation_Fields">
+            <End Role="Fields" EntitySet="Fields" />
+            <End Role="Orientation" EntitySet="Orientation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegisterUser_UserLogin" Association="Self.FK_RegisterUser_UserLogin">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="RegisterUser" EntitySet="RegisterUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RejectInterView_UserLogin" Association="Self.FK_RejectInterView_UserLogin">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="RejectInterView" EntitySet="RejectInterView" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultInterView_UserLogin" Association="Self.FK_ResultInterView_UserLogin">
+            <End Role="ResultItem" EntitySet="ResultItem" />
+            <End Role="ResultInterView" EntitySet="ResultInterView" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultInterView_UserLogin1" Association="Self.FK_ResultInterView_UserLogin1">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="ResultInterView" EntitySet="ResultInterView" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Special_Fields_Fields" Association="Self.FK_Special_Fields_Fields">
+            <End Role="Fields" EntitySet="Fields" />
+            <End Role="Special_Fields" EntitySet="Special_Fields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Special_Fields_Speciality" Association="Self.FK_Special_Fields_Speciality">
+            <End Role="Speciality" EntitySet="Speciality" />
+            <End Role="Special_Fields" EntitySet="Special_Fields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Special_Fields_UserLogin" Association="Self.FK_Special_Fields_UserLogin">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="Special_Fields" EntitySet="Special_Fields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Speciality_Fields" Association="Self.FK_Speciality_Fields">
+            <End Role="Fields" EntitySet="Fields" />
+            <End Role="Speciality" EntitySet="Speciality" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Lang_Language" Association="Self.FK_User_Lang_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="User_Lang" EntitySet="User_Lang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Lang_UserLogin" Association="Self.FK_User_Lang_UserLogin">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="User_Lang" EntitySet="User_Lang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLogin_Roles" Association="Self.FK_UserLogin_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserLogin" EntitySet="UserLogin" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Nava_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleTitle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UserLogin" Relationship="Nava_DBModel.FK_UserLogin_Roles" FromRole="Roles" ToRole="UserLogin" />
+        </EntityType>
+        <EntityContainer Name="Nava_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="CrossSection" EntityType="Nava_DBModel.CrossSection" />
+          <EntitySet Name="Fields" EntityType="Nava_DBModel.Fields" />
+          <EntitySet Name="Orientation" EntityType="Nava_DBModel.Orientation" />
+          <EntitySet Name="UniverCity" EntityType="Nava_DBModel.UniverCity" />
+          <AssociationSet Name="FK_Orientation_Fields" Association="Nava_DBModel.FK_Orientation_Fields">
+            <End Role="Fields" EntitySet="Fields" />
+            <End Role="Orientation" EntitySet="Orientation" />
+          </AssociationSet>
+          <EntitySet Name="Lessons" EntityType="Nava_DBModel.Lessons" />
+          <AssociationSet Name="FK_Lessons_Fields" Association="Nava_DBModel.FK_Lessons_Fields">
+            <End Role="Fields" EntitySet="Fields" />
+            <End Role="Lessons" EntitySet="Lessons" />
+          </AssociationSet>
+          <EntitySet Name="Field_Lessons" EntityType="Nava_DBModel.Field_Lessons" />
+          <AssociationSet Name="FK_Field_Lessons_Lessons" Association="Nava_DBModel.FK_Field_Lessons_Lessons">
+            <End Role="Lessons" EntitySet="Lessons" />
+            <End Role="Field_Lessons" EntitySet="Field_Lessons" />
+          </AssociationSet>
+          <EntitySet Name="Language" EntityType="Nava_DBModel.Language" />
+          <EntitySet Name="User_Lang" EntityType="Nava_DBModel.User_Lang" />
+          <AssociationSet Name="FK_User_Lang_Language" Association="Nava_DBModel.FK_User_Lang_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="User_Lang" EntitySet="User_Lang" />
+          </AssociationSet>
+          <EntitySet Name="UserLogin" EntityType="Nava_DBModel.UserLogin" />
+          <AssociationSet Name="FK_Field_Lessons_UserLogin" Association="Nava_DBModel.FK_Field_Lessons_UserLogin">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="Field_Lessons" EntitySet="Field_Lessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLogin_Roles" Association="Nava_DBModel.FK_UserLogin_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserLogin" EntitySet="UserLogin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Lang_UserLogin" Association="Nava_DBModel.FK_User_Lang_UserLogin">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="User_Lang" EntitySet="User_Lang" />
+          </AssociationSet>
+          <EntitySet Name="Company" EntityType="Nava_DBModel.Company" />
+          <AssociationSet Name="FK_Company_UserLogin" Association="Nava_DBModel.FK_Company_UserLogin">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <EntitySet Name="EducatInfo" EntityType="Nava_DBModel.EducatInfo" />
+          <AssociationSet Name="FK_EducatInfo_CrossSection" Association="Nava_DBModel.FK_EducatInfo_CrossSection">
+            <End Role="CrossSection" EntitySet="CrossSection" />
+            <End Role="EducatInfo" EntitySet="EducatInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducatInfo_Fields" Association="Nava_DBModel.FK_EducatInfo_Fields">
+            <End Role="Fields" EntitySet="Fields" />
+            <End Role="EducatInfo" EntitySet="EducatInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducatInfo_Orientation" Association="Nava_DBModel.FK_EducatInfo_Orientation">
+            <End Role="Orientation" EntitySet="Orientation" />
+            <End Role="EducatInfo" EntitySet="EducatInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducatInfo_UniverCity" Association="Nava_DBModel.FK_EducatInfo_UniverCity">
+            <End Role="UniverCity" EntitySet="UniverCity" />
+            <End Role="EducatInfo" EntitySet="EducatInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducatInfo_UserLogin" Association="Nava_DBModel.FK_EducatInfo_UserLogin">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="EducatInfo" EntitySet="EducatInfo" />
+          </AssociationSet>
+          <EntitySet Name="RejectInterView" EntityType="Nava_DBModel.RejectInterView" />
+          <AssociationSet Name="FK_RejectInterView_UserLogin" Association="Nava_DBModel.FK_RejectInterView_UserLogin">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="RejectInterView" EntitySet="RejectInterView" />
+          </AssociationSet>
+          <EntitySet Name="ResultInterView" EntityType="Nava_DBModel.ResultInterView" />
+          <EntitySet Name="ResultItem" EntityType="Nava_DBModel.ResultItem" />
+          <AssociationSet Name="FK_ResultInterView_UserLogin" Association="Nava_DBModel.FK_ResultInterView_UserLogin">
+            <End Role="ResultItem" EntitySet="ResultItem" />
+            <End Role="ResultInterView" EntitySet="ResultInterView" />
+          </AssociationSet>
+          <EntitySet Name="RegisterUser" EntityType="Nava_DBModel.RegisterUser" />
+          <AssociationSet Name="FK_RegisterUser_UserLogin" Association="Nava_DBModel.FK_RegisterUser_UserLogin">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="RegisterUser" EntitySet="RegisterUser" />
+          </AssociationSet>
+          <EntitySet Name="Special_Fields" EntityType="Nava_DBModel.Special_Fields" />
+          <EntitySet Name="Speciality" EntityType="Nava_DBModel.Speciality" />
+          <AssociationSet Name="FK_Special_Fields_Fields" Association="Nava_DBModel.FK_Special_Fields_Fields">
+            <End Role="Fields" EntitySet="Fields" />
+            <End Role="Special_Fields" EntitySet="Special_Fields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Speciality_Fields" Association="Nava_DBModel.FK_Speciality_Fields">
+            <End Role="Fields" EntitySet="Fields" />
+            <End Role="Speciality" EntitySet="Speciality" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Special_Fields_UserLogin" Association="Nava_DBModel.FK_Special_Fields_UserLogin">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="Special_Fields" EntitySet="Special_Fields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultInterView_UserLogin1" Association="Nava_DBModel.FK_ResultInterView_UserLogin1">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="ResultInterView" EntitySet="ResultInterView" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Special_Fields_Speciality" Association="Nava_DBModel.FK_Special_Fields_Speciality">
+            <End Role="Speciality" EntitySet="Speciality" />
+            <End Role="Special_Fields" EntitySet="Special_Fields" />
+          </AssociationSet>
+          <EntitySet Name="InterView" EntityType="Nava_DBModel.InterView" />
+          <AssociationSet Name="FK_InterView_UserLogin" Association="Nava_DBModel.FK_InterView_UserLogin">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="InterView" EntitySet="InterView" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="CrossSection">
+          <Key>
+            <PropertyRef Name="SectionID" />
+          </Key>
+          <Property Name="SectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SectionTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EducatInfo" Relationship="Nava_DBModel.FK_EducatInfo_CrossSection" FromRole="CrossSection" ToRole="EducatInfo" />
+        </EntityType>
+        <EntityType Name="Fields">
+          <Key>
+            <PropertyRef Name="FieldID" />
+          </Key>
+          <Property Name="FieldID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FieldName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orientation" Relationship="Nava_DBModel.FK_Orientation_Fields" FromRole="Fields" ToRole="Orientation" />
+          <NavigationProperty Name="Lessons" Relationship="Nava_DBModel.FK_Lessons_Fields" FromRole="Fields" ToRole="Lessons" />
+          <NavigationProperty Name="EducatInfo" Relationship="Nava_DBModel.FK_EducatInfo_Fields" FromRole="Fields" ToRole="EducatInfo" />
+          <NavigationProperty Name="Special_Fields" Relationship="Nava_DBModel.FK_Special_Fields_Fields" FromRole="Fields" ToRole="Special_Fields" />
+          <NavigationProperty Name="Speciality" Relationship="Nava_DBModel.FK_Speciality_Fields" FromRole="Fields" ToRole="Speciality" />
+        </EntityType>
+        <EntityType Name="Orientation">
+          <Key>
+            <PropertyRef Name="OrientationID" />
+          </Key>
+          <Property Name="OrientationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FieldID" Type="Int32" Nullable="false" />
+          <Property Name="OrientationName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Fields" Relationship="Nava_DBModel.FK_Orientation_Fields" FromRole="Orientation" ToRole="Fields" />
+          <NavigationProperty Name="EducatInfo" Relationship="Nava_DBModel.FK_EducatInfo_Orientation" FromRole="Orientation" ToRole="EducatInfo" />
+        </EntityType>
+        <EntityType Name="UniverCity">
+          <Key>
+            <PropertyRef Name="UniID" />
+          </Key>
+          <Property Name="UniID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UniName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EducatInfo" Relationship="Nava_DBModel.FK_EducatInfo_UniverCity" FromRole="UniverCity" ToRole="EducatInfo" />
+        </EntityType>
+        <Association Name="FK_Orientation_Fields">
+          <End Type="Nava_DBModel.Fields" Role="Fields" Multiplicity="1" />
+          <End Type="Nava_DBModel.Orientation" Role="Orientation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fields">
+              <PropertyRef Name="FieldID" />
+            </Principal>
+            <Dependent Role="Orientation">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Lessons">
+          <Key>
+            <PropertyRef Name="LessonID" />
+          </Key>
+          <Property Name="LessonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LessonCode" Type="Int32" />
+          <Property Name="FieldID" Type="Int32" Nullable="false" />
+          <Property Name="LessonName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Fields" Relationship="Nava_DBModel.FK_Lessons_Fields" FromRole="Lessons" ToRole="Fields" />
+          <NavigationProperty Name="Field_Lessons" Relationship="Nava_DBModel.FK_Field_Lessons_Lessons" FromRole="Lessons" ToRole="Field_Lessons" />
+        </EntityType>
+        <Association Name="FK_Lessons_Fields">
+          <End Type="Nava_DBModel.Fields" Role="Fields" Multiplicity="1" />
+          <End Type="Nava_DBModel.Lessons" Role="Lessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fields">
+              <PropertyRef Name="FieldID" />
+            </Principal>
+            <Dependent Role="Lessons">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Field_Lessons">
+          <Key>
+            <PropertyRef Name="FL_ID" />
+          </Key>
+          <Property Name="FL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LessonID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ProblemSolving" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MakingVideo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RelatedSoftware" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Lessons" Relationship="Nava_DBModel.FK_Field_Lessons_Lessons" FromRole="Field_Lessons" ToRole="Lessons" />
+          <NavigationProperty Name="UserLogin" Relationship="Nava_DBModel.FK_Field_Lessons_UserLogin" FromRole="Field_Lessons" ToRole="UserLogin" />
+        </EntityType>
+        <Association Name="FK_Field_Lessons_Lessons">
+          <End Type="Nava_DBModel.Lessons" Role="Lessons" Multiplicity="1" />
+          <End Type="Nava_DBModel.Field_Lessons" Role="Field_Lessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lessons">
+              <PropertyRef Name="LessonID" />
+            </Principal>
+            <Dependent Role="Field_Lessons">
+              <PropertyRef Name="LessonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="LangID" />
+          </Key>
+          <Property Name="LangID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LangName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User_Lang" Relationship="Nava_DBModel.FK_User_Lang_Language" FromRole="Language" ToRole="User_Lang" />
+        </EntityType>
+        <EntityType Name="User_Lang">
+          <Key>
+            <PropertyRef Name="UL_ID" />
+          </Key>
+          <Property Name="UL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="LangID" Type="Int32" Nullable="false" />
+          <Property Name="ScoreSpeking" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ScoreListening" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ScoreWrite" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ScoreReading" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionLang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Language" Relationship="Nava_DBModel.FK_User_Lang_Language" FromRole="User_Lang" ToRole="Language" />
+          <NavigationProperty Name="UserLogin" Relationship="Nava_DBModel.FK_User_Lang_UserLogin" FromRole="User_Lang" ToRole="UserLogin" />
+        </EntityType>
+        <Association Name="FK_User_Lang_Language">
+          <End Type="Nava_DBModel.Language" Role="Language" Multiplicity="1" />
+          <End Type="Nava_DBModel.User_Lang" Role="User_Lang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LangID" />
+            </Principal>
+            <Dependent Role="User_Lang">
+              <PropertyRef Name="LangID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserLogin">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActiveCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegisterDate" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ImageUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Field_Lessons" Relationship="Nava_DBModel.FK_Field_Lessons_UserLogin" FromRole="UserLogin" ToRole="Field_Lessons" />
+          <NavigationProperty Name="Roles" Relationship="Nava_DBModel.FK_UserLogin_Roles" FromRole="UserLogin" ToRole="Roles" />
+          <NavigationProperty Name="User_Lang" Relationship="Nava_DBModel.FK_User_Lang_UserLogin" FromRole="UserLogin" ToRole="User_Lang" />
+          <NavigationProperty Name="Company" Relationship="Nava_DBModel.FK_Company_UserLogin" FromRole="UserLogin" ToRole="Company" />
+          <NavigationProperty Name="EducatInfo" Relationship="Nava_DBModel.FK_EducatInfo_UserLogin" FromRole="UserLogin" ToRole="EducatInfo" />
+          <NavigationProperty Name="RejectInterView" Relationship="Nava_DBModel.FK_RejectInterView_UserLogin" FromRole="UserLogin" ToRole="RejectInterView" />
+          <NavigationProperty Name="RegisterUser" Relationship="Nava_DBModel.FK_RegisterUser_UserLogin" FromRole="UserLogin" ToRole="RegisterUser" />
+          <NavigationProperty Name="Special_Fields" Relationship="Nava_DBModel.FK_Special_Fields_UserLogin" FromRole="UserLogin" ToRole="Special_Fields" />
+          <NavigationProperty Name="ResultInterView" Relationship="Nava_DBModel.FK_ResultInterView_UserLogin1" FromRole="UserLogin" ToRole="ResultInterView" />
+          <NavigationProperty Name="InterView" Relationship="Nava_DBModel.FK_InterView_UserLogin" FromRole="UserLogin" ToRole="InterView" />
+        </EntityType>
+        <Association Name="FK_Field_Lessons_UserLogin">
+          <End Type="Nava_DBModel.UserLogin" Role="UserLogin" Multiplicity="1" />
+          <End Type="Nava_DBModel.Field_Lessons" Role="Field_Lessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Field_Lessons">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLogin_Roles">
+          <End Type="Nava_DBModel.Roles" Role="Roles" Multiplicity="1" />
+          <End Type="Nava_DBModel.UserLogin" Role="UserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserLogin">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Lang_UserLogin">
+          <End Type="Nava_DBModel.UserLogin" Role="UserLogin" Multiplicity="1" />
+          <End Type="Nava_DBModel.User_Lang" Role="User_Lang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="User_Lang">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DurationWork" Type="Int32" />
+          <Property Name="DescPosition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserLogin" Relationship="Nava_DBModel.FK_Company_UserLogin" FromRole="Company" ToRole="UserLogin" />
+        </EntityType>
+        <Association Name="FK_Company_UserLogin">
+          <End Type="Nava_DBModel.UserLogin" Role="UserLogin" Multiplicity="1" />
+          <End Type="Nava_DBModel.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EducatInfo">
+          <Key>
+            <PropertyRef Name="Educat_info_ID" />
+          </Key>
+          <Property Name="Educat_info_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="SectionID" Type="Int32" Nullable="false" />
+          <Property Name="UniID" Type="Int32" Nullable="false" />
+          <Property Name="FieldID" Type="Int32" Nullable="false" />
+          <Property Name="OrientationID" Type="Int32" Nullable="false" />
+          <Property Name="ThesisDiss" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Avrage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Stu_Graduate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BeginStudy" Type="DateTime" Precision="0" />
+          <Property Name="YearGrad" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="CrossSection" Relationship="Nava_DBModel.FK_EducatInfo_CrossSection" FromRole="EducatInfo" ToRole="CrossSection" />
+          <NavigationProperty Name="Fields" Relationship="Nava_DBModel.FK_EducatInfo_Fields" FromRole="EducatInfo" ToRole="Fields" />
+          <NavigationProperty Name="Orientation" Relationship="Nava_DBModel.FK_EducatInfo_Orientation" FromRole="EducatInfo" ToRole="Orientation" />
+          <NavigationProperty Name="UniverCity" Relationship="Nava_DBModel.FK_EducatInfo_UniverCity" FromRole="EducatInfo" ToRole="UniverCity" />
+          <NavigationProperty Name="UserLogin" Relationship="Nava_DBModel.FK_EducatInfo_UserLogin" FromRole="EducatInfo" ToRole="UserLogin" />
+        </EntityType>
+        <Association Name="FK_EducatInfo_CrossSection">
+          <End Type="Nava_DBModel.CrossSection" Role="CrossSection" Multiplicity="1" />
+          <End Type="Nava_DBModel.EducatInfo" Role="EducatInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CrossSection">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="EducatInfo">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducatInfo_Fields">
+          <End Type="Nava_DBModel.Fields" Role="Fields" Multiplicity="1" />
+          <End Type="Nava_DBModel.EducatInfo" Role="EducatInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fields">
+              <PropertyRef Name="FieldID" />
+            </Principal>
+            <Dependent Role="EducatInfo">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducatInfo_Orientation">
+          <End Type="Nava_DBModel.Orientation" Role="Orientation" Multiplicity="1" />
+          <End Type="Nava_DBModel.EducatInfo" Role="EducatInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orientation">
+              <PropertyRef Name="OrientationID" />
+            </Principal>
+            <Dependent Role="EducatInfo">
+              <PropertyRef Name="OrientationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducatInfo_UniverCity">
+          <End Type="Nava_DBModel.UniverCity" Role="UniverCity" Multiplicity="1" />
+          <End Type="Nava_DBModel.EducatInfo" Role="EducatInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UniverCity">
+              <PropertyRef Name="UniID" />
+            </Principal>
+            <Dependent Role="EducatInfo">
+              <PropertyRef Name="UniID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducatInfo_UserLogin">
+          <End Type="Nava_DBModel.UserLogin" Role="UserLogin" Multiplicity="1" />
+          <End Type="Nava_DBModel.EducatInfo" Role="EducatInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="EducatInfo">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RejectInterView">
+          <Key>
+            <PropertyRef Name="RejectID" />
+          </Key>
+          <Property Name="RejectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="CauseReject" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserLogin" Relationship="Nava_DBModel.FK_RejectInterView_UserLogin" FromRole="RejectInterView" ToRole="UserLogin" />
+        </EntityType>
+        <Association Name="FK_RejectInterView_UserLogin">
+          <End Type="Nava_DBModel.UserLogin" Role="UserLogin" Multiplicity="1" />
+          <End Type="Nava_DBModel.RejectInterView" Role="RejectInterView" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RejectInterView">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ResultInterView">
+          <Key>
+            <PropertyRef Name="ResultID" />
+          </Key>
+          <Property Name="ResultID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="SkillSpeaking" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassionWork" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sobriety" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rhetorical" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateForWork" Type="DateTime" Precision="0" />
+          <Property Name="VideoName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ResultItem" Relationship="Nava_DBModel.FK_ResultInterView_UserLogin" FromRole="ResultInterView" ToRole="ResultItem" />
+          <NavigationProperty Name="UserLogin" Relationship="Nava_DBModel.FK_ResultInterView_UserLogin1" FromRole="ResultInterView" ToRole="UserLogin" />
+        </EntityType>
+        <EntityType Name="ResultItem">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ValueItem" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ResultInterView" Relationship="Nava_DBModel.FK_ResultInterView_UserLogin" FromRole="ResultItem" ToRole="ResultInterView" />
+        </EntityType>
+        <Association Name="FK_ResultInterView_UserLogin">
+          <End Type="Nava_DBModel.ResultItem" Role="ResultItem" Multiplicity="1" />
+          <End Type="Nava_DBModel.ResultInterView" Role="ResultInterView" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResultItem">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="ResultInterView">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RegisterUser">
+          <Key>
+            <PropertyRef Name="RegID" />
+          </Key>
+          <Property Name="RegID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="NationalNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Province" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MaritalStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MilitaryService" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionArticles" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Workinprogress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeOfEmployment" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeInWeek" Type="Int32" />
+          <Property Name="WageFullTime" Type="Int32" />
+          <Property Name="WagePartTime" Type="Int32" />
+          <Property Name="Telework" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Internship" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionFull" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rezome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateSubmitInfo" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EditInfo" Type="Boolean" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserLogin" Relationship="Nava_DBModel.FK_RegisterUser_UserLogin" FromRole="RegisterUser" ToRole="UserLogin" />
+        </EntityType>
+        <Association Name="FK_RegisterUser_UserLogin">
+          <End Type="Nava_DBModel.UserLogin" Role="UserLogin" Multiplicity="1" />
+          <End Type="Nava_DBModel.RegisterUser" Role="RegisterUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RegisterUser">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Special_Fields">
+          <Key>
+            <PropertyRef Name="SP_FL" />
+          </Key>
+          <Property Name="SP_FL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FieldID" Type="Int32" Nullable="false" />
+          <Property Name="SpecialID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Fields" Relationship="Nava_DBModel.FK_Special_Fields_Fields" FromRole="Special_Fields" ToRole="Fields" />
+          <NavigationProperty Name="UserLogin" Relationship="Nava_DBModel.FK_Special_Fields_UserLogin" FromRole="Special_Fields" ToRole="UserLogin" />
+          <NavigationProperty Name="Speciality" Relationship="Nava_DBModel.FK_Special_Fields_Speciality" FromRole="Special_Fields" ToRole="Speciality" />
+        </EntityType>
+        <EntityType Name="Speciality">
+          <Key>
+            <PropertyRef Name="SpecialID" />
+          </Key>
+          <Property Name="SpecialID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FieldID" Type="Int32" Nullable="false" />
+          <Property Name="SpecialName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Fields" Relationship="Nava_DBModel.FK_Speciality_Fields" FromRole="Speciality" ToRole="Fields" />
+          <NavigationProperty Name="Special_Fields" Relationship="Nava_DBModel.FK_Special_Fields_Speciality" FromRole="Speciality" ToRole="Special_Fields" />
+        </EntityType>
+        <Association Name="FK_Special_Fields_Fields">
+          <End Type="Nava_DBModel.Fields" Role="Fields" Multiplicity="1" />
+          <End Type="Nava_DBModel.Special_Fields" Role="Special_Fields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fields">
+              <PropertyRef Name="FieldID" />
+            </Principal>
+            <Dependent Role="Special_Fields">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Speciality_Fields">
+          <End Type="Nava_DBModel.Fields" Role="Fields" Multiplicity="1" />
+          <End Type="Nava_DBModel.Speciality" Role="Speciality" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fields">
+              <PropertyRef Name="FieldID" />
+            </Principal>
+            <Dependent Role="Speciality">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Special_Fields_UserLogin">
+          <End Type="Nava_DBModel.UserLogin" Role="UserLogin" Multiplicity="1" />
+          <End Type="Nava_DBModel.Special_Fields" Role="Special_Fields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Special_Fields">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultInterView_UserLogin1">
+          <End Type="Nava_DBModel.UserLogin" Role="UserLogin" Multiplicity="1" />
+          <End Type="Nava_DBModel.ResultInterView" Role="ResultInterView" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ResultInterView">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Special_Fields_Speciality">
+          <End Type="Nava_DBModel.Speciality" Role="Speciality" Multiplicity="1" />
+          <End Type="Nava_DBModel.Special_Fields" Role="Special_Fields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Speciality">
+              <PropertyRef Name="SpecialID" />
+            </Principal>
+            <Dependent Role="Special_Fields">
+              <PropertyRef Name="SpecialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InterView">
+          <Key>
+            <PropertyRef Name="ViewID" />
+          </Key>
+          <Property Name="ViewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="DateView" Type="DateTime" Precision="0" />
+          <Property Name="ClockView" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserLogin" Relationship="Nava_DBModel.FK_InterView_UserLogin" FromRole="InterView" ToRole="UserLogin" />
+        </EntityType>
+        <Association Name="FK_InterView_UserLogin">
+          <End Type="Nava_DBModel.UserLogin" Role="UserLogin" Multiplicity="1" />
+          <End Type="Nava_DBModel.InterView" Role="InterView" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="InterView">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Nava_DBModelStoreContainer" CdmEntityContainer="Nava_DBEntities">
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Nava_DBModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleTitle" ColumnName="RoleTitle" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CrossSection">
+            <EntityTypeMapping TypeName="Nava_DBModel.CrossSection">
+              <MappingFragment StoreEntitySet="CrossSection">
+                <ScalarProperty Name="SectionTitle" ColumnName="SectionTitle" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fields">
+            <EntityTypeMapping TypeName="Nava_DBModel.Fields">
+              <MappingFragment StoreEntitySet="Fields">
+                <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+                <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orientation">
+            <EntityTypeMapping TypeName="Nava_DBModel.Orientation">
+              <MappingFragment StoreEntitySet="Orientation">
+                <ScalarProperty Name="OrientationName" ColumnName="OrientationName" />
+                <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+                <ScalarProperty Name="OrientationID" ColumnName="OrientationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UniverCity">
+            <EntityTypeMapping TypeName="Nava_DBModel.UniverCity">
+              <MappingFragment StoreEntitySet="UniverCity">
+                <ScalarProperty Name="UniName" ColumnName="UniName" />
+                <ScalarProperty Name="UniID" ColumnName="UniID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lessons">
+            <EntityTypeMapping TypeName="Nava_DBModel.Lessons">
+              <MappingFragment StoreEntitySet="Lessons">
+                <ScalarProperty Name="LessonName" ColumnName="LessonName" />
+                <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+                <ScalarProperty Name="LessonCode" ColumnName="LessonCode" />
+                <ScalarProperty Name="LessonID" ColumnName="LessonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Field_Lessons">
+            <EntityTypeMapping TypeName="Nava_DBModel.Field_Lessons">
+              <MappingFragment StoreEntitySet="Field_Lessons">
+                <ScalarProperty Name="RelatedSoftware" ColumnName="RelatedSoftware" />
+                <ScalarProperty Name="MakingVideo" ColumnName="MakingVideo" />
+                <ScalarProperty Name="ProblemSolving" ColumnName="ProblemSolving" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="LessonID" ColumnName="LessonID" />
+                <ScalarProperty Name="FL_ID" ColumnName="FL_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Language">
+            <EntityTypeMapping TypeName="Nava_DBModel.Language">
+              <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="LangName" ColumnName="LangName" />
+                <ScalarProperty Name="LangID" ColumnName="LangID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Lang">
+            <EntityTypeMapping TypeName="Nava_DBModel.User_Lang">
+              <MappingFragment StoreEntitySet="User_Lang">
+                <ScalarProperty Name="DescriptionLang" ColumnName="DescriptionLang" />
+                <ScalarProperty Name="ScoreReading" ColumnName="ScoreReading" />
+                <ScalarProperty Name="ScoreWrite" ColumnName="ScoreWrite" />
+                <ScalarProperty Name="ScoreListening" ColumnName="ScoreListening" />
+                <ScalarProperty Name="ScoreSpeking" ColumnName="ScoreSpeking" />
+                <ScalarProperty Name="LangID" ColumnName="LangID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UL_ID" ColumnName="UL_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLogin">
+            <EntityTypeMapping TypeName="Nava_DBModel.UserLogin">
+              <MappingFragment StoreEntitySet="UserLogin">
+                <ScalarProperty Name="ImageUser" ColumnName="ImageUser" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="ActiveCode" ColumnName="ActiveCode" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Company">
+            <EntityTypeMapping TypeName="Nava_DBModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="DescPosition" ColumnName="DescPosition" />
+                <ScalarProperty Name="DurationWork" ColumnName="DurationWork" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EducatInfo">
+            <EntityTypeMapping TypeName="Nava_DBModel.EducatInfo">
+              <MappingFragment StoreEntitySet="EducatInfo">
+                <ScalarProperty Name="YearGrad" ColumnName="YearGrad" />
+                <ScalarProperty Name="BeginStudy" ColumnName="BeginStudy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Stu_Graduate" ColumnName="Stu_Graduate" />
+                <ScalarProperty Name="Avrage" ColumnName="Avrage" />
+                <ScalarProperty Name="ThesisDiss" ColumnName="ThesisDiss" />
+                <ScalarProperty Name="OrientationID" ColumnName="OrientationID" />
+                <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+                <ScalarProperty Name="UniID" ColumnName="UniID" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Educat_info_ID" ColumnName="Educat_info_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RejectInterView">
+            <EntityTypeMapping TypeName="Nava_DBModel.RejectInterView">
+              <MappingFragment StoreEntitySet="RejectInterView">
+                <ScalarProperty Name="CauseReject" ColumnName="CauseReject" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RejectID" ColumnName="RejectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultInterView">
+            <EntityTypeMapping TypeName="Nava_DBModel.ResultInterView">
+              <MappingFragment StoreEntitySet="ResultInterView">
+                <ScalarProperty Name="VideoName" ColumnName="VideoName" />
+                <ScalarProperty Name="DateForWork" ColumnName="DateForWork" />
+                <ScalarProperty Name="Rhetorical" ColumnName="Rhetorical" />
+                <ScalarProperty Name="Sobriety" ColumnName="Sobriety" />
+                <ScalarProperty Name="PassionWork" ColumnName="PassionWork" />
+                <ScalarProperty Name="SkillSpeaking" ColumnName="SkillSpeaking" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="ResultID" ColumnName="ResultID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultItem">
+            <EntityTypeMapping TypeName="Nava_DBModel.ResultItem">
+              <MappingFragment StoreEntitySet="ResultItem">
+                <ScalarProperty Name="ValueItem" ColumnName="ValueItem" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegisterUser">
+            <EntityTypeMapping TypeName="Nava_DBModel.RegisterUser">
+              <MappingFragment StoreEntitySet="RegisterUser">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EditInfo" ColumnName="EditInfo" />
+                <ScalarProperty Name="DateSubmitInfo" ColumnName="DateSubmitInfo" />
+                <ScalarProperty Name="Rezome" ColumnName="Rezome" />
+                <ScalarProperty Name="DescriptionFull" ColumnName="DescriptionFull" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Internship" ColumnName="Internship" />
+                <ScalarProperty Name="Telework" ColumnName="Telework" />
+                <ScalarProperty Name="WagePartTime" ColumnName="WagePartTime" />
+                <ScalarProperty Name="WageFullTime" ColumnName="WageFullTime" />
+                <ScalarProperty Name="TimeInWeek" ColumnName="TimeInWeek" />
+                <ScalarProperty Name="TypeOfEmployment" ColumnName="TypeOfEmployment" />
+                <ScalarProperty Name="Workinprogress" ColumnName="Workinprogress" />
+                <ScalarProperty Name="DescriptionArticles" ColumnName="DescriptionArticles" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="MilitaryService" ColumnName="MilitaryService" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="NationalNumber" ColumnName="NationalNumber" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RegID" ColumnName="RegID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Special_Fields">
+            <EntityTypeMapping TypeName="Nava_DBModel.Special_Fields">
+              <MappingFragment StoreEntitySet="Special_Fields">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="SpecialID" ColumnName="SpecialID" />
+                <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+                <ScalarProperty Name="SP_FL" ColumnName="SP_FL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Speciality">
+            <EntityTypeMapping TypeName="Nava_DBModel.Speciality">
+              <MappingFragment StoreEntitySet="Speciality">
+                <ScalarProperty Name="SpecialName" ColumnName="SpecialName" />
+                <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+                <ScalarProperty Name="SpecialID" ColumnName="SpecialID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InterView">
+            <EntityTypeMapping TypeName="Nava_DBModel.InterView">
+              <MappingFragment StoreEntitySet="InterView">
+                <ScalarProperty Name="ClockView" ColumnName="ClockView" />
+                <ScalarProperty Name="DateView" ColumnName="DateView" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ViewID" ColumnName="ViewID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

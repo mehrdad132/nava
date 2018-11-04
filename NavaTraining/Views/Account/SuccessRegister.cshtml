@@ -1,0 +1,12 @@
+﻿@model  NavaTraining.Models.UserLogin
+@{
+    ViewBag.Title = "SuccessRegister";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="alert alert-success">
+    <p>@Model.UserName عزیز !</p>
+    <p>ثبت نام شما در سایت ما انجام شد و یک ایمیل به آدرس <strong>@Model.Email</strong> ارسال شد ، جهت فعال سازی حساب کاربری خود وارد ایمیلتان شوید و روی لینک کلیک کنید .</p>
+</div>
+

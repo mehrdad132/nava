@@ -1,0 +1,41 @@
+﻿@model NavaTraining.Models.ResultItem
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <i class="icon icon-2x icon-list" style="margin-left: 10px;"></i><label style="font-size: 17px;">حذف آیتم</label>
+
+    </div>
+
+    <div class="panel-body">
+        <div class="table-responsive">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.ValueItem)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ValueItem)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="حذف" class="button button-3d button-small button-rounded button-red" />
+
+                </div>
+                <br /><br />
+                @Html.ActionLink("بازگشت", "Index", null, new { @class = "button button-3d button-rounded button-black " })
+            }
+        </div>
+    </div>
+</div>

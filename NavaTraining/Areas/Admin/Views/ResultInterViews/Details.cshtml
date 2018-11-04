@@ -1,0 +1,101 @@
+﻿@using NavaTraining.Classes
+@model NavaTraining.Models.ResultInterView
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-responsive">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <i class="icon icon-2x icon-list" style="margin-left: 10px;"></i><label style="font-size: 17px;">جزییات مصاحبه ی کاربر</label>
+
+        </div>
+
+        <div class="panel-body">
+            <dl class="dl-horizontal h4 text-right">
+             
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SkillSpeaking)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SkillSpeaking)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PassionWork)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PassionWork)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Sobriety)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Sobriety)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Rhetorical)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Rhetorical)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DateForWork)
+                </dt>
+
+                <dd>
+                    @Model.DateForWork.ToShortPersianDateString()
+                </dd>
+
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ResultItem.ValueItem)
+                </dt>
+
+                <dd class="text-info h3">
+                    @Html.DisplayFor(model => model.ResultItem.ValueItem)
+                </dd>
+                <dt>
+                   
+                </dt>
+
+                <dd class="text-info h3">
+              
+                </dd>
+
+                <dt>
+                    نمایش ویدئو
+                </dt>
+             
+                <dd>
+                
+                   @if (Model.VideoName != null)
+                   {
+                    <video class="col-md-12 col-sm-12 col-xs-12" controls src="~/VideoUpload/UserVideo/@Model.VideoName" ></video>
+                   }
+                   else
+                   {
+                       <label>ویدوئی برای نمایش وجود ندارد</label>
+                   }
+
+                   
+                </dd>
+
+
+            </dl>
+        </div>
+        <div>
+            @Html.ActionLink("بازگشت", "Index", null, new { @class = "button button-3d button-rounded button-black " })
+        </div>
+    </div>
+</div>

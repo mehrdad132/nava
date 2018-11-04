@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e48048fea03e4b7abb238280e98bd616" Name="Diagram1" ZoomLevel="65">
+        <EntityTypeShape EntityType="Nava_DBModel.Roles" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Nava_DBModel.CrossSection" Width="1.5" PointX="7.625" PointY="9.75" />
+        <EntityTypeShape EntityType="Nava_DBModel.Fields" Width="1.5" PointX="5.375" PointY="5.125" />
+        <EntityTypeShape EntityType="Nava_DBModel.Orientation" Width="1.5" PointX="7.625" PointY="6.5" />
+        <EntityTypeShape EntityType="Nava_DBModel.UniverCity" Width="1.5" PointX="7.625" PointY="12.125" />
+        <AssociationConnector Association="Nava_DBModel.FK_Orientation_Fields" />
+        <EntityTypeShape EntityType="Nava_DBModel.Lessons" Width="1.5" PointX="7.625" PointY="3" />
+        <AssociationConnector Association="Nava_DBModel.FK_Lessons_Fields" />
+        <EntityTypeShape EntityType="Nava_DBModel.Field_Lessons" Width="1.5" PointX="9.875" PointY="1.75" />
+        <AssociationConnector Association="Nava_DBModel.FK_Field_Lessons_Lessons" />
+        <EntityTypeShape EntityType="Nava_DBModel.Language" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="Nava_DBModel.User_Lang" Width="1.5" PointX="5.25" PointY="1.25" />
+        <AssociationConnector Association="Nava_DBModel.FK_User_Lang_Language" />
+        <EntityTypeShape EntityType="Nava_DBModel.UserLogin" Width="1.5" PointX="3" PointY="10" />
+        <AssociationConnector Association="Nava_DBModel.FK_Field_Lessons_UserLogin" />
+        <AssociationConnector Association="Nava_DBModel.FK_UserLogin_Roles" />
+        <AssociationConnector Association="Nava_DBModel.FK_User_Lang_UserLogin" />
+        <EntityTypeShape EntityType="Nava_DBModel.Company" Width="1.5" PointX="5.25" PointY="15.75" />
+        <AssociationConnector Association="Nava_DBModel.FK_Company_UserLogin" />
+        <EntityTypeShape EntityType="Nava_DBModel.EducatInfo" Width="1.5" PointX="11.875" PointY="7.25" />
+        <AssociationConnector Association="Nava_DBModel.FK_EducatInfo_CrossSection" />
+        <AssociationConnector Association="Nava_DBModel.FK_EducatInfo_Fields" />
+        <AssociationConnector Association="Nava_DBModel.FK_EducatInfo_Orientation" />
+        <AssociationConnector Association="Nava_DBModel.FK_EducatInfo_UniverCity" />
+        <AssociationConnector Association="Nava_DBModel.FK_EducatInfo_UserLogin" />
+        <EntityTypeShape EntityType="Nava_DBModel.RejectInterView" Width="1.5" PointX="5.25" PointY="22.25" />
+        <AssociationConnector Association="Nava_DBModel.FK_RejectInterView_UserLogin" />
+        <EntityTypeShape EntityType="Nava_DBModel.ResultInterView" Width="1.5" PointX="14.625" PointY="1" />
+        <EntityTypeShape EntityType="Nava_DBModel.ResultItem" Width="1.5" PointX="12.375" PointY="1.625" />
+        <AssociationConnector Association="Nava_DBModel.FK_ResultInterView_UserLogin" />
+        <EntityTypeShape EntityType="Nava_DBModel.RegisterUser" Width="1.5" PointX="5.25" PointY="8" />
+        <AssociationConnector Association="Nava_DBModel.FK_RegisterUser_UserLogin" />
+        <EntityTypeShape EntityType="Nava_DBModel.Special_Fields" Width="1.5" PointX="10.625" PointY="13" />
+        <EntityTypeShape EntityType="Nava_DBModel.Speciality" Width="1.5" PointX="8" PointY="0.625" />
+        <AssociationConnector Association="Nava_DBModel.FK_Special_Fields_Fields" />
+        <AssociationConnector Association="Nava_DBModel.FK_Speciality_Fields" />
+        <AssociationConnector Association="Nava_DBModel.FK_Special_Fields_UserLogin" />
+        <AssociationConnector Association="Nava_DBModel.FK_ResultInterView_UserLogin1" />
+        <AssociationConnector Association="Nava_DBModel.FK_Special_Fields_Speciality" />
+        <EntityTypeShape EntityType="Nava_DBModel.InterView" Width="1.5" PointX="5.25" PointY="19.375" />
+        <AssociationConnector Association="Nava_DBModel.FK_InterView_UserLogin" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

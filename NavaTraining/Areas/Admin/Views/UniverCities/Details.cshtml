@@ -1,0 +1,27 @@
+﻿@model NavaTraining.Models.UniverCity
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UniverCity</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UniName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UniName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UniID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

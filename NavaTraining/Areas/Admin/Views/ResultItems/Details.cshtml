@@ -1,0 +1,31 @@
+﻿@model NavaTraining.Models.ResultItem
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-responsive">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <i class="icon icon-2x icon-list" style="margin-left: 10px;"></i><label style="font-size: 17px;">جزییات کاربر</label>
+
+        </div>
+
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.ValueItem)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ValueItem)
+                </dd>
+
+            </dl>
+        </div>
+        <div>
+            @Html.ActionLink("بازگشت", "Index", null, new { @class = "button button-3d button-rounded button-black " })
+        </div>
+    </div>
+</div>

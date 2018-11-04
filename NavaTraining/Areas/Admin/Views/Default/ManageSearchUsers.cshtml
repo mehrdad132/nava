@@ -1,0 +1,544 @@
+﻿@using NavaTraining.Classes
+@using PagedList.Mvc
+@using NavaTraining.Models;
+@model PagedList.IPagedList<NavaTraining.Areas.Admin.ListUsersForSearch>
+
+@{
+    ViewBag.Title = "ManageSearchUsers";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminOther.cshtml";
+    Nava_DBEntities db = new Nava_DBEntities();
+    int RowCount = 0;
+}
+<link href="~/Areas/Content/PersianDatePicker.min.css" rel="stylesheet" />
+
+<link href="~/Areas/Content/PersianDatePicker.css" rel="stylesheet" />
+<div class="table-responsive">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <i class="icon icon-2x icon-list" style="margin-left: 10px;"></i><label style="font-size: 17px;">لیست تمامی کاربران</label>
+
+        </div>
+
+        <div class="panel-body">
+
+            <h4>جستجوی کاربران بر اساس</h4>
+
+            @using (Html.BeginForm("ManageSearchUsers", "Default", FormMethod.Post))
+            {
+                <div class="row">
+                    <div class="col-md-4 ">
+                        <div class="row">
+                            <div div class="col-md-4">
+                                <label>نام</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" value="" name="username" id="username" class="sm-form-control text-box single-line" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div div class="col-md-4">
+                                <label>نام خانوادگی</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" value="" name="family" id="family" class="sm-form-control text-box single-line" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div div class="col-md-4">
+                                <label>شماره ملی</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" value="" name="meli" id="meli" class="sm-form-control text-box single-line" />
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div div class="col-md-4">
+                                <label>رشته</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" value="" name="fieldname"  id="searchField" class="sm-form-control text-box single-line" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div div class="col-md-4">
+                                <label>گرایش</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" value="" name="orientationname" id="searchOrientation" class="sm-form-control text-box single-line" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div div class="col-md-4">
+                                <label>وضعییت</label>
+                            </div>
+                            <div class="col-md-8">
+
+                                <select name="status" id="Status">
+                                    @{
+                                        List<string> lstStatus = new List<string>();
+                                        lstStatus.Add("");
+                                        lstStatus.Add("بررسی نشده");
+                                        lstStatus.Add("تایید جهت مصاحبه");
+                                        lstStatus.Add("بیش از حد انتظار");
+                                        lstStatus.Add("رد شده");
+                                        for (int i = 0; i < lstStatus.Count; i++)
+                                        {
+
+                                            <option value="@(i + 1)">@lstStatus[i]</option>
+                                        }
+                                    }
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div div class="col-md-4">
+                                <label>نتیجه مصاحبه</label>
+                            </div>
+                            <div class="col-md-8">
+                                @{
+                                    var q = db.ResultItem.ToList();
+                                    List<string> lstItem = new List<string>();
+                                    <select name="item" id="item">
+                                        @{
+                                            foreach (var item in q)
+                                            {
+                                                lstItem.Add(item.ValueItem);
+                                            }
+                                            for (int i = 0; i < q.Count; i++)
+                                            {
+
+                                                <option value="@(i + 1)">@lstItem[i]</option>
+                                            }
+                                        }
+                                    </select>
+                                }
+                                @*@Html.DropDownList("ResultItem", String.Empty)*@
+
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div div class="col-md-4">
+                                <label>مصاحبه</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" value="" name="result" id="result" placeholder="" class="sm-form-control text-box single-line" />
+                            </div>
+
+                        </div>
+
+                        <br/>
+                        <div class="row">
+                            <div div class="col-md-4">
+                                <label>تاریخ مصاحبه</label>
+                            </div>
+                            <div class="col-md-8">
+                                @Html.Editor("dateview", "PersianDatePicker", new { id = "dateview",value=01/01/1990 ,placeholder = "فرمت تاریخ1396/06/08" })
+                              
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div div class="col-md-4">
+                                <label>کارآموزی</label>
+                            </div>
+                            <div class="col-md-8">
+                                @*@{
+                                    List<SelectListItem> internship = new List<SelectListItem>();
+                                    internship.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                                    internship.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+                                    internship.Add(new SelectListItem() { Text = "خیر", Value = "خیر" });
+                                    ViewBag.internship = internship;
+                                    @Html.DropDownList("internship")
+                                  
+                                }
+                                @Html.DropDownList("internship")*@
+                                <select class="form-control" id="internship" name="internship">
+                                    <option> </option>
+                                    <option>بله</option>
+                                    <option>خیر</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-md-offset-6">
+                        <input type="submit" value="جستجو" name="btnSearch" class="button button-3d btn-success" />
+                      
+                        <br />
+                        <a href="/Admin/Default/ManageSearchUsers"  class="button button-rounded button-reveal button-small button-dirtygreen"><i class="icon-repeat"></i>نمایش همه</a>
+                    </div>
+
+                </div>
+
+
+           }
+
+
+            <div class="alert alert-dismissable">
+                <h4> @TempData["msg"]</h4>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-condensed table-responsive table-striped">
+                    <tr class="text-center">
+                        <th>
+                            ردیف
+                        </th>
+                        <th>
+                            نام
+                        </th>
+                        <th>
+                            نام خانوادگی
+                        </th>
+                        <th>
+                            آخرین مقطع تحصیلی
+                        </th>
+                        <th>
+                            رشته تحصیلی
+                        </th>
+                        <th>
+                            گرایش
+                        </th>
+                        <th>
+                            دانشگاه محل تحصیل
+                        </th>
+                        <th>
+                            وضعییت تحصیلی
+                        </th>
+                        <th>
+                            وضعیت سیستمی
+                        </th>
+                        <th>
+                           کارآموزی
+                        </th>
+                        <th>
+                           تاریخ مصاحبه
+                        </th>
+                        <th>
+                          نتیجه مصاحبه
+                        </th>
+                        <th>
+                            شماره تماس
+                        </th>
+
+                        <th>عملیات</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                       
+                        RowCount++;
+                        var q = db.RegisterUser.Where(a => a.UserID == item.UserID).FirstOrDefault();
+                        //var qdate = db.InterView.Where(a => a.UserID == item.UserID).FirstOrDefault().DateView;
+                        //DateTime dt = new DateTime();
+                        //DateTime time1 = qdate.Date;
+                        //DateTime time2 = DateTime.Now;
+                        //TimeSpan different = time1 - time2;
+                        //if (different.Days < -1)
+                        //{
+                        //    q.Status = 4;
+                        //    db.RegisterUser.Attach(q);
+                        //    db.Entry(q).State = System.Data.Entity.EntityState.Modified;
+                        //    db.SaveChanges();
+                        //}
+
+
+
+                        //string style = "";
+                        //if (item.Status == 1)
+                        //{
+                        //    style = "color:green";
+                        //}
+                        //else if (item.Status == 4)
+                        //{
+                        //    style = "color:red";
+                        //}
+                        <tr class="text-center line">
+                            <td>
+                                @RowCount
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Family)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SectionName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Field)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Orientation)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UniName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Stu_Graduste)
+                            </td>
+                            <td >
+                                @{
+                                    string strStatus = "";
+                                    switch (item.Status)
+                                    {
+                                        case 1:
+                                        {
+                                            strStatus = "";
+                                            break;
+
+                                        }
+                                        case 2:
+                                        {
+                                            strStatus = "بررسی نشده";
+                                            break;
+
+                                        }
+                                        case 3:
+                                        {
+                                            strStatus = "تایید شده جهت مصاحبه";
+                                            break;
+
+                                        }
+                                        case 4:
+                                        {
+                                            strStatus = "بیش از حد انتظار";
+                                            break;
+
+                                        }
+                                        case 5:
+                                        {
+                                            strStatus = "رد شده";
+                                            break;
+
+                                        }
+                                        default:
+                                            strStatus = "خطا";
+                                            break;
+                                    }
+                                    @Html.DisplayName(strStatus)
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Internship)
+                            </td>
+                            <td>
+                                @item.DateView.ToPersianDateTextify()
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ValueItem)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Mobile)
+                            </td>
+
+
+                            @if (db.RejectInterView.Where(a => a.UserID == item.UserID).Any())
+                            {
+
+
+
+                                <td class="table-responsive">
+                                    <button type="button" id="btnModal" class="button button-small button-3d  button-rounded " data-toggle="modal" data-target="#myModal">
+                                        عملیات
+                                    </button>
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myTitle"></h4>
+                                                </div>
+                                                <div class="modal-body" id="myModalbody">
+                                                    <div class="row">
+                                                        @Html.ActionLink("جزییات کاربر", "DetailsUsers", new { id = item.RegID }, new { @class = "button button-3d button-small button-rounded button-purple col-md-5 col-sm-10 col-xs-10" })
+                                                        @Html.ActionLink("تغییر وضعیت", "ChangeStatus", new { id = item.RegID }, new { @class = "button button-3d button-small button-rounded button-leaf col-md-5 col-sm-10 col-xs-10" })
+
+                                                        <a href="/Admin/Default/DeleteUsers/@item.RegID" class="button button-3d button-small button-rounded button-red col-md-5 col-sm-10 col-xs-10" onclick="return confirm('آیا می خواهید این کاربر را حذف کنید؟')"> حذف کاربر</a>
+                                                        @{
+                                                            if (db.RegisterUser.Where(a => a.UserID == item.UserID).FirstOrDefault().EditInfo == true)
+                                                            {
+                                                                <a href="/Admin/Default/NotAllowEditProf/@item.RegID" class="button button-small button-3d  button-yellow button-light col-md-5 col-sm-10 col-xs-10" onclick="return confirm('آیا از عدم اجازه ویرایش به کاربر مطمئنید؟')"> عدم اجازه ویرایش </a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="/Admin/Default/AllowEditProf/@item.RegID" class="button button-small button-3d  button-yellow button-light col-md-5 col-sm-10 col-xs-10" onclick="return confirm('آیا اجازه ویرایش به کاربر می دهید؟')"> اجازه ویرایش </a>
+                                                            }
+                                                        }
+
+                                                        <a href="/Admin/Default/DeleteRejectInterView/@item.RegID" class="button button-small button-3d button-pink col-md-5 col-sm-10 col-xs-10" onclick="return confirm('آیا اجازه دعوت به مصاحبه به کاربر می دهید؟')"> دعوت به مصاحبه</a>
+                                                        @*@Html.ActionLink("نتیجه ی مصاحبه", "EndResultInterView", new {id = item.RegID}, new {@class = "button button-3d button-small button-rounded button-leaf col-md-5"})*@
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="button button-3d button-small button-rounded button-red" data-dismiss="modal">خروج</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </td>
+
+
+
+                                                        }
+                                                        else
+                                                        {
+
+                                                            <td class="table-responsive">
+
+                                                                <button type="button" id="btnModal2"  class="button button-small button-3d  button-rounded " data-toggle="modal" data-target="#myModal2">
+                                                                    عملیات
+                                                                </button>
+                                                                <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                                <h4 class="modal-title" id="myTitle2" ></h4>
+                                                                            </div>
+                                                                            <div class="modal-body" id="myModalbody2">
+                                                                                <div class="row">
+                                                                                    @Html.ActionLink("جزییات کاربر", "DetailsUsers", new { id = item.RegID }, new { @class = "button button-3d button-small button-rounded button-purple col-md-5 col-sm-10 col-xs-10" })
+                                                                                    @Html.ActionLink("تاریخ مصاحبه", "InterView", new { id = item.RegID }, new { @class = "button button-small button-3d  button-rounded col-md-5  col-sm-10 col-xs-10" })
+                                                                                    @Html.ActionLink("تغییر وضعیت", "ChangeStatus", new { id = item.RegID }, new { @class = "button button-3d button-small button-rounded button-leaf col-md-5  col-sm-10 col-xs-10" })
+                                                                             
+                                                                                    <a href="/Admin/Default/DeleteUsers/@item.RegID" class="button button-3d button-small button-rounded button-red col-md-5 col-sm-10 col-xs-10" onclick="return confirm('آیا می خواهید این کاربر را حذف کنید؟')"> حذف کاربر</a>
+                                                                                    <a href="/Admin/Default/InterViewResultForm/@item.RegID" class="button button-3d button-small button-rounded button-dirtygreen col-md-5 col-sm-10 col-xs-10">فرم مصاحبه</a>
+                                                                                    @*<a href="/Admin/ResultInterView/Details/@item.RegID" class="button button-3d button-small button-leaf button-light">جزییات مصاحبه</a>*@
+                                                                                    @{
+                                                                                        if (db.RegisterUser.Where(a => a.UserID == item.UserID).FirstOrDefault().EditInfo == false)
+                                                                                        {
+
+                                                                                            <a href="/Admin/Default/AllowEditProf/@item.RegID" class="button button-small button-3d  button-yellow button-light col-md-5 col-sm-10 col-xs-10" onclick="return confirm('آیا اجازه ویرایش به کاربر می دهید؟')"> اجازه ویرایش </a>
+
+                                                                                        }
+                                                                                        else
+                                                                                        {
+
+                                                                                            <a href="/Admin/Default/NotAllowEditProf/@item.RegID" class="button button-small button-3d  button-yellow button-light col-md-5 col-sm-10 col-xs-10" onclick="return confirm('آیا از عدم اجازه ویرایش به کاربر مطمئنید؟')"> عدم اجازه ویرایش پروفایل </a>
+                                                                                        }
+                                                                                    }
+                                                                               
+
+                                                                                    <a href="/Admin/Default/RejectForInterView/@item.RegID" class="button button-small button-3d button-teal col-md-5 col-sm-10 col-xs-10"> عدم دعوت به مصاحبه </a>
+                                                                                    @*@Html.ActionLink("نتیجه ی مصاحبه", "EndResultInterView", new { id = item.RegID }, new { @class = "button button-3d button-small button-rounded button-leaf col-md-5" })*@
+                                                                                    <a href="/Admin/Default/EditInterViewResultform/@item.RegID" class="button button-3d button-small button-yellow button-light col-md-5 col-sm-10 col-xs-10">ویرایش فرم مصاحبه</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="button button-3d button-small button-rounded button-red" data-dismiss="modal">خروج</button>
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </td>
+
+
+                                                                                    }
+
+
+                        </tr>
+                                                                                            }
+
+                </table>
+            </div>
+            @Html.PagedListPager(Model, page => Url.Action("ManageSearchUsers", new { page, username = ViewBag.Username, family = ViewBag.Family, meli = ViewBag.NationalNumber, fieldname = ViewBag.Field, orientationname = ViewBag.Orientation, Status = ViewBag.Status,item= ViewBag.Item,result= ViewBag.Result,dateview= ViewBag.DateView, internship=ViewBag.Internship }))
+
+        </div>
+        @Html.ActionLink("بازگشت", "Index", null, new { @class = "button button-3d button-rounded button-black " })
+
+
+
+    </div>
+</div>
+<script src="~/scripts/PersianDatePicker.js"></script>
+<script src="~/scripts/PersianDatePicker.min.js"></script>
+@section scripts{
+
+    <link href="~/Content/jquery-ui.css" rel="stylesheet"/>
+    <script src="~/scripts/jquery-ui.js"></script>
+    <script src="~/scripts/modal.js"></script>
+    <script type="text/javascript">
+
+        $(function() {
+
+            $("#searchOrientation").autocomplete({
+                source: '@Url.Action("GetOrientadList", "Default")'
+            });
+        });
+
+
+        $(function() {
+
+            $("#searchField").autocomplete({
+                source: '@Url.Action("GetFieldList", "Default")'
+            });
+        });
+
+
+        //function FilterUser() {
+
+
+        //    $.ajax({
+        //            url: "/Admin/Default/ManageSearchUsers",
+        //            data: {
+        //                usernsme: $("#usernsme").val(),
+        //                family: $("#family").val(),
+        //                meli: $("#meli").val(),
+        //                searchField: $("#searchField").val(),
+        //                searchOrientation: $("#searchOrientation").val(),
+        //                Status: $("#Status").val(),
+        //                item: $("#item").val(),
+        //                dateview: $("#dateview").val(),
+        //                result: $("#result").val(),
+        //                internship: $("#internship").val()
+        //            }
+
+        //        }).
+        //        done(function() {
+        //            $("#usernsme").val("");
+        //            $("#family").val("");
+        //            $("#meli").val("");
+        //            $("#searchField").val("");
+        //            $("#searchOrientation").val("");
+        //            $("#Status").val("");
+        //            $("#item").val("");
+        //            $("#dateview").val("");
+        //            $("#result").val("");
+        //            $("#internship").val("");
+        //            $("#internship").val("");
+        //        });
+        //}
+
+        $("#btnModal").click(function () {
+
+            $("#myModal").modal();
+            $("#myTitle").html("انتخاب عملیات");
+            $("#myModalbody").html();
+            $("#myModalbody").html();
+
+        });
+        $("#btnModal2").click(function () {
+            $("#myModal2").modal();
+            $("#myTitle2").html("انتخاب عملیات");
+            $("#myModalbody2").html();
+
+        });
+    </script>
+
+}

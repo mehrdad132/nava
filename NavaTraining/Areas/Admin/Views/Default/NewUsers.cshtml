@@ -1,0 +1,106 @@
+﻿@using NavaTraining.Classes
+@using NavaTraining.Models
+@using PagedList.Mvc
+@model PagedList.IPagedList<NavaTraining.Models.RegisterUser>
+
+@{
+    ViewBag.Title = "NewUsers";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminOther.cshtml";
+    NavaTraining.Models.Nava_DBEntities db = new Nava_DBEntities();
+}
+<div class="table-responsive">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <i class="icon icon-2x icon-list" style="margin-left:10px;"></i><label style="font-size:17px;">لیست کاربران ثبت نامی در سه روز اخیر </label>
+
+        </div>
+
+        <div class="panel-body">
+
+
+            <table class="table table-bordered table-condensed table-responsive table-striped">
+                <tr class="text-center success">
+
+                    <th>
+
+                        نام
+                    </th>
+                    <th>
+
+                        نام خانوادگی
+                    </th>
+
+
+                    <th>
+
+                        تاریخ ثبت اطلاعات
+                    </th>
+                    <th>
+
+                        موبایل
+                    </th>
+
+                    <th>عملیات</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    DateTime time1 = item.DateSubmitInfo;
+                    DateTime time2 = DateTime.Now;
+                    TimeSpan different = time2 - time1;
+
+                    if (different.Days < 40)
+                    {
+                        <tr class="text-center">
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FullName)
+                            </td>
+                            <td>
+                                @item.DateSubmitInfo.ToPersianDateTextify()
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Mobile)
+                            </td>
+
+
+
+                            @if (db.RejectInterView.Where(a => a.UserID == item.UserID).Any())
+                            {
+                                <td>
+                                    @Html.ActionLink("جزییات کاربر", "DetailsUsers", new { id = item.RegID }, new { @class = "button button-3d button-small button-rounded button-purple" }) |
+                                    <a href="/Admin/Default/AllowEditProf/@item.RegID" class="button button-small button-3d  button-yellow button-light" onclick="return confirm('آیا اجازه ویرایش به کاربر می دهید؟')"> اجازه ویرایش </a>|
+                                    @*@Html.ActionLink("حذف از لیست", "DeleteUsers", new { id = item.RegID }, new { @class = "button button-3d button-small button-rounded button-red" })*@
+                                    <a href="/Admin/Default/DeleteUsers/@item.RegID" class="button button-3d button-small button-rounded button-red" onclick="return confirm('آیا می خواهید این کاربر را حذف کنید؟')"> حذف کاربر</a>|
+                                    <a href="/Admin/Default/DeleteRejectInterView/@item.RegID" class="button button-small button-3d button-pink" onclick="return confirm('آیا اجازه دعوت به مصاحبه به کاربر می دهید؟')"> دعوت به مصاحبه</a>|
+                                    @Html.ActionLink("تغییر وضعیت", "ChangeStatus", new { id = item.RegID }, new { @class = "button button-3d button-small button-rounded button-leaf" })
+                                
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    @Html.ActionLink("جزییات کاربر", "DetailsUsers", new { id = item.RegID }, new { @class = "button button-3d button-small button-rounded button-purple" }) |
+                                    <a href="/Admin/Default/AllowEditProf/@item.RegID" class="button button-small button-3d  button-yellow button-light" onclick="return confirm('آیا اجازه ویرایش به کاربر می دهید؟')"> اجازه ویرایش </a>|
+                                    @*@Html.ActionLink("حذف از لیست", "DeleteUsers", new { id = item.RegID }, new { @class = "button button-3d button-small button-rounded button-red" })*@
+                                    <a href="/Admin/Default/DeleteUsers/@item.RegID" class="button button-3d button-small button-rounded button-red" onclick="return confirm('آیا می خواهید این کاربر را حذف کنید؟')"> حذف کاربر</a>|
+                                    <a href="/Admin/Default/RejectInterView/@item.RegID" class="button button-small button-3d button-teal"> عدم دعوت به مصاحبه </a>|
+                                    @Html.ActionLink("تغییر وضعیت", "ChangeStatus", new { id = item.RegID }, new { @class = "button button-3d button-small button-rounded button-leaf" })
+                                </td>
+                            }
+                        </tr>
+                    }
+
+
+                }
+
+            </table>
+            @Html.PagedListPager(Model, page => Url.Action("NewUsers", new { page }))
+        </div>
+        @Html.ActionLink("بازگشت", "Index", null, new { @class = "button button-3d button-rounded button-black " })
+    </div>
+  </div>

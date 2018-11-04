@@ -1,0 +1,70 @@
+﻿@using NavaTraining.Classes
+@using PagedList.Mvc
+@*@model PagedList.IPagedList<NavaTraining.Models.RegisterUser>*@
+@model PagedList.IPagedList<NavaTraining.Areas.Admin.ListFilterUsers>
+<div id="Users_loding">
+    <table class="table table-bordered table-condensed table-responsive">
+        <tr class="text-center success">
+
+            <th>
+                
+                نام
+            </th>
+            <th>
+             
+                نام خانوادگی
+            </th>
+            <th>
+               
+                ایمیل
+            </th>
+
+            <th>
+               
+                موبایل
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Phone)*@
+                تلفن ثابت
+            </th>
+
+            <th>عملیات</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr class="text-center">
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Family)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mobile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+
+                <td>
+
+                    @Html.ActionLink("جزییات کاربر", "DetailsUsers", new { id = item.RegID }, new { @class = "button button-3d button-small button-rounded button-purple" }) |
+                    @Html.ActionLink("تاریخ مصاحبه", "InterView", new { id = item.RegID }, new { @class = "button button-small button-3d  button-rounded " })|
+                    @*@Html.ActionLink("حذف از لیست", "DeleteUsers", new { id = item.RegID }, new { @class = "button button-3d button-small button-rounded button-red" })*@
+                    <a href="/Admin/Default/DeleteUsers/@item.RegID" class="button button-3d button-small button-rounded button-red" onclick="return confirm('آیا می خواهید این کاربر را حذف کنید؟')"> حذف کاربر</a>  
+                    
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    @Html.PagedListPager(Model, page => Url.Action("ManageUsersRegister", new { page, strcheck = ViewBag.strcheck }))
+
+</div>

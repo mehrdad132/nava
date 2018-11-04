@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "ActiveUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>فعال سازی حساب کاربری</h2>
+
+
+<hr />
+
+@if (ViewBag.Finaly == true)
+{
+    <div class="alert alert-success">
+        <p>حساب کاربری شما فعال شد</p>
+    </div>
+}
+else
+{
+    <div class="alert alert-danger">
+        <p>کاربری یافت نشد</p>
+    </div>
+}

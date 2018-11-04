@@ -1,0 +1,97 @@
+﻿@model IEnumerable<NavaTraining.Models.ViewModel.Education_VM>
+
+@using NavaTraining.Classes;
+
+<table class="table tab-content table-bordered table-responsive">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.SectionName)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.UniName)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.FieldName)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.OrientationName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BeginStudy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.YearGrad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThesisDiss)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Avrage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stu_Graduate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.SectionName)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.UniName)
+        </td>
+     
+        <td>
+            @Html.DisplayFor(modelItem => item.FieldName)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.OrientationName)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.BeginStudy.ToShortPersianDateString())*@
+            @item.BeginStudy.ToShortPersianDateString()
+        </td>
+        <td>
+           
+            
+            @item.YearGrad.ToShortPersianDateString()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThesisDiss)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Avrage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stu_Graduate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            <a class="btn btn-danger">
+                <i class="" onclick="DeleteEducation(@item.SectionID,@item.UniID,@item.FieldID,@item.OrientationID,'@item.BeginStudy.ToShortPersianDateString()','@item.YearGrad.ToShortPersianDateString()','@item.ThesisDiss','@item.Avrage','@item.Stu_Graduate','@item.Description')">
+                    حذف
+                </i>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>
+<script>
+   
+
+</script>

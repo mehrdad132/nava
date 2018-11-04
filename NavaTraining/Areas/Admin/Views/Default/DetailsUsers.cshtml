@@ -1,0 +1,338 @@
+﻿@model NavaTraining.Models.RegisterUser
+@using NavaTraining.Classes
+@{
+    ViewBag.Title = "DetailsUsers";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminOther.cshtml";
+    
+
+}
+
+@{
+    NavaTraining.Models.Nava_DBEntities db = new NavaTraining.Models.Nava_DBEntities();
+    NavaTraining.Models.ViewModel.Education_VM Vm = new NavaTraining.Models.ViewModel.Education_VM();
+    NavaTraining.Models.Repository.RepUsers _repUsers = new NavaTraining.Models.Repository.RepUsers();
+    NavaTraining.Models.Repository.RepUsers rep = new NavaTraining.Models.Repository.RepUsers();
+}
+
+<style>
+  table td label{
+        text-align:center;
+    }
+  
+</style>
+
+    <table class="table tab-content table-bordered table-striped">
+        <tr><td class="text-center success" colspan="2"><label>مشخصات فردی</label></td></tr>
+        <tr>
+            <td>نام</td>
+            <td>@Model.UserName</td>
+        </tr>
+        <tr>
+            <td>نام خانوادگی</td>
+            <td>@Model.FullName</td>
+        </tr>
+        <tr>
+            <td>ایمیل</td>
+            <td>@Model.Email</td>
+        </tr>
+        <tr>
+            <td>شماره ملی</td>
+            <td>@Model.NationalNumber</td>
+        </tr>
+        <tr>
+            <td>شماره موبایل</td>
+            <td>@Model.Mobile</td>
+        </tr>
+
+        <tr>
+            <td>تاریخ تولد</td>
+            <td>@Model.BirthDay.ToShortPersianDateString()</td>
+        </tr>
+        <tr>
+            <td>وضعیت تاهل</td>
+            <td>@Model.MaritalStatus</td>
+        </tr>
+        <tr>
+            <td>وضعیت نظام وظیفه</td>
+            <td>@Model.MilitaryService</td>
+        </tr>
+        <tr>
+            <td>تاریخ ثبت اطلاعات</td>
+            <td>@Model.DateSubmitInfo.ToPersianDateTextify()</td>
+        </tr>
+    </table>
+       <div class="table-responsive">
+    <table class="table table-bordered table-condensed table-striped table-responsive">
+        @{
+            int Row = 0;
+            if (_repUsers.DetailsUsers(Model.UserID) != null)
+            {
+                <tr>
+                    <td class="center warning text-primary" colspan="10"><label style="text-align:center !important;">سوابق تحصیلی</label></td>
+                </tr>
+                <tr>
+                    <td>ردیف</td>
+                    <td>مقطع</td>
+                    <td>نام دانشگاه</td>
+                    <td>رشته</td>
+                    <td>گرایش</td>
+                    <td>وضعیت تحصیلی</td>
+                    <td>سال ورود به دانشگاه</td>
+                    <td>سال فارغ التحصیلی</td>
+                    <td>آخرین معدل</td>
+                    <td>نمره پایان نامه</td>
+                  
+                </tr>
+
+                foreach (var item in _repUsers.DetailsUsers(Model.UserID))
+                {
+                    Row++;
+                    <tr>
+                        <td>@Row</td>
+                        <td>@item.SectionName</td>
+
+                        <td>@item.UniName</td>
+
+                        <td>@item.FieldName</td>
+
+                        <td>@item.OrientationName</td>
+                        
+                        <td>@item.Stu_Graduate</td>
+                        <td>@item.BeginStudy.ToShortPersianDateString()</td>
+                        <td>@item.YearGrad.ToShortPersianDateString()</td>
+                        <td>@item.Avrage</td>
+
+
+                        <td>@item.ThesisDiss</td>
+
+
+
+
+                     
+                    </tr>
+                    <tr >
+                        <td>توضیحات</td>
+                  <td colspan="9">@item.Description</td>
+                    </tr>
+                }
+            }
+        }
+    </table>
+    </div>
+    <table class="table tab-content table-bordered table-striped">
+        @{
+            int Rowcomp = 0;
+            if (_repUsers.UserCompany(Model.UserID) != null)
+            {
+                <tr>
+                    <td class="text-center info" colspan="5"><label>سوابق صنعتی</label></td>
+                </tr>
+                <tr>
+                    <td>ردیف</td>
+                    <td>نام شرکت</td>
+                    <td>مدت استخدام به ماه</td>
+                    <td>سمت</td>
+                    <td>شرح مسئولیت به اختصار</td>
+                </tr>
+
+
+                foreach (var item in _repUsers.UserCompany(Model.UserID))
+                {
+                    Rowcomp++;
+                    <tr>
+                        <td>@Rowcomp</td>
+                        <td>@item.CompanyName</td>
+                        <td>@item.DurationWork</td>
+                        <td>@item.Position</td>
+                        <td>@item.DescPosition</td>
+                    </tr>
+                }
+            }
+        }
+    </table>
+
+    <table class="table table-bordered table-condensed table-striped">
+        @{
+            int Rowskill = 0;
+            if (_repUsers.UserSkills(Model.UserID) != null)
+            {
+
+                <tr >
+                    <td class="text-center success" colspan="5"><label>توانایی ها و مهارت های کاربردی</label></td>
+                </tr>
+                <tr>
+                    <td>ردیف</td>
+                    <td>نام درس</td>
+                    <td>حل مسئله و انجام پروژه</td>
+                    <td>تدریس  و ساخت ویدیو</td>
+
+                    <td>نرم افزارهای تخصصی مربوطه (جهت حل مسائل و شبیه سازی )</td>
+                </tr>
+
+
+                foreach (var item in _repUsers.UserSkills(Model.UserID))
+                {
+                    Rowskill++;
+                    <tr>
+                        <td>@Rowskill</td>
+                        <td>@item.LessonName</td>
+
+                        <td>@item.ProblemSolving</td>
+
+                        <td>@item.MakingVideo</td>
+
+                        <td>@item.RelatedSoftware</td>
+
+                    </tr>
+                }
+            }
+        }
+    </table>
+
+
+
+    <table class="table tab-content table-bordered table-striped">
+        <tr>
+            <td>شرحی از سوابق پژوهشی و مقالات  ISI</td>
+            <td>@Model.DescriptionArticles</td>
+        </tr>
+
+    </table>
+     <div class="table-responsive">
+    <table class="table table-bordered table-condensed table-striped table-responsive">
+        @{
+            if (_repUsers.UserLang(Model.UserID) != null)
+            {
+                int RoeLang = 0;
+                <tr>
+                    <td class="text-center danger" colspan="7"><label>زبان</label> </td>
+                </tr>
+                <tr>
+                    <td>ردیف</td>
+                    <td>زبان</td>
+                    <td>نمره اسپیکینگ</td>
+                    <td>نمره لسنینگ</td>
+                    <td>نمره رایتینگ</td>
+                    <td>نمره ریدینگ</td>
+                    <td>توضیحات</td>
+                </tr>
+
+
+                foreach (var item in _repUsers.UserLang(Model.UserID))
+                {
+                    RoeLang++;
+                    <tr>
+                        <td>@RoeLang</td>
+                        <td>@item.LangName</td>
+
+                        <td>@item.ScoreSpeking</td>
+
+                        <td>@item.ScoreListening</td>
+
+                        <td>@item.ScoreWrite</td>
+                        <td>@item.ScoreReading</td>
+                        <td>@item.DescriptionLang</td>
+                    </tr>
+                }
+            }
+        }
+    </table>
+    </div>
+
+
+    <table class="table tab-content table-bordered table-striped">
+        <tr><td class="text-center success" colspan="2"><label>شرایط کاری</label></td></tr>
+        <tr>
+            <td>آیا هم اکنون در جایی بصورت تمام وقت و یا پاره وقت مشغول بکار هستید؟</td>
+            <td>@Model.Workinprogress</td>
+        </tr>
+
+        <tr>
+            <td>درخواست استخدام بصورت تمام وقت/ پاره وقت؟</td>
+            <td>@Model.TypeOfEmployment</td>
+        </tr>
+        <tr>
+            <td>درصورت پاره وقت بودن حداقل تعداد ساعات کاری در هفته ؟ </td>
+            <td>@Model.TimeInWeek ساعت در هفته</td>
+        </tr>
+        <tr>
+            <td>میزان دستمزد درخواستی ماهیانه به تومان ( درصورت تمام وقت بودن)؟</td>
+            <td style="font-size:20px;">@Model.WageFullTime.ToPersianNumbers("0,# تومان")</td>
+        </tr>
+        <tr>
+            <td>میزان دستمزد درخواستی ساعتی به تومان ( درصورت پاره وقت بودن)؟</td>
+            <td style="font-size:20px;">@Model.WagePartTime.ToPersianNumbers("0,# تومان")</td>
+        </tr>
+        <tr>
+            <td>در صورت نیاز شرکت ، مایل به انجام کارهای محوله بصورت دورکاری  بعد از ساعات کاری روزانه و یا  پنجشنبه  و ایام تعطیلات رسمی هستید؟</td>
+            <td>@Model.Telework</td>
+        </tr>
+        <tr>
+            <td>آیا درصورت پذیرفته نشدن  شما بعلت مهارت پایین  ، مایل به کارورزی هستید؟</td>
+            <td>@Model.Internship</td>
+        </tr>
+
+    </table>
+
+
+    <table class="table tab-content table-bordered table-striped">
+        <tr>
+            <td class="text-center danger" colspan="2"><label>جزییات کامل آدرس</label> </td>
+        </tr>
+        <tr>
+            <td>استان</td>
+            <td>@Model.Province</td>
+        </tr>
+        <tr>
+            <td>شهرستان</td>
+            <td>@Model.City</td>
+        </tr>
+
+        <tr>
+            <td>آدرس کامل</td>
+            <td>@Model.Address</td>
+        </tr>
+
+
+        <tr>
+            <td>تلفن</td>
+            <td>@Model.Phone</td>
+        </tr>
+    </table>
+
+
+
+    <table class="table tab-content table-bordered table-striped">
+        <tr>
+            <td colspan="1">مواردی را که فکر میکنید در برگزیده شدن شما برای تصدی این شغل موثر است ذکر نمایید</td>
+           
+        </tr>
+        <tr><td>@Model.DescriptionFull</td></tr>
+    </table>
+<table class="table tab-content table-bordered table-striped">
+    <tr >
+        <td class="text-center h3 success" colspan="2">رزومه</td>
+    </tr>
+    <tr>
+        @{
+            if (Model.Rezome == null)
+            {
+                <td colspan="2"><label>رزومه ای ندارد</label></td>
+            }
+            else
+            {
+                @*<td><a class="btn btn-outline-success" href="~/FileUpload/UserFiles/@Model.Rezome" download="~/FileUpload/UserFiles/@Model.Rezome">دانلود رزومه</a></td>*@
+                @*<td><embed src="~/FileUpload/UserFiles/@Model.Rezome" /></td>*@
+                @*<td class="col-md-12 col-xs-12 col-ms-12"><iframe src="~/FileUpload/UserFiles/@Model.Rezome" style="width: 100%; height: 700px;"></iframe></td>*@
+                <td class="center h3" colspan="2"><a href="/Admin/Default/ShowRezomeh/@Model.RegID">نمایش رزومه</a></td>
+            }
+        }
+
+    </tr>
+
+
+   
+</table>
+
+    <a class="button button-3d button-rounded button-black" href="/Admin/Default/index">بازگشت</a>
+

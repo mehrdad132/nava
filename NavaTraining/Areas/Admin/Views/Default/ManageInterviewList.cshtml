@@ -1,0 +1,302 @@
+﻿@using NavaTraining.Classes
+@using PagedList.Mvc
+
+@*@model PagedList.IPagedList<NavaTraining.Areas.Admin.Controllers.DefaultController.InterViewList_VM>*@
+
+@model PagedList.IPagedList<NavaTraining.Areas.Admin.ListDate>
+
+@{
+    ViewBag.Title = "ManageInterviewList";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminOther.cshtml";
+    NavaTraining.Models.Nava_DBEntities db = new NavaTraining.Models.Nava_DBEntities();
+    int Row = 0;
+}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <i class="icon icon-2x icon-list" style="margin-left:10px;"></i><label style="font-size:17px;">لیست  مشخصات-ساعات و روز های مصاحبه شوندگان </label>
+
+    </div>
+
+    <div class="panel-body">
+    <div class="alert alert-dismissable">
+        <h4> @TempData["msg"]</h4>
+    </div>
+    @using (Html.BeginForm("ManageInterviewList", "Default", FormMethod.Post))
+            {
+        <div class="row">
+            <div class="col-md-4 ">
+                <div class="row">
+                    <div div class="col-md-4">
+                        <label>شماره ملی</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" value="" name="meli" class="form-control" />
+                    </div>
+                </div>
+                <br />
+
+
+                <div class="col-md-6 col-md-offset-6">
+                    <input type="submit" value="جستجو" name="btnSearch" class="button button-3d btn-success" />
+
+                </div>
+
+        </div>
+            </div>
+            <a href="/Admin/Default/ManageInterviewList" class="button button-rounded button-reveal button-large button-dirtygreen"><i class="icon-repeat"></i>نمایش همه</a>
+
+            }
+        <div class="table-responsive">
+            <table class="table table-bordered table-condensed table-responsive table-striped">
+                <tr>
+                    <th>
+                        ردیف
+                    </th>
+                    <th>
+                        نام
+                    </th>
+                    <th>
+                        نام خانوادگی
+                    </th>
+                    <th>
+                        شماره ملی
+                    </th>
+                    <th>
+                        موبایل
+                    </th>
+                    <th>
+                        تاریخ مصاحبه
+                    </th>
+                    <th>
+                        ساعت مصاحبه
+                    </th>
+                    <th>
+                        روز مانده به مصاحبه
+                    </th>
+                    <th>
+                        عملیات
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+            {
+                DateTime time1 = item.Date.Value;
+                DateTime time2=DateTime.Now;
+                TimeSpan different = time1 - time2;
+                Row += 1;
+                    <tr>
+
+                        <td>
+                            @Row
+                        </td>
+                        <td>@item.Username</td>
+                        <td>@item.Family</td>
+                        <td>@item.Meli</td>
+                        <td>@item.Mobile</td>
+                        <td>
+                            @item.Date.ToPersianDateTextify()
+                        </td>
+                        @{
+                               if (item.Clockview == 1)
+                               {
+                                <td>
+
+                                    <label>ساعت مصاحبه&nbsp;&nbsp; 8:30-8</label> <br />
+
+                                </td>
+                               }
+
+                               if (item.Clockview == 2)
+                               {
+                                <td>
+
+                                    <label>ساعت مصاحبه  &nbsp;&nbsp;9-8:30</label> <br />
+
+
+                                </td>
+                               }
+
+                               if (item.Clockview == 3)
+                               {
+                                <td>
+
+                                    <label>ساعت مصاحبه  &nbsp;&nbsp;9:30-9</label> <br />
+
+
+                                </td>
+                               }
+
+                               if (item.Clockview == 4)
+                               {
+                                <td>
+
+                                    <label>ساعت مصاحبه  &nbsp;&nbsp;10-9:30</label> <br />
+
+                                </td>
+                               }
+
+
+                               if (item.Clockview == 5)
+                               {
+                                <td>
+
+                                    <label>ساعت مصاحبه10:30-10  &nbsp;&nbsp;</label> <br />
+
+
+                                </td>
+                               }
+
+                               if (item.Clockview == 6)
+                               {
+                                <td>
+
+                                    <label>ساعت مصاحبه  &nbsp;&nbsp;11-10:30</label> <br />
+
+                                </td>
+                               }
+                               if (item.Clockview == 7)
+                               {
+                                <td>
+
+                                    <label>ساعت مصاحبه  &nbsp;&nbsp;11:30-11</label> <br />
+
+
+                                </td>
+                               }
+
+                               if (item.Clockview == 8)
+                               {
+                                <td>
+
+                                    <label>ساعت مصاحبه  &nbsp;&nbsp;12-11:30</label> <br />
+
+
+                                </td>
+                               }
+                               if (item.Clockview == 9)
+                               {
+                                <td>
+
+                                    <label>ساعت مصاحبه12:30-12  &nbsp;&nbsp;</label> <br />
+
+
+                                </td>
+                               }
+                               if (item.Clockview == 10)
+                               {
+                                <td>
+
+                                    <label>ساعت مصاحبه13-12:30  &nbsp;&nbsp;</label> <br />
+
+                                </td>
+                               }
+                               if (item.Clockview == 11)
+                               {
+                                <td>
+
+                                    <label>ساعت مصاحبه  &nbsp;&nbsp;13:30-13</label> <br />
+
+                                </td>
+                               }
+                               if (item.Clockview == 12)
+                               {
+                                <td>
+
+                                    <label>ساعت مصاحبه  &nbsp;&nbsp;14-13:30</label> <br />
+
+                                </td>
+                               }
+                               if (item.Clockview == 13)
+                               {
+                                <td>
+
+                                    <label>ساعت مصاحبه  &nbsp;&nbsp;14:30-14</label> <br />
+
+
+                                </td>
+                               }
+
+
+                               if (item.Clockview == 14)
+                               {
+                                <td>
+
+                                    <label>ساعت مصاحبه  &nbsp;&nbsp;15-14:30</label> <br />
+
+                                </td>
+                               }
+
+                               if (item.Clockview == 15)
+                               {
+                                <td>
+
+                                    <label>ساعت مصاحبه  &nbsp;&nbsp;15:30-15</label> <br />
+
+
+                                </td>
+                               }
+
+                               if (item.Clockview == 16)
+                               {
+                                <td>
+
+                                    <label>ساعت مصاحبه  &nbsp;&nbsp;16-15:30</label> <br />
+
+
+                                </td>
+                        }
+                        if (different.Days < 0)
+                        {
+
+                                <td class="danger">
+                                    @different.Days.ToString()
+                                    <labale>از مصاحبه گذشته است</labale>
+                                </td>
+                        }
+                        else if(different.Days==0 && different.Hours>0)
+                        {
+                                <td class="info">
+                                    <label> امروز روز مصاحبه می باشد</label>
+                                </td>
+
+                        }
+                        else if (different.Days == 0 && different.Hours < 0 && different.Hours>-24)
+                        {
+                                <td class="info">
+                                    <label> دیروز مصاحبه بوده است</label>
+                                </td>
+
+                        }
+                        else
+                        {
+                                <td class="success">
+                                    @different.Days.ToString()
+                                    <label> روز مانده به مصاحبه</label>
+                                </td>
+
+                        }
+
+                        }
+
+
+                        <td>
+
+                            @*@Html.ActionLink("ویرایش", "", new {id = item.UserID}, new {@class = "button button-small button-3d  button-rounded "})|*@
+                            <a href="/Admin/Default/EditInterView/@item.ViewID" class="button button-mini button-3d  button-rounded"> ویرایش مصاحبه</a>|
+                            @*@Html.ActionLink("حذف از لیست", "", new { id = item.UserID }, new { @class = "button button-3d button-small button-rounded button-red" })*@
+                            <a href="/Admin/Default/DeleteInterviewUsers/@item.ViewID" class="button button-3d button-small button-rounded button-red" onclick="return confirm('آیا می خواهید این کاربر را حذف کنید؟')"> حذف کاربر</a>
+                        </td>
+                    </tr>
+            }
+
+            </table>
+            @Html.PagedListPager(Model, page => Url.Action("ManageInterviewList", new { page, meli = ViewBag.NationalNumber }))
+        </div>
+        </div>
+        @Html.ActionLink("بازگشت", "Index", null, new { @class = "button button-3d button-rounded button-black " })
+
+
+
+    </div>
+

@@ -1,0 +1,67 @@
+﻿@model NavaTraining.Models.RegisterUser
+
+@{
+    ViewBag.Title = "ChangeStatus";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-responsive">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <i class="icon icon-2x icon-list" style="margin-left:10px;"></i><label style="font-size:17px;">تغییر وضعییت کاربران</label>
+
+        </div>
+
+        <div class="panel-body">
+            <div class="alert alert-defualt col-md-12" style="margin:2px 20px;color:#ff0000; ">
+                @TempData["msg"]
+            </div>
+            @*//این یزینگ باعث می شود دکمه باتن اعمال شود*@
+            @using (Html.BeginForm("EditStatusUser", "Default", FormMethod.Post))
+            {
+
+                @Html.HiddenFor(model => model.RegID)
+                <table>
+                    <tr>
+                        <td><span> انتخاب وضعیت :</span></td>
+                        <td>
+                            <select name="Status">
+                                @{
+                                    List<string> lstStatus = new List<string>();
+                                    lstStatus.Add("");
+                                    lstStatus.Add("بررسی نشده");
+                                    lstStatus.Add("تایید شده جهت مصاحبه");
+                                    lstStatus.Add("بیش از حد انتظار");
+                                    lstStatus.Add("رد شده");
+                                    for (int i = 0; i < lstStatus.Count; i++)
+                                    {
+                                        string _selected = "";
+                                        if (i+1  == Model.Status)
+                                        {
+                                            _selected = "selected";
+
+                                        }
+                                        <option value="@(i+1)" @_selected>@lstStatus[i]</option>
+                                    }
+                                }
+                            </select>
+                        </td>
+                        &nbsp;&nbsp;
+                        <td>
+                            <input type="submit" name="btnSave" value="ثبت تغییرات" class="button button-small button-3d  button-rounded " />
+                        </td>
+                    </tr>
+
+                
+                
+                </table>
+                                    }
+
+            <p style="margin-top:80px;">
+                @Html.ActionLink("بازگشت", "ManageSearchUsers", null, new { @class = "btn btn-info" })
+            </p>
+
+        </div>
+    </div>
+</div>
+  

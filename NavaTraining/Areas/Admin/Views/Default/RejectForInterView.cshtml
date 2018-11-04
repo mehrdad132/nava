@@ -1,0 +1,66 @@
+﻿@model NavaTraining.Models.RejectInterView
+
+@{
+    ViewBag.Title = "RejectForInterView";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <i class="icon icon-2x icon-list" style="margin-left: 10px;"></i><label style="font-size: 17px;">رد کاربران برای مصاحبه</label>
+
+    </div>
+
+    <div class="panel-body">
+        <div class="alert alert-dismissable">
+            <h4> @TempData["msg"]</h4>
+        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CauseReject, htmlAttributes: new {@class = "control-label col-md-2"})
+                    <div class="col-md-3">
+                        @{
+                            List<SelectListItem> CauseReject = new List<SelectListItem>();
+                            CauseReject.Add(new SelectListItem() {Text = "", Value = "", Selected = true});
+                            CauseReject.Add(new SelectListItem() {Text = "رزومه ضعیف", Value = "رزومه ضعیف"});
+                            CauseReject.Add(new SelectListItem() {Text = "زرومه فوق العاده قوی", Value = "زرومه فوق العاده قوی"});
+
+                        }
+                        @Html.DropDownListFor(model => model.CauseReject, CauseReject.AsEnumerable(), new {style = "width:100%;"})
+                        @Html.ValidationMessageFor(model => model.CauseReject, "", new {@class = "text-danger"})
+
+                    </div>
+
+                </div>
+
+
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.CauseReject, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CauseReject, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CauseReject, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="ثبت نهایی" class="button button-3d"/>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+
+    </div>
+    <div>
+        @Html.ActionLink("بازگشت", "Index", null, new { @class = "button button-3d button-rounded button-black " })
+    </div>
+</div>

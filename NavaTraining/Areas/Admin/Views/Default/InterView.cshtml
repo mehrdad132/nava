@@ -1,0 +1,91 @@
+﻿@model NavaTraining.Models.InterView
+
+@{
+    ViewBag.Title = "InterView";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Areas/Content/PersianDatePicker.css" rel="stylesheet" />
+<link href="~/Areas/Content/PersianDatePicker.min.css" rel="stylesheet" />
+
+<div class="table-responsive">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <i class="icon icon-2x icon-user" style="margin-left: 10px;"></i><label style="font-size: 17px;">رزرو تاریخ مصاحبه</label>
+
+        </div>
+
+        <div class="panel-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    <div class="alert alert-dismissable">
+                        <h4> @TempData["msg"]</h4>
+                    </div>
+                    @Html.HiddenFor(model => model.UserID)
+               
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DateView, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.DateView, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DateView, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ClockView, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @{
+                                List<SelectListItem> ClockView = new List<SelectListItem>();
+                                ClockView.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                                ClockView.Add(new SelectListItem() { Text = "8-8:30", Value = "1" });
+                                ClockView.Add(new SelectListItem() { Text = "8:30-9", Value = "2" });
+                                ClockView.Add(new SelectListItem() { Text = "9-9:30", Value = "3" });
+                                ClockView.Add(new SelectListItem() { Text = "9:30-10", Value = "4" });
+                                ClockView.Add(new SelectListItem() { Text = "10-10:30", Value = "5" });
+                                ClockView.Add(new SelectListItem() { Text = "10:30-11", Value = "6" });
+                                ClockView.Add(new SelectListItem() { Text = "11-11:30", Value = "7" });
+                                ClockView.Add(new SelectListItem() { Text = "11:30-12", Value = "8" });
+                                ClockView.Add(new SelectListItem() { Text = "12-12:30", Value = "9" });
+                                ClockView.Add(new SelectListItem() { Text = "12:30-13", Value = "10" });
+                                ClockView.Add(new SelectListItem() { Text = "13-13:30", Value = "11" });
+                                ClockView.Add(new SelectListItem() { Text = "13:30-14", Value = "12" });
+                                ClockView.Add(new SelectListItem() { Text = "14-14:30", Value = "13" });
+                                ClockView.Add(new SelectListItem() { Text = "14:30-15", Value = "14" });
+                                ClockView.Add(new SelectListItem() { Text = "15-15:30", Value = "15" });
+                                ClockView.Add(new SelectListItem() { Text = "15:30-16", Value = "16" });
+                            }
+                            @Html.DropDownListFor(model => model.ClockView, ClockView.AsEnumerable(), new { style = "width:100%;" })
+                            @Html.ValidationMessageFor(model => model.ClockView, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-3">
+                            <span style="color: red;">*</span>
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                            @Html.LabelFor(model => model.ClockView, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.ClockView, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ClockView, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="ثبت تاریخ" class="button button-3d" />
+                        </div>
+                    </div>
+                </div>
+                                }
+            <script src="~/scripts/PersianDatePicker.js"></script>
+            <script src="~/scripts/PersianDatePicker.min.js"></script>
+            <div>
+                @Html.ActionLink("بازگشت", "Index", null, new { @class = "button button-3d button-rounded button-black " })
+            </div>
+        </div>
+    </div>
+</div>

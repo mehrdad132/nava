@@ -1,0 +1,184 @@
+﻿@using NavaTraining.Models
+@using NavaTraining.Classes
+@using PagedList.Mvc
+@model PagedList.IPagedList<NavaTraining.Areas.Admin.FormEndResultViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminOther.cshtml";
+    Nava_DBEntities db = new Nava_DBEntities();
+}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <i class="icon icon-2x icon-list" style="margin-left: 10px;"></i><label style="font-size: 17px;"> نتایج تمامی مصاحبه ها</label>
+
+    </div>
+
+    <div class="panel-body">
+
+        @using (Html.BeginForm("Index", "ResultInterViews", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-md-4 col-xs-12 ">
+                    <div class="row">
+                        <div div class="col-md-4">
+                            <label>رشته</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" value="" name="fieldname" id="searchField" class="sm-form-control text-box single-line" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div div class="col-md-4">
+                            <label>گرایش</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" value="" name="orientationname" id="searchOrientation" class="sm-form-control text-box single-line" />
+                        </div>
+                    </div>
+                    <br />
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="row">
+                        <div div class="col-md-4">
+                            <label>نتیجه مصاحبه</label>
+                        </div>
+                        <div class="col-md-8">
+                            @{
+                                var q = db.ResultItem.ToList();
+                                List<string> lstItem = new List<string>();
+                                            <select name="Item">
+                                                @{
+                                                        foreach (var item in q)
+                                                        {
+                                                            lstItem.Add(item.ValueItem);
+                                                        }
+                                                        for (int i = 0; i < q.Count; i++)
+                                                        {
+
+                                                    <option value="@(i + 1)">@lstItem[i]</option>
+                                                        }
+                                                }
+                                            </select>
+                            }
+                            @*@Html.DropDownList("ResultItem", String.Empty)*@
+
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div div class="col-md-4">
+                            <label>نتیجه مصاحبه</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" value="" name="result" placeholder="" class="sm-form-control text-box single-line" />
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                <div class="col-md-12">
+                    <input type="submit" value="جستجو" name="btnSearch" class="button button-3d btn-success pull-left" />
+                    <a href="/Admin/ResultInterViews/index" class="button button-rounded button-reveal button-small button-dirtygreen pull-right"><i class="icon-repeat"></i>نمایش همه</a>
+                </div>
+
+            </div>
+
+
+                       }
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-condensed table-responsive table-striped">
+
+                <tr class="success center">
+                    <th>
+                        نام
+                    </th>
+                    <th>
+                        نام خانوادگی
+                    </th>
+                    <th>
+                        شماره تماس
+                    </th>
+                    <th>
+                        رشته
+                    </th>
+                    <th>
+                        گرایش
+                    </th>
+                    <th>
+                        نتیجه مصاحبه
+                    </th>
+
+                    <th>عملیات</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    var qitem = db.ResultItem.Where(a => a.ItemID == item.ItemID).Select(a => a.ValueItem).FirstOrDefault();
+                    var qregid = db.RegisterUser.Where(a => a.UserID == item.UserID).FirstOrDefault().RegID;
+                    <tr class="text-center">
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.Family
+                        </td>
+                        <td>
+                            @item.Mobile
+                        </td>
+                        <td>
+                            @item.FieldName
+                        </td>
+                        <td>
+                            @item.OrientationName
+                        </td>
+
+                        <td>
+                            @qitem
+                        </td>
+                        <td>
+                            @Html.ActionLink("ویرایش مصاحبه", "Edit",  new { id = item.ResultID }, new { @class = "button button-3d button-small button-yellow button-light" }) |
+                            <a href="/Admin/Default/EditInterViewResultform/@qregid" class="button button-3d button-small button-yellow button-light">ویرایش جامع</a>|
+                            @Html.ActionLink("جزییات", "Details",  new { id = item.ResultID }, new { @class = "button button-3d button-small button-leaf button-light" }) |
+                            @Html.ActionLink("حذف از لیست", "Delete", new { id = item.ResultID }, new { @class = "button button-3d button-small button-rounded button-red" })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, orientationname = ViewBag.Orientation, fieldname = ViewBag.Field, Item = ViewBag.Itemid, result= ViewBag.result }))
+    </div>
+
+    <a href="/Admin/Default/Index" class = "button button-3d button-rounded button-black ">بازگشت</a>
+   
+</div>
+
+@section scripts{
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <script src="~/scripts/jquery-ui.js"></script>
+    <script type="text/javascript">
+
+        $(function() {
+
+            $("#searchOrientation").autocomplete({
+                source: '@Url.Action("GetOrientadList", "Default")'
+            });
+        });
+
+
+        $(function() {
+
+            $("#searchField").autocomplete({
+                source: '@Url.Action("GetFieldList", "Default")'
+            });
+        });
+    </script>
+}

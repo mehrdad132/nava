@@ -1,0 +1,2407 @@
+﻿@model NavaTraining.Models.RegisterUserInformation
+
+@{
+    ViewBag.Title = "RegisterInfo";
+    Layout = "~/Areas/UserPanel/Views/Shared/_Layout.cshtml";
+
+}
+
+<link href="~/Areas/Content/PersianDatePicker.css" rel="stylesheet" />
+<link href="~/Areas/Content/PersianDatePicker.min.css" rel="stylesheet" />
+@using NavaTraining.Models;
+@using NavaTraining.Classes;
+
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        Nava_DBEntities db = new Nava_DBEntities();
+        int Userid = CheckUser.GetUserID();
+        <h2> @db.UserLogin.Where(a => a.UserID == Userid).FirstOrDefault().UserName عزیز اطلاعات تحصیلی خود را ثبت نمایید</h2>
+
+        }
+    }
+<div class="alert alert-dismissable">
+   @TempData["msg"]
+</div>
+
+@*@using (Html.BeginForm("RegisterInfo", "SubmitInfo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        <div id="processTabs">
+            <ul class="process-steps process-4 bottommargin clearfix">
+                <li>
+                    <a href="#ptab1" class="i-circled i-bordered i-alt divcenter">1</a>
+                    <h5>اطلاعات شخصی</h5>
+                </li>
+                <li>
+                    <a href="#ptab2" class="i-circled i-bordered i-alt divcenter">2</a>
+                    <h5>اطلاعات تحصیلی</h5>
+                </li>
+                <li>
+                    <a href="#ptab3" class="i-circled i-bordered i-alt divcenter">3</a>
+                    <h5>توانایی ها و مهارت های علمی و کاربردی</h5>
+                </li>
+                <li>
+                    <a href="#ptab4" class="i-circled i-bordered i-alt divcenter">4</a>
+                    <h5>سوابق صنعتی</h5>
+                </li>
+                <li>
+                    <a href="#ptab5" class="i-circled i-bordered i-alt divcenter">5</a>
+                    <h5>میزان تسلط به زبان انگلیسی</h5>
+                </li>
+                <li>
+                    <a href="#ptab6" class="i-circled i-bordered i-alt divcenter">6</a>
+                    <h5>شرایط کاری</h5>
+                </li>
+                <li>
+                    <a href="#ptab7" class="i-circled i-bordered i-alt divcenter">7</a>
+                    <h5>اطلاعات تماس</h5>
+                </li>
+                <li>
+                    <a href="#ptab8" class="i-circled i-bordered i-alt divcenter">8</a>
+                    <h5>توضیحات و ارسال رزومه</h5>
+                </li>
+            </ul>
+            <div>
+                <div id="ptab1">
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-3">
+                            <span style="color:red;">*</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Family, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.Family, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Family, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-3">
+                            <span style="color:red;">*</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-3">
+                            <span style="color:red;">*</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NationalNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.NationalNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NationalNumber, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-3">
+                            <span style="color:red;">*</span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BirthDay, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.BirthDay, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.BirthDay, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-3">
+                            <span style="color:red;">*</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MaritalStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @{
+                                List<SelectListItem> MaritalStatus = new List<SelectListItem>();
+                                MaritalStatus.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                                MaritalStatus.Add(new SelectListItem() { Text = "مجرد", Value = "مجرد" });
+                                MaritalStatus.Add(new SelectListItem() { Text = "متاهل", Value = "متاهل" });
+
+                            }
+                            @Html.DropDownListFor(model => model.MaritalStatus, MaritalStatus.AsEnumerable(), new { style = "width:100%;" })
+                            @Html.ValidationMessageFor(model => model.MaritalStatus, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-3">
+                            <span style="color:red;">*</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MilitaryService, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @{
+                                List<SelectListItem> MilitaryService = new List<SelectListItem>();
+                                MilitaryService.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                                MilitaryService.Add(new SelectListItem() { Text = "کارت پایان خدمت دارم", Value = "کارت پایان خدمت دارم" });
+                                MilitaryService.Add(new SelectListItem() { Text = "معاف از خدمت", Value = "معاف از خدمت" });
+                                MilitaryService.Add(new SelectListItem() { Text = "مشمول می باشم", Value = "مشمول می باشم" });
+                            }
+                            @Html.DropDownListFor(model => model.MilitaryService, MilitaryService.AsEnumerable(), new { style = "width:100%;" })
+                            @Html.ValidationMessageFor(model => model.MilitaryService, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-3">
+                            <span style="color:red;">*</span>
+                        </div>
+                    </div>
+
+
+
+                    <input  type="submit" value="بعدی"  class="button button-3d nomargin tab-linker" rel="2" />
+
+                </div>
+                <div id="ptab2">
+
+                    <div class="form-group">
+                        <label for="Title" title="" class="control-label col-md-2"></label>
+                        <div class="col-md-12">
+                            <fieldset>
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <p> مقطع:</p>
+                                        @Html.DropDownList("CrossSection", String.Empty)
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p> دانشگاه محل تحصیل:</p>
+                                        @Html.DropDownList("Uni", String.Empty)
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p> رشته:</p>
+                                        <select id="comboboxFields">
+                                            <option value="-1">- select item-</option>
+
+                                            @foreach (var item in ViewBag.Field)
+                                            {
+                                            <option value="@item.FieldID">@item.FieldName</option>
+                                            }
+
+                                        </select>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p>  گرایش:</p>
+                                        <select id="comboboxOrientation"></select>
+                                    </div>
+
+
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-3">
+
+                                        <p>  وضعیت تحصیل:</p>
+                                        @{
+                                            List<SelectListItem> lstStatus = new List<SelectListItem>();
+                                            lstStatus.Add(new SelectListItem() { Text = "-", Value = "-", Selected = true });
+                                            lstStatus.Add(new SelectListItem() { Text = "دانشجو می باشم", Value = "دانشجو می باشم" });
+                                            lstStatus.Add(new SelectListItem() { Text = "فارغ التحصیل شده ام", Value = "فارغ التحصیل شده ام" });
+
+
+
+                                        }
+                                        @Html.DropDownList("list", lstStatus)
+
+
+                                    </div>
+
+
+                                    <div class="col-md-3">
+                                        <p> نمره آخرین معدل:</p>
+                                        <input type="text" id="txtmoadel" class="form-control" placeholder="15.25" />
+                                        <div class="col-md-1">
+                                            <span style="color:red;">*</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <br />
+
+                                <div class="row" id="open" style="display:none;">
+
+                                    <div class="col-md-3">
+                                        <p> تاریخ فارغ التحصیلی:</p>
+                                        <input type="text" id="txtakhz" class="form-control" />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p>نمره پایان نامه:</p>
+                                        <input type="text" id="txtnomre" class="form-control" placeholder="18.25" />
+
+                                    </div>
+
+
+                                </div>
+
+                                <br />
+                                <div class="row">
+
+                                    <div class="col-md-8">
+                                        <p> توضیحات:</p>
+                                        <input type="text" id="txtDescrip" class="form-control" placeholder="" />
+
+                                    </div>
+
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <a class="button button-border button-border-thin button-amber" onclick="AddListEducat()">
+                                            <i class="icon icon-plus"></i>
+                                            اضافه کرده به لیست
+                                        </a>
+                                    </div>
+                                </div>
+                                <hr />
+
+                                <div id="ListEducation">
+                                    @Html.Action("ListEducation")
+                                </div>
+
+                            </fieldset>
+
+                        </div>
+                        </div>
+                        <a href="#" class="button button-3d nomargin tab-linker pull-left" rel="1">قبلی</a>
+                        <a href="#" class="button button-3d nomargin fright tab-linker" rel="3">بعدی</a>
+                    
+                </div>
+                <div id="ptab3">
+
+                    <div class="form-group">
+                        <label for="Title" title="" class="control-label col-md-2"></label>
+                        <div class="col-md-12">
+                            <fieldset>
+
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <p> رشته:</p>
+                                        <select id="boxFields">
+                                            <option value="-1">- select item-</option>
+
+                                            @foreach (var item in ViewBag.Field)
+                                            {
+                                            <option value="@item.FieldID">@item.FieldName</option>
+                                            }
+
+                                        </select>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p> تخصص:</p>
+                                        <select id="boxLesson"></select>
+                                    </div>
+
+
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-3">
+
+                                        <p> تدریس  و ساخت ویدیو:</p>
+                                        @{
+                                            List<SelectListItem> lstvideo = new List<SelectListItem>();
+                                            lstvideo.Add(new SelectListItem() { Text = "-", Value = "-", Selected = true });
+                                            lstvideo.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+                                            lstvideo.Add(new SelectListItem() { Text = "خیر", Value = "خیر" });
+                                        }
+                                        @Html.DropDownList("listvideo", lstvideo)
+
+
+                                    </div>
+
+                                    <div class="col-md-3" id="solving" style="display:none;">
+
+                                        <p> حل مسئله و انجام پروژه:</p>
+                                        @{
+                                            List<SelectListItem> lstsolotion = new List<SelectListItem>();
+
+                                            lstsolotion.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+
+                                        }
+                                        @Html.DropDownList("listsolotion", lstsolotion)
+
+
+                                    </div>
+                                    <div class="col-md-3" id="solving1" style="display:none;">
+
+                                        <p> حل مسئله و انجام پروژه:</p>
+                                        @{
+                                            List<SelectListItem> lstsolotion1 = new List<SelectListItem>();
+                                            lstsolotion1.Add(new SelectListItem() { Text = "-", Value = "-", Selected = true });
+                                            lstsolotion1.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+                                            lstsolotion1.Add(new SelectListItem() { Text = "خیر", Value = "خیر" });
+                                        }
+                                        @Html.DropDownList("listsolotion", lstsolotion1)
+
+
+                                    </div>
+
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <p>  نرم افزارهای تخصصی مربوطه (جهت حل مسائل و شبیه سازی ):</p>
+                                        <input type="text" id="txtemolator" class="form-control" placeholder="" />
+
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+
+                                    <div class="col-md-2">
+                                        <a class="btn btn-success" onclick="AddListSkill()">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                            اضافه کرده به لیست
+                                        </a>
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                                <div id="ListSkill">
+                                    @Html.Action("ListSkill")
+                                </div>
+
+                            </fieldset>
+
+                        </div>
+                    </div>
+
+
+
+
+
+                    <a href="#" class="button button-3d nomargin tab-linker pull-left" rel="2">قبلی</a>
+                    <a href="#" class="button button-3d nomargin fright tab-linker" rel="4">بعدی</a>
+                </div>
+                <div id="ptab4">
+
+                    <div class="form-group">
+                        <label for="Title" title="" class="control-label col-md-2"></label>
+                        <div class="col-md-12">
+                            <fieldset>
+
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <p>نام شرکت:</p>
+                                        <input type="text" id="txtcompany" class="form-control" placeholder="" />
+
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p>سمت:</p>
+                                        <input type="text" id="txtposition" class="form-control" placeholder="مدیر شرکت" />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p> مدت زمان استخدام به ماه:</p>
+                                        <input type="text" id="txttime" class="form-control" placeholder="8" />
+
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <p>  شرح مسئولیت به اختصار:</p>
+                                        <input type="text" id="txtdecsposition" class="form-control" placeholder="" />
+
+                                    </div>
+
+                                </div>
+                                <br />
+
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <a class="btn btn-success" onclick="AddListCompany()">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                            اضافه کرده به لیست
+                                        </a>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div id="ListComp">
+                                    @Html.Action("ListComp")
+                                </div>
+
+                            </fieldset>
+
+                        </div>
+                    </div>
+
+                    <a href="#" class="button button-3d nomargin tab-linker pull-left" rel="3">قبلی</a>
+                    <a href="#" class="button button-3d nomargin fright tab-linker" rel="5">بعدی</a>
+                </div>
+                <div id="ptab5">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                     
+                        <div class="col-md-12">
+                            <fieldset>
+
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <p>انتخاب زبان :</p>
+                                        @Html.DropDownList("Language", String.Empty)
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p> اسپیکینگ:</p>
+                                        <input type="text" id="txtespeaking" class="form-control" placeholder="18.36" />
+
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p> نمره لستنینگ:</p>
+                                        <input type="text" id="txtemlistening" class="form-control" placeholder="18.36" />
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p> نمره رایتینگ:</p>
+                                        <input type="text" id="txtwriting" class="form-control" placeholder="18.36" />
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>  نمره ریدینگ:</p>
+                                        <input type="text" id="txtreading" class="form-control" placeholder="18.36" />
+
+                                    </div>
+
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <p> در صورت داشتن مدرک زبان غیر از ایلتس و تافل ذکر نمایید.</p>
+                                        <input type="text" id="txtdeslang" class="form-control" placeholder="" />
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <a class="btn btn-success" onclick="AddListLang()">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                            اضافه کرده به لیست
+                                        </a>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div id="ListLang">
+                                    @Html.Action("ListLang")
+                                </div>
+
+                            </fieldset>
+
+                        </div>
+
+                        <a href="#" class="button button-3d nomargin tab-linker pull-left" rel="4">قبلی</a>
+                        <a href="#" class="button button-3d nomargin fright tab-linker" rel="6">بعدی</a>
+                    </div>
+                    </div>
+                <div id="ptab6">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Workinprogress, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-3">
+                            @{ List<SelectListItem> Workinprogress = new List<SelectListItem>();
+                                Workinprogress.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                                Workinprogress.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+                                Workinprogress.Add(new SelectListItem() { Text = "خیر", Value = "خیر" });
+                            }
+                            @Html.DropDownListFor(model => model.Workinprogress, Workinprogress.AsEnumerable(), new { style = "width:100%;" })
+                            @Html.ValidationMessageFor(model => model.Workinprogress, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-1">
+                            <span style="color:red;">*</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TypeOfEmployment, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-3">
+                            @{ List<SelectListItem> TypeOfEmployment = new List<SelectListItem>();
+                                TypeOfEmployment.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                                TypeOfEmployment.Add(new SelectListItem() { Text = "نیمه وقت", Value = "نیمه وقت" });
+                                TypeOfEmployment.Add(new SelectListItem() { Text = "تمام وقت", Value = "تمام وقت" });
+                            }
+                            @Html.DropDownListFor(model => model.TypeOfEmployment, TypeOfEmployment.AsEnumerable(), new { style = "width:100%;" })
+                            @Html.ValidationMessageFor(model => model.TypeOfEmployment, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-1">
+                            <span style="color:red;">*</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TimeInWeek, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.TimeInWeek, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TimeInWeek, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-1">
+                            <span style="color:red;">*</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.WageFullTime, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.WageFullTime, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.WageFullTime, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-1">
+                            <span style="color:red;">*</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.WagePartTime, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.WagePartTime, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.WagePartTime, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-1">
+                            <span style="color:red;">*</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Telework, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-3">
+                            @{ List<SelectListItem> Telework = new List<SelectListItem>();
+                                Telework.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                                Telework.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+                                Telework.Add(new SelectListItem() { Text = "خیر", Value = "خیر" });
+                            }
+                            @Html.DropDownListFor(model => model.Telework, Telework.AsEnumerable(), new { style = "width:100%;" })
+                            @Html.ValidationMessageFor(model => model.Telework, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-1">
+                            <span style="color:red;">*</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Internship, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-3">
+                            @{ List<SelectListItem> Internship = new List<SelectListItem>();
+                                Internship.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                                Internship.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+                                Internship.Add(new SelectListItem() { Text = "خیر", Value = "خیر" });
+                            }
+                            @Html.DropDownListFor(model => model.Internship, Telework.AsEnumerable(), new { style = "width:100%;" })
+                            @Html.ValidationMessageFor(model => model.Internship, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-1">
+                            <span style="color:red;">*</span>
+                        </div>
+                    </div>
+
+
+                    <a href="#" class="button button-3d nomargin tab-linker pull-left" rel="5">قبلی</a>
+                    <a href="#" class="button button-3d nomargin fright tab-linker" rel="6">بعدی</a>
+                </div>
+                <div id="ptab7">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Province, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+
+                            <tr>
+                                <td style="font-size: 15px;">
+                                    <select class="province form-control" name="province"></select>
+                                </td>
+                            </tr>
+                            <br />
+
+
+                            <select class="city form-control" name="city"></select>
+
+
+
+                            @Html.ValidationMessageFor(model => model.Province, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <a href="#" class="button button-3d nomargin tab-linker pull-left" rel="6">قبلی</a>
+                    <a href="#" class="button button-3d nomargin fright tab-linker" rel="8">بعدی</a>
+
+                </div>
+                <div id="ptab8">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DescriptionArticles, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.DescriptionArticles, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DescriptionArticles, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-1">
+                            <span style="color:red;">*</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DescriptionFull, htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10 col-md-offset-2">
+                            @Html.TextAreaFor(model => model.DescriptionFull, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DescriptionFull, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Rezome, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-5">
+                            <input type="file" id="fileupload" name="fileupload" class="file" multiple data-show-upload="false" data-show-caption="true" data-show-preview="true" />
+                            @Html.ValidationMessageFor(model => model.Rezome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <a href="#" class="button button-3d nomargin tab-linker pull-left" rel="7">قبلی</a>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="ثبت نهایی" class="button button-large button-rounded" />
+                        </div>
+                    </div>
+                   
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+                                }
+<div class="clear"></div>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@using (Html.BeginForm("RegisterInfo", "SubmitInfo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="alert alert-dismissable">
+        @TempData["msg"]
+    </div>
+    <div class="form-horizontal">
+      
+        <hr />
+        @Html.ValidationSummary(false, "فیلد های پر نشده عبارتند از :", new { @class = "text-danger" })
+        <div class="toggle toggle-border">
+            <div class="togglet"><i class="toggle-closed icon-ok-circle"></i><i class="toggle-open icon-remove-circle"></i>اطلاعات شخصی (وارد کردن فیلد های ستاره دار الزامی می باشد)</div>
+            <div class="togglec">
+            
+              
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "sm-form-control text-box single-line" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "sm-form-control text-box single-line" } })
+                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "sm-form-control text-box single-line" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NationalNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.NationalNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NationalNumber, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BirthDay, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.BirthDay, new { htmlAttributes = new { @class = "form-control PersianDatePicker" } })
+                        @Html.ValidationMessageFor(model => model.BirthDay, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MaritalStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @{
+                            List<SelectListItem> MaritalStatus = new List<SelectListItem>();
+                            MaritalStatus.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                            MaritalStatus.Add(new SelectListItem() { Text = "مجرد", Value = "مجرد" });
+                            MaritalStatus.Add(new SelectListItem() { Text = "متاهل", Value = "متاهل" });
+
+                        }
+                        @Html.DropDownListFor(model => model.MaritalStatus, MaritalStatus.AsEnumerable(), new { style = "width:100%;" })
+                        @Html.ValidationMessageFor(model => model.MaritalStatus, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MilitaryService, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @{
+                            List<SelectListItem> MilitaryService = new List<SelectListItem>();
+                            MilitaryService.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                            MilitaryService.Add(new SelectListItem() { Text = "کارت پایان خدمت دارم", Value = "کارت پایان خدمت دارم" });
+                            MilitaryService.Add(new SelectListItem() { Text = "معاف از خدمت", Value = "معاف از خدمت" });
+                            MilitaryService.Add(new SelectListItem() { Text = "مشمول می باشم", Value = "مشمول می باشم" });
+                        }
+                        @Html.DropDownListFor(model => model.MilitaryService, MilitaryService.AsEnumerable(), new { style = "width:100%;" })
+                        @Html.ValidationMessageFor(model => model.MilitaryService, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+
+             
+            </div>
+        </div>
+        <div class="toggle toggle-border">
+            <div class="togglet"><i class="toggle-closed icon-ok-circle"></i><i class="toggle-open icon-remove-circle"></i>سوابق تحصیلی</div>
+            <div class="togglec">
+                <div class="form-group">
+                    <label for="Title" title="" class="control-label col-md-2"></label>
+                    <div class="col-md-12">
+                        <fieldset>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <p> مقطع:</p>
+                                    @Html.DropDownList("CrossSection", String.Empty)
+
+                                </div>
+                                <div class="col-md-3">
+                                    <p> دانشگاه محل تحصیل:</p>
+                                    @Html.DropDownList("Uni", String.Empty)
+
+                                </div>
+                                <div class="col-md-3">
+                                    <p> رشته:</p>
+                                    <select id="comboboxFields">
+                                        <option value="-1">- رشته-</option>
+
+                                        @foreach (var item in ViewBag.Field)
+                                        {
+                                            <option value="@item.FieldID">@item.FieldName</option>
+                                        }
+
+                                    </select>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <p>  گرایش:</p>
+                                    <select id="comboboxOrientation"></select>
+                                </div>
+
+
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4">
+
+                                    <p>  وضعیت تحصیل:</p>
+                                    @{
+                                        List<SelectListItem> lstStatus = new List<SelectListItem>();
+                                        lstStatus.Add(new SelectListItem() { Text = "-", Value = "-", Selected = true });
+                                        lstStatus.Add(new SelectListItem() { Text = "دانشجو", Value = "دانشجو" });
+                                        lstStatus.Add(new SelectListItem() { Text = "فارغ التحصیل", Value = "فارغ التحصیل" });
+
+
+
+                                    }
+                                    @Html.DropDownList("list", lstStatus)
+
+
+                                </div>
+                              
+                                    <div class="col-md-5">
+                                        <p> نمره آخرین معدل:</p>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <input type="text" id="txtmoadelashar" class="sm-form-control text-box single-line" placeholder="اعشار" />
+                                            </div>
+                                            <div class="col-md-1">
+                                                /
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <input type="text" id="txtmoadelsahih" class="sm-form-control text-box single-line" placeholder="رقم" />
+                                            </div>
+                                            <div class="col-md-1">
+                                                <span style="color:red;">*</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <p> تاریخ شروع به تحصیل:</p>
+                                    @Html.Editor("txtstart", "PersianDatePicker", new { id = "txtstart", placeholder = "فرمت تاریخ1396/06/08" })
+                                   
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row" id="open" style="display:none;">
+
+                                <div class="col-md-4">
+                                    <p> تاریخ فارغ التحصیلی:</p>
+                                    @Html.Editor("txtakhz", "PersianDatePicker",new {id= "txtakhz" , placeholder = "فرمت تاریخ1396/06/08" })
+            
+
+                                </div>
+                                <div class="col-md-5">
+                                    <p>نمره پایان نامه:</p>
+                                 
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <input type="text" id="txtpayanlashar" class="sm-form-control text-box single-line" placeholder="اعشار" />
+                                        </div>
+                                        <div class="col-md-1">
+                                            /
+                                        </div>
+                                        <div class="col-md-3">
+
+                                            <input type="text" id="txtpayansahih" class="sm-form-control text-box single-line" placeholder="رقم" />
+                                        </div>
+                                        <div class="col-md-1">
+                                            <span style="color:red;">*</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+
+                            <br />
+                            <div class="row">
+
+                                <div class="col-md-8">
+                                    <p> توضیحات:</p>
+                                    <input type="text" id="txtDescrip" class="sm-form-control text-box single-line" placeholder="" />
+
+                                </div>
+
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <a class="btn btn-success" onclick="AddListEducat()">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        اضافه کرده به لیست
+                                    </a>
+                                </div>
+                            </div>
+                            <hr />
+
+                            <div id="ListEducation">
+                                @Html.Action("ListEducation")
+                            </div>
+
+                        </fieldset>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="toggle toggle-border">
+            <div class="togglet"><i class="toggle-closed icon-ok-circle"></i><i class="toggle-open icon-remove-circle"></i>توانایی ها و مهارت های علمی و کاربردی</div>
+            <div class="togglec">
+                <div class="form-group">
+                    <label for="Title" title="" class="control-label col-md-2"></label>
+                    <div class="col-md-12">
+                        <fieldset>
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <p> رشته:</p>
+                                    <select id="boxFields">
+                                        <option value="-1">- انتخاب آیتم-</option>
+
+                                        @foreach (var item in ViewBag.Field)
+                                        {
+                                            <option value="@item.FieldID">@item.FieldName</option>
+                                        }
+
+                                    </select>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <p> تخصص:</p>
+                                    <select id="boxLesson"></select>
+                                </div>
+
+
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-3">
+
+                                    <p> تدریس  و ساخت ویدیو:</p>
+                                    @{
+                                        List<SelectListItem> lstvideo = new List<SelectListItem>();
+                                        lstvideo.Add(new SelectListItem() { Text = "-", Value = "-", Selected = true });
+                                        lstvideo.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+                                        lstvideo.Add(new SelectListItem() { Text = "خیر", Value = "خیر" });
+                                    }
+                                    @Html.DropDownList("listvideo", lstvideo)
+
+
+                                </div>
+
+                                <div class="col-md-3" id="solving" style="display:none;">
+
+                                    <p> حل مسئله و انجام پروژه:</p>
+                                    @{
+                                        List<SelectListItem> lstsolotion = new List<SelectListItem>();
+
+                                        lstsolotion.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+
+                                    }
+                                    @Html.DropDownList("listsolotion", lstsolotion)
+
+
+                                </div>
+                                <div class="col-md-3" id="solving1" style="display:none;">
+
+                                    <p> حل مسئله و انجام پروژه:</p>
+                                    @{
+                                        List<SelectListItem> lstsolotion1 = new List<SelectListItem>();
+                                        lstsolotion1.Add(new SelectListItem() { Text = "-", Value = "-", Selected = true });
+                                        lstsolotion1.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+                                        lstsolotion1.Add(new SelectListItem() { Text = "خیر", Value = "خیر" });
+                                    }
+                                    @Html.DropDownList("listsolotion", lstsolotion1)
+
+
+                                </div>
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <p>  نرم افزارهای تخصصی مربوطه (جهت حل مسائل و شبیه سازی ):</p>
+                                    <input type="text" id="txtemolator" class="sm-form-control text-box single-line" placeholder="" />
+
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+
+                                <div class="col-md-2">
+                                    <a class="btn btn-success" onclick="AddListSkill()">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        اضافه کرده به لیست
+                                    </a>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <div id="ListSkill">
+                                @Html.Action("ListSkill")
+                            </div>
+
+                        </fieldset>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="toggle toggle-border">
+            <div class="togglet"><i class="toggle-closed icon-ok-circle"></i><i class="toggle-open icon-remove-circle"></i>سوابق صنعتی</div>
+            <div class="togglec">
+                <div class="form-group">
+                    <label for="Title" title="" class="control-label col-md-2"></label>
+                    <div class="col-md-12">
+                        <fieldset>
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <p>نام شرکت:</p>
+                                    <input type="text" id="txtcompany" class="sm-form-control text-box single-line" placeholder="" />
+
+
+                                </div>
+                                <div class="col-md-3">
+                                    <p>سمت:</p>
+                                    <input type="text" id="txtposition" class="sm-form-control text-box single-line" placeholder="مدیر شرکت" />
+
+                                </div>
+                                <div class="col-md-3">
+                                    <p> مدت زمان استخدام به ماه:</p>
+                                    <input type="text" id="txttime" class="sm-form-control text-box single-line" placeholder="8" />
+
+                                </div>
+
+                                <div class="col-md-3">
+                                    <p>  شرح مسئولیت به اختصار:</p>
+                                    <input type="text" id="txtdecsposition" class="sm-form-control text-box single-line" placeholder="" />
+
+                                </div>
+
+                            </div>
+                            <br />
+
+                            <br />
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <a class="btn btn-success" onclick="AddListCompany()">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        اضافه کرده به لیست
+                                    </a>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div id="ListComp">
+                                @Html.Action("ListComp")
+                            </div>
+
+                        </fieldset>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="toggle toggle-border">
+            <div class="togglet"><i class="toggle-closed icon-ok-circle"></i><i class="toggle-open icon-remove-circle"></i>شرحی در مورد مقالات ISI</div>
+            <div class="togglec">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DescriptionArticles, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.TextAreaFor(model => model.DescriptionArticles, new { htmlAttributes = new { @class = "sm-form-control text-box single-line" } })
+                        @Html.ValidationMessageFor(model => model.DescriptionArticles, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-1">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="toggle toggle-border">
+            <div class="togglet"><i class="toggle-closed icon-ok-circle"></i><i class="toggle-open icon-remove-circle"></i>میزان تسلط به زبان انگلیسی</div>
+            <div class="togglec">
+                <div class="form-group">
+                    <label for="Title" title="" class="control-label col-md-2"></label>
+                    <div class="col-md-12">
+                        <fieldset>
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <p>انتخاب زبان :</p>
+                                    @Html.DropDownList("Language", String.Empty)
+                                </div>
+                                <div class="col-md-2">
+                                    <p> اسپیکینگ:</p>
+                                    <input type="text" id="txtespeaking" class="sm-form-control text-box single-line" placeholder="18" />
+
+
+                                </div>
+                                <div class="col-md-2">
+                                    <p> نمره لستنینگ:</p>
+                                    <input type="text" id="txtemlistening" class="sm-form-control text-box single-line" placeholder="18" />
+
+                                </div>
+                                <div class="col-md-2">
+                                    <p> نمره رایتینگ:</p>
+                                    <input type="text" id="txtwriting" class="sm-form-control text-box single-line" placeholder="18" />
+
+                                </div>
+                                <div class="col-md-2">
+                                    <p>  نمره ریدینگ:</p>
+                                    <input type="text" id="txtreading" class="sm-form-control text-box single-line" placeholder="18" />
+
+                                </div>
+
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <p> در صورت داشتن مدرک زبان غیر از ایلتس و تافل ذکر نمایید.</p>
+                                    <input type="text" id="txtdeslang" class="sm-form-control text-box single-line" placeholder="" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <a class="btn btn-success" onclick="AddListLang()">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        اضافه کرده به لیست
+                                    </a>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div id="ListLang">
+                                @Html.Action("ListLang")
+                            </div>
+
+                        </fieldset>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="toggle toggle-border">
+            <div class="togglet"><i class="toggle-closed icon-ok-circle"></i><i class="toggle-open icon-remove-circle"></i>شرایط کاری</div>
+            <div class="togglec">
+              
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Workinprogress, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-3">
+                        @{ List<SelectListItem> Workinprogress = new List<SelectListItem>();
+                            Workinprogress.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                            Workinprogress.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+                            Workinprogress.Add(new SelectListItem() { Text = "خیر", Value = "خیر" });
+                        }
+                        @Html.DropDownListFor(model => model.Workinprogress, Workinprogress.AsEnumerable(), new { style = "width:100%;" })
+                        @Html.ValidationMessageFor(model => model.Workinprogress, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-1">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TypeOfEmployment, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-3">
+                        @{ List<SelectListItem> TypeOfEmployment = new List<SelectListItem>();
+                            TypeOfEmployment.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                            TypeOfEmployment.Add(new SelectListItem() { Text = "نیمه وقت", Value = "نیمه وقت" });
+                            TypeOfEmployment.Add(new SelectListItem() { Text = "تمام وقت", Value = "تمام وقت" });
+                        }
+                        @Html.DropDownListFor(model => model.TypeOfEmployment, TypeOfEmployment.AsEnumerable(), new { style = "width:100%;" })
+                        @Html.ValidationMessageFor(model => model.TypeOfEmployment, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-1">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TimeInWeek, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.TimeInWeek, new { htmlAttributes = new { @class = "sm-form-control text-box single-line" } })
+                        @Html.ValidationMessageFor(model => model.TimeInWeek, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-1">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.WageFullTime, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.WageFullTime, new { htmlAttributes = new { @class = "sm-form-control text-box single-line" } })
+                        @Html.ValidationMessageFor(model => model.WageFullTime, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-1">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.WagePartTime, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.WagePartTime, new { htmlAttributes = new { @class = "sm-form-control text-box single-line" } })
+                        @Html.ValidationMessageFor(model => model.WagePartTime, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-1">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Telework, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-3">
+                        @{ List<SelectListItem> Telework = new List<SelectListItem>();
+                            Telework.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                            Telework.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+                            Telework.Add(new SelectListItem() { Text = "خیر", Value = "خیر" });
+                        }
+                        @Html.DropDownListFor(model => model.Telework, Telework.AsEnumerable(), new { style = "width:100%;" })
+                        @Html.ValidationMessageFor(model => model.Telework, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="col-md-1">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Internship, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-3">
+                        @{ List<SelectListItem> Internship = new List<SelectListItem>();
+                            Internship.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                            Internship.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+                            Internship.Add(new SelectListItem() { Text = "خیر", Value = "خیر" });
+                        }
+                        @Html.DropDownListFor(model => model.Internship, Telework.AsEnumerable(), new { style = "width:100%;" })
+                        @Html.ValidationMessageFor(model => model.Internship, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-1">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="toggle toggle-border">
+            <div class="togglet"><i class="toggle-closed icon-ok-circle"></i><i class="toggle-open icon-remove-circle"></i>آدرس کامل</div>
+            <div class="togglec">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Province, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+
+                        <tr>
+                            <td style="font-size: 15px;">
+                                <select class="province form-control" name="province"></select>
+                            </td>
+                            @Html.ValidationMessageFor(model => model.Province, "", new { @class = "text-danger" })
+                        </tr>
+                        <br />
+
+
+                        <select class="city form-control" name="city"></select>
+
+
+
+                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-1">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.TextAreaFor(model => model.Address, new { htmlAttributes = new { @class = "sm-form-control text-box single-line" } })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-1">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "sm-form-control text-box single-line" } })
+                        @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-1">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "sm-form-control text-box single-line" } })
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-1">
+                        <span style="color:red;">*</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="toggle toggle-border">
+            <div class="togglet"><i class="toggle-closed icon-ok-circle"></i><i class="toggle-open icon-remove-circle"></i>ارسال رزومه و توضیحات بیشتر</div>
+            <div class="togglec">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DescriptionFull, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-10 col-md-offset-2">
+                        @Html.TextAreaFor(model => model.DescriptionFull, new { htmlAttributes = new { @class = "sm-form-control text-box single-line" } })
+                        @Html.ValidationMessageFor(model => model.DescriptionFull, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Rezome, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-5">
+                        <input type="file" id="fileupload" name="fileupload" class="file" multiple data-show-upload="false" data-show-caption="true" data-show-preview="true" />
+                        @Html.ValidationMessageFor(model => model.Rezome, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                
+
+            </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="ثبت نهایی" class="button button-3d" />
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+        }
+
+
+
+
+
+
+
+        @*@using (Html.BeginForm("RegisterInfo", "SubmitInfo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Family, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.Family, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Family, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NationalNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.NationalNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NationalNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BirthDay, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.BirthDay, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.BirthDay, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MaritalStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @{
+                        List<SelectListItem> MaritalStatus = new List<SelectListItem>();
+                        MaritalStatus.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                        MaritalStatus.Add(new SelectListItem() { Text = "مجرد", Value = "مجرد" });
+                        MaritalStatus.Add(new SelectListItem() { Text = "متاهل", Value = "متاهل" });
+
+                            }
+                            @Html.DropDownListFor(model => model.MaritalStatus, MaritalStatus.AsEnumerable(), new { style = "width:100%;" })
+                            @Html.ValidationMessageFor(model => model.MaritalStatus, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MilitaryService, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @{
+                        List<SelectListItem> MilitaryService = new List<SelectListItem>();
+                        MilitaryService.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                        MilitaryService.Add(new SelectListItem() { Text = "کارت پایان خدمت دارم", Value = "کارت پایان خدمت دارم" });
+                        MilitaryService.Add(new SelectListItem() { Text = "معاف از خدمت", Value = "معاف از خدمت" });
+                        MilitaryService.Add(new SelectListItem() { Text = "مشمول می باشم", Value = "مشمول می باشم" });
+                            }
+                            @Html.DropDownListFor(model => model.MilitaryService, MilitaryService.AsEnumerable(), new { style = "width:100%;" })
+                            @Html.ValidationMessageFor(model => model.MilitaryService, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Title" title="" class="control-label col-md-2"></label>
+                        <div class="col-md-12">
+                            <fieldset>
+                                <legend>اطلاعات تحصیلی</legend>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <p> مقطع:</p>
+                                        @Html.DropDownList("CrossSection", String.Empty)
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p> دانشگاه محل تحصیل:</p>
+                                        @Html.DropDownList("Uni", String.Empty)
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p> رشته:</p>
+                                        <select id="comboboxFields">
+                                            <option value="-1">- select item-</option>
+
+                                            @foreach (var item in ViewBag.Field)
+                                            {
+                                                <option value="@item.FieldID">@item.FieldName</option>
+                                            }
+
+                                        </select>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p>  گرایش:</p>
+                                        <select id="comboboxOrientation"></select>
+                                    </div>
+
+
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-3">
+
+                                        <p>  وضعیت تحصیل:</p>
+                                        @{
+                                            List<SelectListItem> lstStatus = new List<SelectListItem>();
+                                            lstStatus.Add(new SelectListItem() { Text = "-", Value = "-", Selected = true });
+                                            lstStatus.Add(new SelectListItem() { Text = "دانشجو می باشم", Value = "دانشجو می باشم" });
+                                            lstStatus.Add(new SelectListItem() { Text = "فارغ التحصیل شده ام", Value = "فارغ التحصیل شده ام" });
+
+
+
+                                        }
+                                        @Html.DropDownList("list", lstStatus)
+
+
+                                    </div>
+
+
+                                    <div class="col-md-3">
+                                        <p> نمره آخرین معدل:</p>
+                                        <input type="text" id="txtmoadel" class="form-control" placeholder="15.25" />
+
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row" id="open" style="display:none;">
+
+                                    <div class="col-md-3">
+                                        <p> تاریخ فارغ التحصیلی:</p>
+                                        <input type="text" id="txtakhz" class="form-control" />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p>نمره پایان نامه:</p>
+                                        <input type="text" id="txtnomre" class="form-control" placeholder="18.25" />
+
+                                    </div>
+
+
+                                </div>
+
+                                <br />
+                                <div class="row">
+
+                                    <div class="col-md-8">
+                                        <p> توضیحات:</p>
+                                        <input type="text" id="txtDescrip" class="form-control" placeholder="" />
+
+                                    </div>
+
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <a class="btn btn-success" onclick="AddListEducat()">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                            اضافه کرده به لیست
+                                        </a>
+                                    </div>
+                                </div>
+                                <hr />
+
+                                <div id="ListEducation">
+                                    @Html.Action("ListEducation")
+                                </div>
+
+                            </fieldset>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="Title" title="" class="control-label col-md-2"></label>
+                        <div class="col-md-12">
+                            <fieldset>
+                                <legend>توانایی ها و مهارت های علمی و کاربردی</legend>
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <p> رشته:</p>
+                                        <select id="boxFields">
+                                            <option value="-1">- select item-</option>
+
+                                            @foreach (var item in ViewBag.Field)
+                                            {
+                                                <option value="@item.FieldID">@item.FieldName</option>
+                                            }
+
+                                        </select>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p> تخصص:</p>
+                                        <select id="boxLesson"></select>
+                                    </div>
+
+
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-3">
+
+                                        <p> تدریس  و ساخت ویدیو:</p>
+                                        @{
+                                            List<SelectListItem> lstvideo = new List<SelectListItem>();
+                                            lstvideo.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                                            lstvideo.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+                                            lstvideo.Add(new SelectListItem() { Text = "خیر", Value = "خیر" });
+                                        }
+                                        @Html.DropDownList("listvideo", lstvideo)
+
+
+                                    </div>
+                                    <div class="col-md-3" id="solving" style="display:none;">
+
+                                        <p> حل مسئله و انجام پروژه:</p>
+                                        @{
+                                            List<SelectListItem> lstsolotion = new List<SelectListItem>();
+
+                                            lstsolotion.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+
+                                        }
+                                        @Html.DropDownList("listsolotion", lstsolotion)
+
+
+                                    </div>
+                                    <div class="col-md-3" id="solving1" style="display:none;">
+
+                                        <p> حل مسئله و انجام پروژه:</p>
+                                        @{
+                                            List<SelectListItem> lstsolotion1 = new List<SelectListItem>();
+                                            lstsolotion1.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                                            lstsolotion1.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+                                            lstsolotion1.Add(new SelectListItem() { Text = "خیر", Value = "خیر" });
+                                        }
+                                        @Html.DropDownList("listsolotion", lstsolotion1)
+
+
+                                    </div>
+
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <p>  نرم افزارهای تخصصی مربوطه (جهت حل مسائل و شبیه سازی ):</p>
+                                        <input type="text" id="txtemolator" class="form-control" placeholder="" />
+
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+
+                                    <div class="col-md-2">
+                                        <a class="btn btn-success" onclick="AddListSkill()">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                            اضافه کرده به لیست
+                                        </a>
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                                <div id="ListSkill">
+                                    @Html.Action("ListSkill")
+                                </div>
+
+                            </fieldset>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="Title" title="" class="control-label col-md-2"></label>
+                        <div class="col-md-12">
+                            <fieldset>
+                                <legend>سوابق صنعتی</legend>
+                                <div class="row">
+
+                                    <div class="col-md-2">
+                                        <p>نام شرکت:</p>
+                                        <input type="text" id="txtcompany" class="form-control" placeholder="" />
+
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>سمت:</p>
+                                        <input type="text" id="txtposition" class="form-control" placeholder="مدیر شرکت" />
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p> مدت زمان استخدام به ماه:</p>
+                                        <input type="text" id="txttime" class="form-control" placeholder="8" />
+
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <p>  شرح مسئولیت به اختصار:</p>
+                                        <input type="text" id="txtdecsposition" class="form-control" placeholder="" />
+
+                                    </div>
+
+                                </div>
+                                <br />
+
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <a class="btn btn-success" onclick="AddListCompany()">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                            اضافه کرده به لیست
+                                        </a>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div id="ListComp">
+                                    @Html.Action("ListComp")
+                                </div>
+
+                            </fieldset>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DescriptionArticles, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.DescriptionArticles, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DescriptionArticles, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Title" title="" class="control-label col-md-2"></label>
+                        <div class="col-md-12">
+                            <fieldset>
+                                <legend>میزان تسلط به زبان انگلیسی</legend>
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <p>انتخاب زبان :</p>
+                                        @Html.DropDownList("Language", String.Empty)
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p> اسپیکینگ:</p>
+                                        <input type="text" id="txtespeaking" class="form-control" placeholder="18.36" />
+
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p> نمره لستنینگ:</p>
+                                        <input type="text" id="txtemlistening" class="form-control" placeholder="18.36" />
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p> نمره رایتینگ:</p>
+                                        <input type="text" id="txtwriting" class="form-control" placeholder="18.36" />
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>  نمره ریدینگ:</p>
+                                        <input type="text" id="txtreading" class="form-control" placeholder="18.36" />
+
+                                    </div>
+
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <p> در صورت داشتن مدرک زبان غیر از ایلتس و تافل ذکر نمایید.</p>
+                                        <input type="text" id="txtdeslang" class="form-control" placeholder="" />
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <a class="btn btn-success" onclick="AddListLang()">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                            اضافه کرده به لیست
+                                        </a>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div id="ListLang">
+                                    @Html.Action("ListLang")
+                                </div>
+
+                            </fieldset>
+
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Workinprogress, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-3">
+                            @{ List<SelectListItem> Workinprogress = new List<SelectListItem>();
+                        Workinprogress.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                        Workinprogress.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+                        Workinprogress.Add(new SelectListItem() { Text = "خیر", Value = "خیر" });
+                            }
+                            @Html.DropDownListFor(model => model.Workinprogress, Workinprogress.AsEnumerable(), new { style = "width:100%;" })
+                            @Html.ValidationMessageFor(model => model.Workinprogress, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TypeOfEmployment, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-3">
+                            @{ List<SelectListItem> TypeOfEmployment = new List<SelectListItem>();
+                        TypeOfEmployment.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                        TypeOfEmployment.Add(new SelectListItem() { Text = "نیمه وقت", Value = "نیمه وقت" });
+                        TypeOfEmployment.Add(new SelectListItem() { Text = "تمام وقت", Value = "تمام وقت" });
+                            }
+                            @Html.DropDownListFor(model => model.TypeOfEmployment, TypeOfEmployment.AsEnumerable(), new { style = "width:100%;" })
+                            @Html.ValidationMessageFor(model => model.TypeOfEmployment, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TimeInWeek, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.TimeInWeek, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TimeInWeek, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.WageFullTime, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.WageFullTime, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.WageFullTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.WagePartTime, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.WagePartTime, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.WagePartTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Telework, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-3">
+                            @{ List<SelectListItem> Telework = new List<SelectListItem>();
+                        Telework.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                        Telework.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+                        Telework.Add(new SelectListItem() { Text = "خیر", Value = "خیر" });
+                            }
+                            @Html.DropDownListFor(model => model.Telework, Telework.AsEnumerable(), new { style = "width:100%;" })
+                            @Html.ValidationMessageFor(model => model.Telework, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Internship, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-3">
+                            @{ List<SelectListItem> Internship = new List<SelectListItem>();
+                        Internship.Add(new SelectListItem() { Text = "", Value = "", Selected = true });
+                        Internship.Add(new SelectListItem() { Text = "بله", Value = "بله" });
+                        Internship.Add(new SelectListItem() { Text = "خیر", Value = "خیر" });
+                            }
+                            @Html.DropDownListFor(model => model.Internship, Telework.AsEnumerable(), new { style = "width:100%;" })
+                            @Html.ValidationMessageFor(model => model.Internship, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Province, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+
+                            <tr>
+                                <td style="font-size: 15px;">
+                                    <select class="province form-control" name="province"></select>
+                                </td>
+                            </tr>
+                            <br />
+
+
+                            <select class="city form-control" name="city"></select>
+
+
+
+                            @Html.ValidationMessageFor(model => model.Province, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DescriptionFull, htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10 col-md-offset-2">
+                            @Html.TextAreaFor(model => model.DescriptionFull, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DescriptionFull, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Rezome, htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-5">
+                            <input type="file" id="fileupload" name="fileupload" class="file" multiple data-show-upload="false" data-show-caption="true" data-show-preview="true" />
+                            @Html.ValidationMessageFor(model => model.Rezome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                        @Html.LabelFor(model => model.Rezome, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6 bottommargin">
+
+
+                            <input id="fileupload" name="input2[]" type="file"   class="file" multiple data-show-upload="false" data-show-caption="true" data-show-preview="true">
+                        </div>
+                        </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="ثبت نهایی" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+
+                                }*@
+<script src="~/scripts/PersianDatePicker.js"></script>
+<script src="~/scripts/PersianDatePicker.min.js"></script>
+
+        @section scripts{
+            <script type="text/javascript">
+
+
+
+                $(document).ready(function () {
+
+                    $('#comboboxFields').on('change', function () {
+
+                        var FieldID = $('#comboboxFields option:selected').val();
+                        $.ajax({
+                            type: 'GET',
+                            data: { FieldID: FieldID },
+                            url: '@Url.Action("Orientation", "SubmitInfo")',
+                            @*url: '@Url.Action("RegisterUser","Home")',*@
+                            success: function (res) {
+                                // var Lesson = JSON.parse(res)
+                                var s = '<option value="-1">انتخاب گرایش</option>';
+                                for (var i = 0; i < res.length; i++) {
+                                    s += '<option value="' + res[i].OrientationID + '">' + res[i].OrientationName + '</option>';
+                                }
+                                $('#comboboxOrientation').html(s);
+                            }
+                        });
+                    });
+
+                });
+            </script>
+
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+
+                    $('#boxFields').on('change', function () {
+
+                        var FieldID = $('#boxFields option:selected').val();
+                        $.ajax({
+                            type: 'GET',
+                            data: { FieldID: FieldID },
+                            url: '@Url.Action("Lessons", "SubmitInfo")',
+                            @*url: '@Url.Action("RegisterUser","Home")',*@
+                            success: function (res) {
+                                // var Lesson = JSON.parse(res)
+                                var s = '<option value="-1">انتخاب درس</option>';
+                                for (var i = 0; i < res.length; i++) {
+                                    s += '<option value="' + res[i].LessonID + '">' + res[i].LessonName + '</option>';
+                               
+                                
+                                }
+                                $('#boxLesson').html(s);
+                            }
+                        });
+                    });
+
+                });
+            </script>
+
+            <script>
+                function AddListEducat() {
+                 
+                
+
+                    var sahihmoadel = $("#txtmoadelsahih").val();
+                    var Asharmoadel = $("#txtmoadelashar").val();
+                    var Avrage = sahihmoadel + "." + Asharmoadel;
+                   
+                    var sahihpayani = $("#txtpayansahih").val();
+                    var asharpayani = $("#txtpayanlashar").val();
+                    var ThesisDiss = sahihpayani + "." + asharpayani;
+                    $.ajax({
+
+
+                        url: "/UserPanel/SubmitInfo/AddListEducation",
+                        data: {
+                            SectionID: $("#CrossSection").val(),
+                            SectionName: $("#CrossSection :selected").text(),
+                            UniID: $("#Uni").val(),
+                            UniName: $("#Uni :selected").text(),
+                            FieldID: $("#comboboxFields").val(),
+                            FieldName: $("#comboboxFields :selected").text(),
+                            OrientationID: $("#comboboxOrientation").val(),
+                            OrientationName: $("#comboboxOrientation :selected").text(),
+                            BeginStudy: $("#txtstart").val(),
+                            YearGrad: $("#txtakhz").val(),
+                            ThesisDiss: ThesisDiss,
+                            Avrage: Avrage,
+                            Stu_Graduate: $("#list").val(),
+                            
+                            Description: $("#txtDescrip").val()
+
+
+
+                        }
+                    }).done(function (result) {
+                        $("#txtakhz").val("");
+                        $("#txtnomre").val("");
+                        $("#txtmoadel").val("");
+                        $("#txtDescrip").val("");
+                        $("#txtmoadelashar").val("");
+                        $("#txtmoadelsahih").val("");
+                        $("#txtpayansahih").val("");
+                        $("#txtpayanlashar").val("");
+                        $("#txtstart").val("");
+
+                        $("#ListEducation").html(result);
+
+                    });
+                }
+
+
+
+
+                function DeleteEducation(SectionID, UniID, FieldID, OrientationID, BeginStudy, YearGrad, ThesisDiss, Avrage, Stu_Graduate, Description) {
+                    $.ajax({
+                        url: "/UserPanel/SubmitInfo/DeleteEducation",
+                        data: {
+                            SectionID: SectionID, UniID: UniID, FieldID: FieldID,
+                            OrientationID: OrientationID,BeginStudy:BeginStudy, YearGrad: YearGrad, ThesisDiss: ThesisDiss, Avrage: Avrage,
+
+                            Stu_Graduate: Stu_Graduate, Description: Description
+                        }
+                    }).done(function (result) {
+                        $("#ListEducation").html(result);
+                    });
+                }
+
+
+                $(document).ready(function () {
+
+                    $("#list").click(function () {
+                        var lst = $(this).val();
+                        if (lst == "فارغ التحصیل شده ام") {
+                            $("#open").fadeIn();
+                            $("#open").fadeIn("slow");
+                            $("#open").fadeIn(3000);
+                        }
+                        else {
+                            $("#open").fadeOut();
+                            $("#open").fadeOut("slow");
+                            $("#open").fadeOut(3000);
+                        }
+
+                    });
+                    $("#flip").click(function () {
+                        $("#open").toggle();
+                    });
+                });
+            </script>
+
+            <script>
+                function AddListSkill() {
+
+                    $.ajax({
+
+
+                        url: "/UserPanel/SubmitInfo/AddListSkills",
+                        data: {
+
+
+                            LessonID: $("#boxLesson").val(),
+                            LessonName: $("#boxLesson :selected").text(),
+                            ProblemSolving: $("#listsolotion").val(),
+                            MakingVideo: $("#listvideo").val(),
+                            RelatedSoftware: $("#txtemolator").val()
+
+
+
+                        }
+                    }).done(function (result) {
+
+                        $("#txtemolator").val("");
+
+
+                        $("#ListSkill").html(result);
+
+                    });
+                }
+
+                function DeleteSkill(LessonID, ProblemSolving, MakingVideo, RelatedSoftware) {
+                    $.ajax({
+                        url: "/UserPanel/SubmitInfo/DeleteSkills",
+                        data: {
+                            LessonID: LessonID,
+                            ProblemSolving: ProblemSolving, MakingVideo: MakingVideo, RelatedSoftware: RelatedSoftware
+                        }
+                    }).done(function (result) {
+                        $("#ListSkill").html(result);
+                    });
+                }
+
+
+
+
+                function AddListCompany() {
+
+                    $.ajax({
+
+
+                        url: "/UserPanel/SubmitInfo/AddListCompanyes",
+                        data: {
+
+
+                            CompanyName: $("#txtcompany").val(),
+                            Position: $("#txtposition").val(),
+                            DurationWork: $("#txttime").val(),
+                            DescPosition: $("#txtdecsposition").val()
+
+
+
+
+                        }
+                    }).done(function (result) {
+                        $("#txtcompany").val("");
+                        $("#txtposition").val("");
+                        $("#txttime").val("");
+                        $("#txtdecsposition").val("");
+
+
+                        $("#ListComp").html(result);
+
+                    });
+                }
+                function DeleteComp(CompanyName, Position, DurationWork, DescPosition) {
+                    $.ajax({
+                        url: "/UserPanel/SubmitInfo/DeleteCompes",
+                        data: {
+                            CompanyName: CompanyName,
+                            Position: Position, DurationWork: DurationWork, DescPosition: DescPosition
+                        }
+                    }).done(function (result) {
+                        $("#ListComp").html(result);
+                    });
+                }
+
+
+
+
+
+
+
+
+                function AddListLang() {
+
+                    $.ajax({
+
+
+                        url: "/UserPanel/SubmitInfo/AddListLanguages",
+                        data: {
+
+
+                            LangID: $("#Language").val(),
+                            LangName: $("#Language :selected").text(),
+                            ScoreSpeking: $("#txtespeaking").val(),
+                            ScoreListening: $("#txtemlistening").val(),
+                            ScoreWrite: $("#txtwriting").val(),
+                            ScoreReading: $("#txtreading").val(),
+                            DescriptionLang: $("#txtdeslang").val()
+
+
+
+
+                        }
+                    }).done(function (result) {
+                        $("#txtespeaking").val("");
+                        $("#txtemlistening").val("");
+                        $("#txtwriting").val("");
+                        $("#txtreading").val("");
+                        $("#txtdeslang").val("");
+
+
+                        $("#ListLang").html(result);
+
+                    });
+                }
+                function DeleteLang(LangID, ScoreSpeking, ScoreListening, ScoreWrite, ScoreReading, DescriptionLang) {
+                    $.ajax({
+                        url: "/UserPanel/SubmitInfo/DeleteLagns",
+                        data: {
+                            LangID: LangID,
+                            ScoreSpeking: ScoreSpeking, ScoreListening: ScoreListening, ScoreWrite: ScoreWrite,
+                            ScoreReading: ScoreReading, DescriptionLang: DescriptionLang
+                        }
+                    }).done(function (result) {
+                        $("#ListLang").html(result);
+                    });
+                }
+
+
+
+
+
+
+
+
+
+
+                //$(document).ready(function () {
+                //    $("#btn").click(function () {
+                //        $("#open").toggle()
+                //    });
+                //});
+
+
+
+
+                $(document).ready(function () {
+
+                    $("#list").click(function () {
+                        var lst = $(this).val();
+                        if (lst == "فارغ التحصیل") {
+                            $("#open").fadeIn();
+                            $("#open").fadeIn("slow");
+                            $("#open").fadeIn(3000);
+                        }
+                        else {
+                            $("#open").fadeOut();
+                            $("#open").fadeOut("slow");
+                            $("#open").fadeOut(3000);
+                        }
+
+                    });
+
+
+
+
+
+
+
+
+
+                    //    $("#flip").click(function () {
+                    //        $("#open").toggle();
+                    //    });
+                    //});
+
+                    $(document).ready(function () {
+
+                        $("#listvideo").click(function () {
+                            var lstvideo = $(this).val();
+                            if (lstvideo == "بله") {
+                                $("#solving").fadeIn();
+                                $("#solving").fadeIn("slow");
+                                $("#solving").fadeIn(3000);
+                                $("#solving1").fadeOut();
+                                $("#solving1").fadeOut("slow");
+                                $("#solving1").fadeOut(3000);
+                            }
+                            else {
+                                $("#solving").fadeOut();
+                                $("#solving").fadeOut("slow");
+                                $("#solving").fadeOut(3000);
+                                $("#solving1").fadeIn();
+                                $("#solving1").fadeIn("slow");
+                                $("#solving1").fadeIn(3000);
+                            }
+
+                        });
+                        //$("#flip").click(function () {
+                        //    $("#solving").toggle();
+                    });
+                });
+
+
+                //var objCal2 = new AMIB.persianCalendar('BirthDay', {
+                //    initialDate: '1370/01/01',
+                //}
+                //    );
+                //var objCal2 = new AMIB.persianCalendar('txtakhz', {
+                //    initialDate: '1397/01/01',
+                //}
+                //   );
+
+
+                //$(function () {
+                //    $("#processTabs").tabs({ show: { effect: "fade", duration: 400 } });
+                //    $(".tab-linker").click(function () {
+                //        $("#processTabs").tabs("option", "active", $(this).attr('rel') - 1);
+                //        return false;
+                //    });
+                //});
+
+
+
+            </script>
+
+
+        }

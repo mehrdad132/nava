@@ -1,0 +1,194 @@
+﻿@model NavaTraining.Models.ResultInterView
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    <link href="~/Areas/Content/PersianDatePicker.min.css" rel="stylesheet" />
+
+    <link href="~/Areas/Content/PersianDatePicker.css" rel="stylesheet" />
+
+}
+
+<div class="table-responsive">
+<div class="panel panel-info">
+<div class="panel-heading">
+    <i class="icon icon-2x icon-list" style="margin-left: 10px;"></i><label style="font-size: 17px;">ویرایش آیتم</label>
+
+</div>
+
+<div class="panel-body">
+
+
+    @using (Html.BeginForm("Edit", "ResultInterViews", FormMethod.Post, new {enctype = "multipart/form-data"}))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <div class="alert alert-dismissable h3 text-danger">
+                @TempData["msg"]
+            </div>
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            @Html.HiddenFor(model => model.ResultID)
+            @Html.HiddenFor(model => model.UserID)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ItemID, "آیتم مصاحبه", htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-6">
+                    @Html.DropDownList("ItemID", null, htmlAttributes: new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.ItemID, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+
+
+
+            <div class="togglec">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SkillSpeaking, htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-3">
+                        @{
+                            List<SelectListItem> SkillSpeaking = new List<SelectListItem>();
+                            SkillSpeaking.Add(new SelectListItem() {Text = "", Value = "", Selected = true});
+                            SkillSpeaking.Add(new SelectListItem() {Text = "مکالمه عالی", Value = "مکالمه عالی"});
+                            SkillSpeaking.Add(new SelectListItem() {Text = "مکالمه خوب", Value = "مکالمه خوب"});
+                            SkillSpeaking.Add(new SelectListItem() {Text = "مکالمه متوسط", Value = "مکالمه متوسط"});
+                            SkillSpeaking.Add(new SelectListItem() {Text = "مکالمه ضعیف", Value = "مکالمه ضعیف"});
+                            SkillSpeaking.Add(new SelectListItem() {Text = "مکالمه نامشخص", Value = "مکالمه نامشخص"});
+                        }
+                        @Html.DropDownListFor(model => model.SkillSpeaking, SkillSpeaking.AsEnumerable(), new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.SkillSpeaking, "", new {@class = "text-danger"})
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PassionWork, htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-3">
+                        @{
+                            List<SelectListItem> PassionWork = new List<SelectListItem>();
+                            PassionWork.Add(new SelectListItem() {Text = "", Value = "", Selected = true});
+                            PassionWork.Add(new SelectListItem() {Text = "اشتیاق 5", Value = "اشتیاق 5"});
+                            PassionWork.Add(new SelectListItem() {Text = "اشتیاق 4", Value = "اشتیاق 4"});
+                            PassionWork.Add(new SelectListItem() {Text = "اشتیاق 3", Value = "اشتیاق 3"});
+                            PassionWork.Add(new SelectListItem() {Text = "اشتیاق 2", Value = "اشتیاق 2"});
+                            PassionWork.Add(new SelectListItem() {Text = "اشتیاق 1", Value = "اشتیاق 1"});
+                            PassionWork.Add(new SelectListItem() {Text = "اشتیاق 0", Value = "اشتیاق 0"});
+                        }
+                        @Html.DropDownListFor(model => model.PassionWork, PassionWork.AsEnumerable(), new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.PassionWork, "", new {@class = "text-danger"})
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Sobriety, htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-3">
+                        @{
+                            List<SelectListItem> Sobriety = new List<SelectListItem>();
+                            Sobriety.Add(new SelectListItem() {Text = "", Value = "", Selected = true});
+                            Sobriety.Add(new SelectListItem() {Text = "متانت 5", Value = "متانت 5"});
+                            Sobriety.Add(new SelectListItem() {Text = "متانت 4", Value = "متانت 4"});
+                            Sobriety.Add(new SelectListItem() {Text = "متانت 3", Value = "متانت 3"});
+                            Sobriety.Add(new SelectListItem() {Text = "متانت 2", Value = "متانت 2"});
+                            Sobriety.Add(new SelectListItem() {Text = "متانت 1", Value = "متانت 1"});
+                            Sobriety.Add(new SelectListItem() {Text = "متانت 0", Value = "متانت 0"});
+                        }
+                        @Html.DropDownListFor(model => model.Sobriety, Sobriety.AsEnumerable(), new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Sobriety, "", new {@class = "text-danger"})
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Rhetorical, htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-3">
+                        @{
+                            List<SelectListItem> Rhetorical = new List<SelectListItem>();
+                            Rhetorical.Add(new SelectListItem() {Text = "", Value = "", Selected = true});
+                            Rhetorical.Add(new SelectListItem() {Text = "فن بیان 5", Value = "فن بیان 5"});
+                            Rhetorical.Add(new SelectListItem() {Text = "فن بیان 4", Value = "فن بیان 4"});
+                            Rhetorical.Add(new SelectListItem() {Text = "فن بیان 3", Value = "فن بیان 3"});
+                            Rhetorical.Add(new SelectListItem() {Text = "فن بیان 2", Value = "فن بیان 2"});
+                            Rhetorical.Add(new SelectListItem() {Text = "فن بیان 1", Value = "فن بیان 1"});
+                            Rhetorical.Add(new SelectListItem() {Text = "فن بیان 0", Value = "فن بیان 0"});
+                            Rhetorical.Add(new SelectListItem() {Text = "مهم نیست", Value = "مهمم نیست"});
+                        }
+                        @Html.DropDownListFor(model => model.Rhetorical, Rhetorical.AsEnumerable(), new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Rhetorical, "", new {@class = "text-danger"})
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateForWork, htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.DateForWork, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.DateForWork, "", new {@class = "text-danger"})
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    @Html.LabelFor(model => model.VideoName, htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-6">
+                        <input type="file" value="@Model.VideoName" id="fileupload" name="fileupload" class="file" multiple data-show-upload="false" data-show-caption="true" data-show-preview="true"/>
+                        <input type="hidden" value="@Model.VideoName" name="fileupload"/>
+                        @Html.ValidationMessageFor(model => model.VideoName, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="form-group" id="video">
+                    <label for="Title" title="" class="control-label col-md-2">گالری فیلم</label>
+                    <div class="col-md-10" id="video_@(Model.ResultID)">
+                        <video class="col-md-12 col-sm-12 col-xs-12" controls src="~/VideoUpload/UserVideo/@Model.VideoName"></video>
+                        <br/>
+
+
+                    </div>
+
+
+                </div>
+                <a class="btn btn-danger btn-block col-md-4 col-sm-5 col-xs-12 pull-left" onclick="Deletevideo(@Model.ResultID)"> حذف فیلم</a>
+                <br/><br/>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="ویرایش" class="button button-3d button-small button-yellow button-light"/>
+                    </div>
+                </div>
+            </div>
+            </div>
+    }
+
+
+    <div>
+        @Html.ActionLink("بازگشت", "Index", null, new {@class = "button button-3d button-rounded button-black "})
+    </div>
+</div>
+</div>
+</div>
+<script src="~/scripts/PersianDatePicker.js"></script>
+<script src="~/scripts/PersianDatePicker.min.js"></script>
+
+@section scripts
+{
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script src="/ckeditor/adapters/jquery.js"></script>
+
+    <script>
+       
+
+        function Deletevideo(id) {
+            if (confirm("آیا از حذف فیلم مطمئن هستید؟")) {
+
+                $.ajax({
+                    url: "/Admin/ResultInterViews/DeleteVideo/" + id
+
+
+                }).done(function () {
+                    $("#video_" + id).remove();
+                    $("#video").html(result);
+                });
+            }
+        }
+</script>
+}

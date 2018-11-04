@@ -1,0 +1,50 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<NavaTraining.Models.Fields>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <i class="icon icon-2x icon-list" style="margin-left: 10px;"></i><label style="font-size: 17px;">لیست رشته ها</label>
+
+        </div>
+
+        <div class="panel-body">
+            <p>
+                @Html.ActionLink("اضافه کردن رشته", "Create", null, new {@class = "button button-3d button-small button-rounded button-rounded"})
+            </p>
+            <div class="table-responsive">
+                <table class="table table-bordered table-condensed table-responsive table-striped">
+
+                    <tr class="success center">
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().FieldName)
+                        </th>
+                        <th>عملیات</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr class="center">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FieldName)
+                            </td>
+                            <td>
+                                @Html.ActionLink("ویرایش", "Edit", new {id = item.FieldID}, new {@class = "button button-3d button-small button-yellow button-light"}) |
+
+                                @Html.ActionLink("حذف از لیست", "Delete", new {id = item.FieldID}, new {@class = "button button-3d button-small button-rounded button-red"})
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
+            </div>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>
+ 

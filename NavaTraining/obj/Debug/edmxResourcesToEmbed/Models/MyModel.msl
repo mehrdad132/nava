@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Nava_DBModelStoreContainer" CdmEntityContainer="Nava_DBEntities">
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="Nava_DBModel.Roles">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleTitle" ColumnName="RoleTitle" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CrossSection">
+      <EntityTypeMapping TypeName="Nava_DBModel.CrossSection">
+        <MappingFragment StoreEntitySet="CrossSection">
+          <ScalarProperty Name="SectionTitle" ColumnName="SectionTitle" />
+          <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fields">
+      <EntityTypeMapping TypeName="Nava_DBModel.Fields">
+        <MappingFragment StoreEntitySet="Fields">
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+          <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orientation">
+      <EntityTypeMapping TypeName="Nava_DBModel.Orientation">
+        <MappingFragment StoreEntitySet="Orientation">
+          <ScalarProperty Name="OrientationName" ColumnName="OrientationName" />
+          <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+          <ScalarProperty Name="OrientationID" ColumnName="OrientationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UniverCity">
+      <EntityTypeMapping TypeName="Nava_DBModel.UniverCity">
+        <MappingFragment StoreEntitySet="UniverCity">
+          <ScalarProperty Name="UniName" ColumnName="UniName" />
+          <ScalarProperty Name="UniID" ColumnName="UniID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lessons">
+      <EntityTypeMapping TypeName="Nava_DBModel.Lessons">
+        <MappingFragment StoreEntitySet="Lessons">
+          <ScalarProperty Name="LessonName" ColumnName="LessonName" />
+          <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+          <ScalarProperty Name="LessonCode" ColumnName="LessonCode" />
+          <ScalarProperty Name="LessonID" ColumnName="LessonID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Field_Lessons">
+      <EntityTypeMapping TypeName="Nava_DBModel.Field_Lessons">
+        <MappingFragment StoreEntitySet="Field_Lessons">
+          <ScalarProperty Name="RelatedSoftware" ColumnName="RelatedSoftware" />
+          <ScalarProperty Name="MakingVideo" ColumnName="MakingVideo" />
+          <ScalarProperty Name="ProblemSolving" ColumnName="ProblemSolving" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LessonID" ColumnName="LessonID" />
+          <ScalarProperty Name="FL_ID" ColumnName="FL_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Language">
+      <EntityTypeMapping TypeName="Nava_DBModel.Language">
+        <MappingFragment StoreEntitySet="Language">
+          <ScalarProperty Name="LangName" ColumnName="LangName" />
+          <ScalarProperty Name="LangID" ColumnName="LangID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Lang">
+      <EntityTypeMapping TypeName="Nava_DBModel.User_Lang">
+        <MappingFragment StoreEntitySet="User_Lang">
+          <ScalarProperty Name="DescriptionLang" ColumnName="DescriptionLang" />
+          <ScalarProperty Name="ScoreReading" ColumnName="ScoreReading" />
+          <ScalarProperty Name="ScoreWrite" ColumnName="ScoreWrite" />
+          <ScalarProperty Name="ScoreListening" ColumnName="ScoreListening" />
+          <ScalarProperty Name="ScoreSpeking" ColumnName="ScoreSpeking" />
+          <ScalarProperty Name="LangID" ColumnName="LangID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UL_ID" ColumnName="UL_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserLogin">
+      <EntityTypeMapping TypeName="Nava_DBModel.UserLogin">
+        <MappingFragment StoreEntitySet="UserLogin">
+          <ScalarProperty Name="ImageUser" ColumnName="ImageUser" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+          <ScalarProperty Name="ActiveCode" ColumnName="ActiveCode" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Company">
+      <EntityTypeMapping TypeName="Nava_DBModel.Company">
+        <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="DescPosition" ColumnName="DescPosition" />
+          <ScalarProperty Name="DurationWork" ColumnName="DurationWork" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EducatInfo">
+      <EntityTypeMapping TypeName="Nava_DBModel.EducatInfo">
+        <MappingFragment StoreEntitySet="EducatInfo">
+          <ScalarProperty Name="YearGrad" ColumnName="YearGrad" />
+          <ScalarProperty Name="BeginStudy" ColumnName="BeginStudy" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Stu_Graduate" ColumnName="Stu_Graduate" />
+          <ScalarProperty Name="Avrage" ColumnName="Avrage" />
+          <ScalarProperty Name="ThesisDiss" ColumnName="ThesisDiss" />
+          <ScalarProperty Name="OrientationID" ColumnName="OrientationID" />
+          <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+          <ScalarProperty Name="UniID" ColumnName="UniID" />
+          <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Educat_info_ID" ColumnName="Educat_info_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RejectInterView">
+      <EntityTypeMapping TypeName="Nava_DBModel.RejectInterView">
+        <MappingFragment StoreEntitySet="RejectInterView">
+          <ScalarProperty Name="CauseReject" ColumnName="CauseReject" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="RejectID" ColumnName="RejectID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResultInterView">
+      <EntityTypeMapping TypeName="Nava_DBModel.ResultInterView">
+        <MappingFragment StoreEntitySet="ResultInterView">
+          <ScalarProperty Name="VideoName" ColumnName="VideoName" />
+          <ScalarProperty Name="DateForWork" ColumnName="DateForWork" />
+          <ScalarProperty Name="Rhetorical" ColumnName="Rhetorical" />
+          <ScalarProperty Name="Sobriety" ColumnName="Sobriety" />
+          <ScalarProperty Name="PassionWork" ColumnName="PassionWork" />
+          <ScalarProperty Name="SkillSpeaking" ColumnName="SkillSpeaking" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="ResultID" ColumnName="ResultID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResultItem">
+      <EntityTypeMapping TypeName="Nava_DBModel.ResultItem">
+        <MappingFragment StoreEntitySet="ResultItem">
+          <ScalarProperty Name="ValueItem" ColumnName="ValueItem" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegisterUser">
+      <EntityTypeMapping TypeName="Nava_DBModel.RegisterUser">
+        <MappingFragment StoreEntitySet="RegisterUser">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EditInfo" ColumnName="EditInfo" />
+          <ScalarProperty Name="DateSubmitInfo" ColumnName="DateSubmitInfo" />
+          <ScalarProperty Name="Rezome" ColumnName="Rezome" />
+          <ScalarProperty Name="DescriptionFull" ColumnName="DescriptionFull" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Internship" ColumnName="Internship" />
+          <ScalarProperty Name="Telework" ColumnName="Telework" />
+          <ScalarProperty Name="WagePartTime" ColumnName="WagePartTime" />
+          <ScalarProperty Name="WageFullTime" ColumnName="WageFullTime" />
+          <ScalarProperty Name="TimeInWeek" ColumnName="TimeInWeek" />
+          <ScalarProperty Name="TypeOfEmployment" ColumnName="TypeOfEmployment" />
+          <ScalarProperty Name="Workinprogress" ColumnName="Workinprogress" />
+          <ScalarProperty Name="DescriptionArticles" ColumnName="DescriptionArticles" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="MilitaryService" ColumnName="MilitaryService" />
+          <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+          <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="NationalNumber" ColumnName="NationalNumber" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="RegID" ColumnName="RegID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Special_Fields">
+      <EntityTypeMapping TypeName="Nava_DBModel.Special_Fields">
+        <MappingFragment StoreEntitySet="Special_Fields">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="SpecialID" ColumnName="SpecialID" />
+          <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+          <ScalarProperty Name="SP_FL" ColumnName="SP_FL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Speciality">
+      <EntityTypeMapping TypeName="Nava_DBModel.Speciality">
+        <MappingFragment StoreEntitySet="Speciality">
+          <ScalarProperty Name="SpecialName" ColumnName="SpecialName" />
+          <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+          <ScalarProperty Name="SpecialID" ColumnName="SpecialID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InterView">
+      <EntityTypeMapping TypeName="Nava_DBModel.InterView">
+        <MappingFragment StoreEntitySet="InterView">
+          <ScalarProperty Name="ClockView" ColumnName="ClockView" />
+          <ScalarProperty Name="DateView" ColumnName="DateView" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ViewID" ColumnName="ViewID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

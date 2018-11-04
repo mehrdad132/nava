@@ -1,0 +1,109 @@
+﻿@using NavaTraining.Classes
+@using NavaTraining.Models
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<NavaTraining.Models.RejectInterView>
+
+@{
+    ViewBag.Title = "ListReject";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Nava_DBEntities db=new Nava_DBEntities();
+}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <i class="icon icon-2x icon-list" style="margin-left:10px;"></i><label style="font-size:17px;">لیست کاربران رد شده برای مصاحبه </label>
+
+    </div>
+
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <label style="color: #006400; font-size: 20px;">لیست افرادی که رزومه قوی دارند</label>
+                <br/>
+                <label style="color: #dc143c; font-size: 20px;">لیست افرادی که رزومه ضعیف دارند</label>
+            </div>
+
+        </div>
+        <table class="table table-bordered table-condensed table-responsive table-striped">
+
+            <tr class="center">
+
+                <th>
+                    نام
+                </th>
+                <th>
+                    نام خانوادگی
+                </th>
+                <th>
+                    شماره تماس
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().CauseReject)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                var q = db.RegisterUser.Where(a => a.UserID == item.UserID).FirstOrDefault();
+                if (item.CauseReject == "زرومه فوق العاده قوی")
+                {
+                    <tr class="success">
+
+                        <td>
+                            @q.UserName
+                        </td>
+
+                        <td>
+                            @q.FullName
+                        </td>
+                        <td>
+                            @q.Mobile
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CauseReject)
+                        </td>
+                        <td>
+                            @Html.ActionLink("جزییات کاربر", "DetailsUsers", new {id = q.RegID}, new {@class = "button button-3d button-small button-rounded button-purple"}) |
+                            @Html.ActionLink("تاریخ مصاحبه", "InterView", new {id = q.RegID}, new {@class = "button button-small button-3d  button-rounded "})|
+                            @*@Html.ActionLink("حذف از لیست", "DeleteUsers", new { id = item.RegID }, new { @class = "button button-3d button-small button-rounded button-red" })*@
+
+                        </td>
+                    </tr>
+                }
+                else if (item.CauseReject == "رزومه ضعیف")
+                {
+                    <tr class="danger">
+
+                        <td>
+                            @q.UserName
+                        </td>
+
+                        <td>
+                            @q.FullName
+                        </td>
+                        <td>
+                            @q.Mobile
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CauseReject)
+                        </td>
+                        <td>
+                            @Html.ActionLink("جزییات کاربر", "DetailsUsers", new {id = q.RegID}, new {@class = "button button-3d button-small button-rounded button-purple"}) |
+                            <a href="/Admin/Default/DeleteRejectInterView/@q.RegID" class="button button-small button-3d button-pink" onclick="return confirm('آیا اجازه دعوت به مصاحبه به کاربر می دهید؟')"> دعوت به مصاحبه</a>
+                            @*@Html.ActionLink("حذف از لیست", "DeleteUsers", new { id = item.RegID }, new { @class = "button button-3d button-small button-rounded button-red" })*@
+
+                        </td>
+                    </tr>
+                }
+
+            }
+
+        </table>
+        @Html.PagedListPager(Model, page => Url.Action("ListReject", new {page}))
+    </div>
+    @Html.ActionLink("بازگشت", "Index", null, new { @class = "button button-3d button-rounded button-black " })
+</div>

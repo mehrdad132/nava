@@ -1,0 +1,58 @@
+﻿@model IEnumerable<NavaTraining.Areas.UserPanel.Lang_VM>
+
+<table class="table tab-content table-bordered table-responsive">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.LangName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScoreSpeking)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScoreListening)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScoreWrite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScoreReading)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescriptionLang)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.LangName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScoreSpeking)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScoreListening)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScoreWrite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScoreReading)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DescriptionLang)
+        </td>
+        <td>
+            <a class="btn btn-danger">
+                <i class="" onclick="DeleteLang(@item.LangID,'@item.ScoreSpeking','@item.ScoreListening','@item.ScoreWrite','@item.ScoreReading','@item.DescriptionLang')">
+                    حذف
+                </i>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

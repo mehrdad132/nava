@@ -1,0 +1,352 @@
+﻿@model IEnumerable<NavaTraining.Models.InterView>
+@using NavaTraining.Classes
+
+@using NavaTraining.Areas.Admin
+@{
+    ViewBag.Title = "InterviewList";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminOther.cshtml";
+    NavaTraining.Models.Nava_DBEntities db = new NavaTraining.Models.Nava_DBEntities();
+
+}
+<style>
+    label {
+        color: #c12626;
+    }
+</style>
+<h2>لیست مصاحبه شوندگان به همراه تاریخ مصاحبه</h2>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <i class="icon icon-2x icon-list" style="margin-left:10px;"></i><label style="font-size:17px;">لیست ساعات و روز های مصاحبه</label>
+
+    </div>
+
+    <div class="panel-body">
+   
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-condensed table-responsive table-striped">
+                <tr>
+                    <th>
+                        تاریخ مصاحبه
+                    </th>
+
+                    <th colspan="16">
+                        <h5>ساعات مصاحبه ی دانشجویان</h5>
+                    </th>
+               
+
+                </tr>
+                @{
+
+                    var _lstdate = (from a in db.InterView
+                                    join b in db.RegisterUser on a.UserID equals b.UserID
+                                    where a.DateView == a.DateView
+                                    select new ListDate
+                                    {
+                                        Date = a.DateView
+
+                                    }).Distinct();
+
+           
+                }
+
+
+                @foreach (var item in _lstdate)
+                {
+
+                    var qclock = db.InterView.Where(a => a.DateView == item.Date).ToList().OrderBy(a => a.ClockView);
+
+
+                    <tr>
+                        <td>@item.Date.ToPersianDateTextify()</td>
+                        @foreach (var item1 in qclock)
+                        {
+
+                            var qinfo = db.RegisterUser.Where(a => a.UserID == item1.UserID).FirstOrDefault();
+                            var qinfoEducat = (from a in db.RegisterUser
+                                               join b in db.EducatInfo on a.UserID equals b.UserID
+                                               where a.UserLogin.EducatInfo.Any(x=>x.Fields.FieldName==x.Fields.FieldName) && (a.UserID==item1.UserID)
+                                               select b).OrderByDescending(b=>b.BeginStudy).FirstOrDefault();
+                            if (item1.ClockView == 1)
+                            {
+                                <td>
+                                    <label>ساعت مصاحبه&nbsp;&nbsp; 8:30-8</label> <br />
+                                    نام و نام خانوادگی : @qinfo.UserName @qinfo.FullName
+                                    <br/>
+
+                                    رشته: @qinfoEducat.Fields.FieldName
+                                    <br/>
+                                    گرایش: @qinfoEducat.Orientation.OrientationName
+                                    <br/>
+
+                                    شماره مویابل @qinfo.Mobile
+
+                                </td>
+                            }
+
+                            if (item1.ClockView == 2)
+                            {
+                                <td>
+                                    <label>ساعت مصاحبه &nbsp;&nbsp;9-8:30</label> <br/>
+                                    دگی :      @qinfo.UserName @qinfo.FullName
+                                    <br />
+                                    رشته: @qinfoEducat.Fields.FieldName
+                                    <br/>
+                                    گرایش: @qinfoEducat.Orientation.OrientationName
+                                    <br/>
+
+                                    نام و نام خانوا
+                                    شماره مویابل @qinfo.Mobile
+
+                                </td>
+                            }
+
+                            if (item1.ClockView == 3)
+                            {
+                                <td>
+                                    <label>ساعت مصاحبه  &nbsp;&nbsp;9:30-9</label> <br />
+                                    رشته: @qinfoEducat.Fields.FieldName
+                                    <br/>
+                                    گرایش: @qinfoEducat.Orientation.OrientationName
+                                    <br/>
+
+
+                                    نام و نام خانوادگی :     @qinfo.UserName @qinfo.FullName
+                                    <br/>
+                                    شماره مویابل @qinfo.Mobile
+
+                                </td>
+                            }
+
+                            if (item1.ClockView == 4)
+                            {
+                                <td>
+                                    <label>ساعت مصاحبه &nbsp;&nbsp;10-9:30</label> <br/>
+                                    نام و نام خانوادگی :     @qinfo.UserName @qinfo.FullName
+                                    <br />
+                                    رشته: @qinfoEducat.Fields.FieldName
+                                    <br/>
+                                    گرایش: @qinfoEducat.Orientation.OrientationName
+                                    <br/>
+
+                                 
+                                    شماره مویابل @qinfo.Mobile
+
+                                </td>
+                            }
+
+
+                            if (item1.ClockView == 5)
+                            {
+                                <td>
+                                    <label>ساعت مصاحبه10:30-10 &nbsp;&nbsp;</label> <br/>
+                                    نام و نام خانوادگی :     @qinfo.UserName @qinfo.FullName
+                                    <br />
+                                    رشته: @qinfoEducat.Fields.FieldName
+                                    <br/>
+                                    گرایش: @qinfoEducat.Orientation.OrientationName
+                                    <br/>
+
+                                   
+                                    شماره مویابل @qinfo.Mobile
+
+                                </td>
+                            }
+
+                            if (item1.ClockView == 6)
+                            {
+                                <td>
+                                    <label>ساعت مصاحبه &nbsp;&nbsp;11-10:30</label> <br/>
+                                    نام و نام خانوادگی :     @qinfo.UserName @qinfo.FullName
+                                    <br />
+                                    رشته: @qinfoEducat.Fields.FieldName
+                                    <br/>
+                                    گرایش: @qinfoEducat.Orientation.OrientationName
+                                    <br/>
+
+                                  
+                                    شماره مویابل @qinfo.Mobile
+
+                                </td>
+                            }
+                            if (item1.ClockView == 7)
+                            {
+                                <td>
+                                    <label>ساعت مصاحبه &nbsp;&nbsp;11:30-11</label> <br/>
+                                    نام و نام خانوادگی :     @qinfo.UserName @qinfo.FullName
+                                    <br />
+                                    رشته: @qinfoEducat.Fields.FieldName
+                                    <br/>
+                                    گرایش: @qinfoEducat.Orientation.OrientationName
+                                    <br/>
+
+                                   
+                                    شماره مویابل @qinfo.Mobile
+
+                                </td>
+                            }
+
+                            if (item1.ClockView == 8)
+                            {
+                                <td>
+                                    <label>ساعت مصاحبه &nbsp;&nbsp;12-11:30</label> <br/>
+                                    نام و نام خانوادگی :     @qinfo.UserName @qinfo.FullName
+                                    <br />
+                                    رشته: @qinfoEducat.Fields.FieldName
+                                    <br/>
+                                    گرایش: @qinfoEducat.Orientation.OrientationName
+                                    <br/>
+
+                                   
+                                    شماره مویابل @qinfo.Mobile
+
+                                </td>
+                            }
+                            if (item1.ClockView == 9)
+                            {
+                                <td>
+                                    <label>ساعت مصاحبه12:30-12 &nbsp;&nbsp;</label> <br/>
+                                    نام و نام خانوادگی :     @qinfo.UserName @qinfo.FullName
+                                    <br />
+                                    رشته: @qinfoEducat.Fields.FieldName
+                                    <br/>
+                                    گرایش: @qinfoEducat.Orientation.OrientationName
+                                    <br/>
+
+                                
+                                    شماره مویابل @qinfo.Mobile
+
+                                </td>
+                            }
+                            if (item1.ClockView == 10)
+                            {
+                                <td>
+                                    <label>ساعت مصاحبه13-12:30 &nbsp;&nbsp;</label> <br/>
+                                    نام و نام خانوادگی :     @qinfo.UserName @qinfo.FullName
+                                    <br />
+                                    رشته: @qinfoEducat.Fields.FieldName
+                                    <br/>
+                                    گرایش: @qinfoEducat.Orientation.OrientationName
+                                    <br/>
+
+                                    شماره مویابل @qinfo.Mobile
+
+                                </td>
+                            }
+                            if (item1.ClockView == 11)
+                            {
+                                <td>
+                                    <label>ساعت مصاحبه &nbsp;&nbsp;13:30-13</label> <br/>
+                                    نام و نام خانوادگی :     @qinfo.UserName @qinfo.FullName
+                                    <br />
+                                    رشته: @qinfoEducat.Fields.FieldName
+                                    <br/>
+                                    گرایش: @qinfoEducat.Orientation.OrientationName
+                                    <br/>
+
+                                    شماره مویابل @qinfo.Mobile
+
+                                </td>
+                            }
+                            if (item1.ClockView == 12)
+                            {
+                                <td>
+                                    <label>ساعت مصاحبه &nbsp;&nbsp;14-13:30</label> <br/>
+                                    نام و نام خانوادگی :     @qinfo.UserName @qinfo.FullName
+                                    <br />
+                                    رشته: @qinfoEducat.Fields.FieldName
+                                    <br/>
+                                    گرایش: @qinfoEducat.Orientation.OrientationName
+                                    <br/>
+
+                                    شماره مویابل @qinfo.Mobile
+
+                                </td>
+                            }
+                            if (item1.ClockView == 13)
+                            {
+                                <td>
+                                    <label>ساعت مصاحبه &nbsp;&nbsp;14:30-14</label> <br/>
+                                    نام و نام خانوادگی :     @qinfo.UserName @qinfo.FullName
+                                    <br />
+                                    رشته: @qinfoEducat.Fields.FieldName
+                                    <br/>
+                                    گرایش: @qinfoEducat.Orientation.OrientationName
+                                    <br/>
+
+                                    شماره مویابل @qinfo.Mobile
+
+                                </td>
+                            }
+
+
+                            if (item1.ClockView == 14)
+                            {
+                                <td>
+                                    <label>ساعت مصاحبه &nbsp;&nbsp;15-14:30</label> <br/>
+                                    نام و نام خانوادگی :     @qinfo.UserName @qinfo.FullName
+                                    <br />
+                                    رشته: @qinfoEducat.Fields.FieldName
+                                    <br/>
+                                    گرایش: @qinfoEducat.Orientation.OrientationName
+                                    <br/>
+
+                                    شماره مویابل @qinfo.Mobile
+
+                                </td>
+                            }
+
+                            if (item1.ClockView == 15)
+                            {
+                                <td>
+                                    <label>ساعت مصاحبه  &nbsp;&nbsp;15:30-15</label> <br />
+                                    رشته: @qinfoEducat.Fields.FieldName
+                                    <br/>
+                                    گرایش: @qinfoEducat.Orientation.OrientationName
+                                    <br/>
+
+                                    نام و نام خانوادگی :    @qinfo.UserName @qinfo.FullName
+                                    <br/>
+                                    شماره مویابل @qinfo.Mobile
+
+                                </td>
+                            }
+
+                            if (item1.ClockView == 16)
+                            {
+                                <td>
+                                    <label>ساعت مصاحبه &nbsp;&nbsp;16-15:30</label> <br/>
+                                    نام و نام خانوادگی :     @qinfo.UserName @qinfo.FullName
+                                    <br />
+                                    رشته: @qinfoEducat.Fields.FieldName
+                                    <br/>
+                                    گرایش: @qinfoEducat.Orientation.OrientationName
+                                    <br/>
+
+                                    شماره مویابل @qinfo.Mobile
+
+                                </td>
+                            }
+
+                         
+
+
+                        }
+                       
+                    </tr>
+                }
+
+
+            </table>
+        </div>
+      
+        </div>
+
+    @Html.ActionLink("بازگشت", "Index", null, new { @class = "button button-3d button-rounded button-black " })
+
+
+    </div>
+
+        @*<td>
+                @Html.DisplayFor(modelItem => item.ClockView)
+            </td>*@

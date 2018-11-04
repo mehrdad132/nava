@@ -1,0 +1,97 @@
+﻿@model NavaTraining.Models.ResultInterView
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <i class="icon icon-2x icon-list" style="margin-left: 10px;"></i><label style="font-size: 17px;">حذف کاربر</label>
+
+    </div>
+
+    <div class="panel-body">
+        <div class="table-responsive">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserID)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UserID)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SkillSpeaking)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SkillSpeaking)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PassionWork)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PassionWork)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Sobriety)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Sobriety)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Rhetorical)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Rhetorical)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DateForWork)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DateForWork)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.VideoName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.VideoName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ResultItem.ValueItem)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ResultItem.ValueItem)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="حذف" class="button button-3d button-small button-rounded button-red" />
+
+                </div>
+                <br /><br />
+                @Html.ActionLink("بازگشت", "Index", null, new { @class = "button button-3d button-rounded button-black " })
+            }
+        </div>
+    </div>
+</div>

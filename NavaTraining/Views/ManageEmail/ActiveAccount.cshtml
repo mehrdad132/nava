@@ -1,0 +1,19 @@
+﻿@model NavaTraining.Models.UserLogin
+@using System.Configuration
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="border: 1px solid gainsboro; padding: 10px; overflow: hidden; direction: rtl;">
+
+    <h1>@Model.UserName کاربر عزیز !</h1>
+    <p>
+        با تشکر از ثبت نام شما در سایت ما,جهت فعالسازی حساب کاربری خود لینک
+        زیر را کلیک کنید
+    </p>
+    @*کد زیر باعث می شود وقتی کاربر لینک را در ایمیل کلیک میکند به صفحه فعالسازی می رود*@
+    <a href="@ConfigurationManager.AppSettings["MyDomain"]/Account/ActiveUser/@Model.ActiveCode">لینک فعالسازی</a>
+
+
+</div>

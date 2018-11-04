@@ -1,0 +1,39 @@
+﻿@model IEnumerable<NavaTraining.Areas.Admin.Special_VM>
+
+
+
+<table class="table tab-content table-bordered table-responsive">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.FieldName)
+        </th>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.SpecialName)
+        </th>
+        <th>عملیات</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="text-center">
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.FieldName)
+            </td>
+         
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecialName)
+            </td>
+            <td>
+                <a class="btn btn-danger">
+                    <i class="" onclick="DeleteSpecial(@item.FieldID,'@item.FieldName',@item.SpecialID,'@item.SpecialName')">
+                        حذف
+                    </i>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>

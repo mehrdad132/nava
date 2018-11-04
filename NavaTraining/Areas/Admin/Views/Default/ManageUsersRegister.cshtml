@@ -1,0 +1,166 @@
+﻿@*@model PagedList.IPagedList<NavaTraining.Models.RegisterUser>*@
+@model PagedList.IPagedList<NavaTraining.Areas.Admin.ListFilterUsers>
+@{
+    ViewBag.Title = "ManageUsersRegister";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminOther.cshtml";
+}
+@using PagedList;
+@using PagedList.Mvc;
+
+
+<style>
+    td {
+        font-size: 15px;
+        text-align: center;
+        padding-top: 15px;
+    }
+</style>
+@*<div class="row" style="margin-top:15px;">
+    <div class="col-md-12">
+        <h1 class="page-header">
+            <img src="~/Images/0508.png" class="img-thumbnail" width="100" height="100" />مدیریت کاربران
+        </h1>
+    </div>
+</div>*@
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <i class="icon icon-2x icon-list" style="margin-left:10px;"></i><label style="font-size:17px;">لیست تمامی کاربران</label> 
+       
+    </div>
+
+    <div class="panel-body">
+
+        <div class="alert alert-dismissable">
+            <h4> @TempData["msg"]</h4>
+        </div>
+        <h4>جستجوی کاربران بر اساس</h4>
+        <table>
+
+            <tr>
+
+                <td style="margin-left:7px;">
+                   نام دانشگاه یا رشته<input type="text" id="Search" name="Search" class="form-control" />
+                </td>
+
+
+            </tr>
+        </table>
+    
+        <hr />
+        @Html.Partial("Load_UsersbySearch", Model)
+        <div>
+            @Html.ActionLink("بازگشت", "Index",null,new { @class = "button button-3d button-rounded button-black " })
+        </div>
+    </div>
+ </div>
+
+        @section scripts{
+            <script>
+
+                $(document).ready(function () {
+
+
+                    $("#check").click(function () {
+
+                        var strcheck = $("#check").val();
+
+                        if (strcheck != null) {
+
+
+                            $.ajax({
+
+                                url: "/Admin/Default/Load_UsersbySearch",
+                                data: { strcheck: strcheck },
+                                method: "POST",
+                                success: function (data) {
+                                    $("#Users_loding").fadeIn(1).html(data);
+                                }
+                            });
+                        }
+                        else {
+
+                            $.load("#Users_loding");
+                        }
+
+                    });
+                    $("#Search").keyup(function () {
+
+                        var strcheck = $("#Search").val();
+
+                        if (strcheck != null) {
+
+
+                            $.ajax({
+
+                                url: "/Admin/Default/Load_UsersbySearch",
+                                data: { strcheck: strcheck },
+                                method: "POST",
+                                success: function (data) {
+                                    $("#Users_loding").fadeIn(1).html(data);
+                                }
+                            });
+                        }
+                        else {
+
+                            $.load("#Users_loding");
+                        }
+
+                    });
+                    $("#madrak").keyup(function () {
+
+                        var strcheck = $("#madrak").val();
+
+                        if (strcheck != null) {
+
+
+                            $.ajax({
+
+                                url: "/Admin/Default/Load_UsersbySearch",
+                                data: { strcheck: madrak },
+                                method: "POST",
+                                success: function (data) {
+                                    $("#Users_loding").fadeIn(1).html(data).slideUp(300000).delay(1500000);
+                                }
+                            });
+                        }
+                        else {
+
+                            $.load("#Users_loding").slideUp(3000000).delay(1500000);
+                        }
+
+                    });
+
+
+
+                });
+
+
+                $(document).ready(function () {
+
+                    $('[data-toggle="popover"]').popover({
+                        title: setData,
+                        html: true,
+                        placement: 'right'
+
+                    });
+                    function setData(id) {
+                        var set_data = '';
+                        var element = $(this);
+                        var id = element.attr("id");
+                        $.ajax({
+
+                            url: "/Admin/Default/DetailonUser?id" + id,
+                            method: "post",
+                            async: false,
+                            data: { id: id },
+                            success: function (data) {
+                                set_data = data;
+                            }
+
+                        });
+                        return set_data;
+                    }
+
+                });
+            </script>
+        }

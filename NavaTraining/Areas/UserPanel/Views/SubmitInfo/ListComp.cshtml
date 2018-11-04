@@ -1,0 +1,56 @@
+﻿@model IEnumerable<NavaTraining.Areas.UserPanel.Company_VM>
+
+@{ 
+    int CompanyID=0;
+}
+
+<table class="table tab-content table-bordered table-responsive">
+    <tr>
+        <th>
+           ردیف
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Position)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DurationWork)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescPosition)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    CompanyID++;
+    <tr>
+        <td>
+            @CompanyID
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Position)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DurationWork)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DescPosition)
+        </td>
+        <td>
+            <a class="btn btn-danger">
+                <i class="" onclick="DeleteComp('@item.CompanyName','@item.Position','@item.DurationWork','@item.DescPosition')">
+                    حذف
+                </i>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

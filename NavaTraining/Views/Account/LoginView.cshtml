@@ -1,0 +1,69 @@
+﻿@model NavaTraining.Models.UserLogin
+@using NavaTraining.Models
+
+@{
+    Nava_DBEntities db = new Nava_DBEntities();
+}
+
+<div class="thumbnail">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="well well-sm">
+             Wellcome @User.Identity.Name 
+
+            </div>
+            <ul>
+                <li>
+                    <a href="/UserPanel/Default/ChangePassword">
+                        تغییر رمز
+                    </a>
+                    </li>
+                @*<li>
+                    <a href="/UserPanel/MyOrder/Index">
+                     صورت حساب شما
+                    </a>
+                </li>
+                <li>
+                    <a href="/UserPanel/Default/EditProfile">
+                        ویرایش پروفایل
+                    </a>
+                </li>*@
+                <li>
+                    <a href="/Account/LogOff">
+                       Logout
+                    </a>
+                </li>
+
+            </ul>
+        }
+        else
+        {
+            <div class="well well-sm">
+               WellCome
+            </div>
+            <ul>
+                <li>
+                    <a href="/Userpanel/submitinfo/Index">پنل کاربری</a>
+                </li>
+                <li>
+                    <a href="/Admin/Default/index">پنل مدیریت</a>
+                </li>
+                <li>
+                    <a href="/Account/Login">ورود به سایت</a>
+                </li>
+                @*<li>
+                    <a href="/SellerPanel/Default/Index">
+                        ورود فروشنده
+                    </a>
+                </li>*@
+                <li>
+                    <a href="/Account/Register">Register</a>
+                </li>
+                <li>
+                    <a href="/Account/RecoveryPass">RecoveryPassword</a>
+                </li>
+            </ul>
+        }
+    </div>
+
+

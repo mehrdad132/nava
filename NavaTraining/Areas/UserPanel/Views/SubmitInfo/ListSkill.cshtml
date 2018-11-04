@@ -1,0 +1,47 @@
+﻿@model IEnumerable<NavaTraining.Areas.UserPanel.Skills_VM>
+
+
+<table class="table tab-content table-bordered table-responsive">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.LessonName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProblemSolving)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MakingVideo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RelatedSoftware)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.LessonName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProblemSolving)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MakingVideo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RelatedSoftware)
+        </td>
+        <td>
+            <a class="btn btn-danger">
+                <i class="" onclick="DeleteSkill(@item.LessonID,'@item.ProblemSolving','@item.MakingVideo','@item.RelatedSoftware')">
+                    حذف
+                </i>
+            </a>
+        </td>
+        </tr>
+}
+
+</table>
